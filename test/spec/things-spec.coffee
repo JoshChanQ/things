@@ -5,6 +5,7 @@ define [
   '../../scripts/plugin/widget/Rect'
   '../../scripts/plugin/widget/Line'
   '../../scripts/plugin/widget/Circle'
+  '../../scripts/plugin/widget/Magnifier'
   'jquery'
 ], (
   things,
@@ -13,6 +14,7 @@ define [
   Rect
   Line
   Circle
+  Magnifier
   $
 ) ->
 
@@ -80,6 +82,9 @@ define [
             w: 300
             h: 300
             draggable: true
+            fillStyle: 'lightgray'
+            strokeStyle: 'blue'
+            lineWidth: 6
           components: [{
             type: 'rect'
             attrs:
@@ -99,6 +104,7 @@ define [
             'rect': Rect
             'line': Line
             'circle': Circle
+            'magnifier': Magnifier
           type: 'widget-box'
           attrs:
             container: 'container'

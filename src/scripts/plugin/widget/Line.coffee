@@ -24,27 +24,8 @@ define [
       context.moveTo @get('x1'), @get('y1')
       context.lineTo @get('x2'), @get('y2')
 
-    move: (option) ->
-      {delta} = option
-
-      return unless delta
-
-      x1 = @get('x1')
-      y1 = @get('y1')
-      x2 = @get('x2')
-      y2 = @get('y2')
-
-      to = {}
-
-      if delta.x
-        to.x1 = x1 + delta.x
-        to.x2 = x2 + delta.x
-
-      if delta.y
-        to.y1 = y1 + delta.y
-        to.y2 = y2 + delta.y
-
-      @set to unless _.isEmpty(to)
+    _move_set: ->
+      [['x1', 'x2'], ['y1', 'y2']]
 
     event_map: ->
 

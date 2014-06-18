@@ -65,9 +65,8 @@ define [
           'magnify-target': 'widget-layer'
           'fillStyle': 'white'
           'strokeStyle': 'gray'
-          'lineWidth': 6
-          w: 210
-          h: 210
+          'r': 100
+          'ratio': 2
       }, {
         type: 'debug-layer'
       }]

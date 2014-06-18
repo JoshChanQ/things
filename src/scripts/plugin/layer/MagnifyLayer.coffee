@@ -27,11 +27,17 @@ define [
 
       @magnify_handle = @select('#magnify-handle')[0]
 
-      @set('offset-x', (@target.canvas.width / 2) - 100)
-      @set('offset-y', (@target.canvas.height / 2) - 100)
+      r = @get('r')
+      @set
+        'w': 2 * r
+        'h': 2 * r
+        'offset-x': (@target.canvas.width / 2) - r
+        'offset-y': (@target.canvas.height / 2) - r
 
-      @set('w', 200)
-      @set('h', 200)
+      @magnify_handle.set
+        'cx': r
+        'cy': r
+        'r': r - 5
 
       super()
 
@@ -48,36 +54,28 @@ define [
 
       context.save()
 
-      cx = 100 + @get('lineWidth') / 2
-      cy = 100 + @get('lineWidth') / 2
-      r = 100
+      r = @get('r')
+      ratio = @get('ratio') || 10
 
-      context.arc(cx, cy, r, 0, Math.PI * 2, false)
+      context.arc(r, r, r - 1, 0, Math.PI * 2, false)
 
       context.clip();
 
-      context.rect(cx - r, cy - r, r * 2, r * 2)
+      context.rect(0, 0, r * 2, r * 2)
 
       if @get('fillStyle')
         context.fillStyle = @get('fillStyle')
         context.fill()
 
-      target_x = @get('offset-x') + cx
-      target_y = @get('offset-y') + cy
+      target_x = @get('offset-x') + r
+      target_y = @get('offset-y') + r
+      target_w = Math.round(r / ratio)
+      target_h = target_w
 
-      context.drawImage @target.canvas, target_x - r / 2, target_y - r / 2, r, r,
-      cx - r, cy - r, 2 * r, 2 * r
+      context.drawImage @target.canvas, target_x - target_w, target_y - target_h, 2 * target_w, 2 * target_h,
+      0, 0, 2 * r, 2 * r
 
       context.restore()
-
-      context.beginPath()
-
-      context.arc(cx, cy, r, 0, 2 * Math.PI, false)
-      context.lineWidth = 2
-      if @get('strokeStyle')
-        context.strokeStyle = @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
-        context.stroke();
 
       @forEach (child) ->
         child.draw context
@@ -109,12 +107,11 @@ define [
         type: 'circle'
         attrs:
           'id': 'magnify-handle'
-          'cx': 186
-          'cy': 186
-          'r': 16
-          'lineWidth': 6
+          'cx': 100
+          'cy': 100
+          'r': 95
+          'lineWidth': 10
           'strokeStyle': 'gray'
-          'fillStyle': 'black'
           capturable: true
           draggable: true
       }]

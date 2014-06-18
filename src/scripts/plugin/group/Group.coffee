@@ -6,52 +6,73 @@
 
 define [
   '../../base/Container'
+  '../../validator/Bound'
+  '../../validator/Graphic'
 ], (
   Container
+  Bound
+  Graphic
 ) ->
 
   'use strict'
 
   class Group extends Container
+    _shape: (context) ->
+      context.rect @get('x'), @get('y'), @get('w'), @get('h')
 
     draw: (context) ->
       context.beginPath()
-      context.lineWidth = '6'
-      context.strokeStyle = 'blue'
 
-      context.rect @get('x'), @get('y'), @get('w'), @get('h')
+      context.save()
 
-      context.stroke()
+      @_shape context
+
+      if @get('fillStyle')
+        context.fillStyle = @get('fillStyle')
+        context.fill()
+
+      if @get('strokeStyle')
+        context.lineWidth = @get('lineWidth')
+        context.strokeStyle = @get('strokeStyle')
+        context.stroke()
+
+      context.clip();
 
       @forEach (child) ->
         child.draw context
 
+      context.restore()
+
     capture: (position, context) ->
       context.beginPath()
-      context.lineWidth = '6'
 
-      context.rect @get('x'), @get('y'), @get('w'), @get('h')
+      @_shape context
 
-      return context.isPointInPath(position.x, position.y) || context.isPointInStroke(position.x, position.y)
-      # return context.isPointInStroke(position.x, position.y)
+      if @get('strokeStyle')
+        context.lineWidth = @get('lineWidth')
+
+      (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
+      (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
+
+    _move_set: ->
+      [['x'], ['y']]
 
     move: (option) ->
       {delta} = option
 
-      return unless delta
-
-      x = @get('x')
-      y = @get('y')
+      return if _.isEmpty(delta)
 
       to = {}
 
       if delta.x
-        to.x = x + delta.x
-
+        (to[x] = Math.round(@get(x) + delta.x)) for x in @_move_set()[0]
       if delta.y
-        to.y = y + delta.y
+        (to[y] = Math.round(@get(y) + delta.y)) for y in @_move_set()[1]
 
       @set to
+
+      @forEach (child) ->
+        child.move(option)
 
     event_map: null
 
@@ -66,20 +87,7 @@ define [
 
       dependencies: {}
 
-      properties:
-        x:
-          type: 'number'
-          default: 0
-        y:
-          type: 'number'
-          default: 0
-        w:
-          type: 'number'
-          validators: ['0..100']
-          default: 100
-        h:
-          type: 'number'
-          default: 100
-        alpha:
-          type: 'number'
-          default: 100
+      properties: [
+        Bound
+        Graphic
+      ]

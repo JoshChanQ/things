@@ -13,12 +13,9 @@ define [
   properties =
     lineWidth:
       type: 'number'
-      default: 1
     fillStyle:
       type: 'string'
     strokeStyle:
       type: 'string'
-      default: 'black'
     alpha:
       type: 'number'
-      default: 100

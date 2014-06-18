@@ -46,23 +46,22 @@ define [
       (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
       (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
 
+    _move_set: ->
+      [['x'], ['y']]
+
     move: (option) ->
       {delta} = option
 
-      return unless delta
-
-      x = @get('x')
-      y = @get('y')
+      return if _.isEmpty(delta)
 
       to = {}
 
       if delta.x
-        to.x = x + delta.x
-
+        (to[x] = Math.round(@get(x) + delta.x)) for x in @_move_set()[0]
       if delta.y
-        to.y = y + delta.y
+        (to[y] = Math.round(@get(y) + delta.y)) for y in @_move_set()[1]
 
-      @set to unless _.isEmpty(to)
+      @set to
 
     event_map: null
 

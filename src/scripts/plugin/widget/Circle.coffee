@@ -23,23 +23,8 @@ define [
     _shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
 
-    move: (option) ->
-      {delta} = option
-
-      return unless delta
-
-      cx = @get('cx')
-      cy = @get('cy')
-
-      to = {}
-
-      if delta.x
-        to.cx = cx + delta.x
-
-      if delta.y
-        to.cy = cy + delta.y
-
-      @set to unless _.isEmpty(to)
+    _move_set: ->
+      [['cx'], ['cy']]
 
     @spec:
       type: 'circle'

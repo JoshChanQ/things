@@ -46,6 +46,10 @@ define [
   onchange = (target, before, after) ->
     @canvas.style.left = after['offset-x'] + 'px' if after.hasOwnProperty('offset-x')
     @canvas.style.top = after['offset-y'] + 'px' if after.hasOwnProperty('offset-y')
+    if after.hasOwnProperty('r')
+      @set({w: 2 * after.r, h: 2 * after.r})
+      @canvas.setAttribute('width', 2 * after.r)
+      @canvas.setAttribute('height', 2 * after.r)
 
   {
     '?magnify-target':
@@ -54,7 +58,7 @@ define [
     '(self)':
       '(self)':
         'change': onchange
-      '#magnify-handle':
+      'circle':
         'dragstart': ondragstart
         'drag': ondrag
         'dragend': ondragend
