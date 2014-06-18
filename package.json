@@ -1,0 +1,49 @@
+{
+  "name": "things",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-compass": "^0.8.0",
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "gulp": "^3.6.2",
+    "gulp-cache": "^0.1.11",
+    "gulp-clean": "^0.3.0",
+    "gulp-coffee": "^1.4.3",
+    "gulp-coffeelint": "^0.3.3",
+    "gulp-concat": "^2.2.0",
+    "gulp-connect": "^2.0.5",
+    "gulp-livereload": "^1.5.0",
+    "gulp-mocha": "^0.4.1",
+    "gulp-notify": "^1.3.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.0",
+    "gulp-util": "^2.2.14",
+    "karma": "^0.12.16",
+    "karma-chai": "^0.1.0",
+    "karma-chai-plugins": "^0.2.1",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-coffee-preprocessor": "^0.2.1",
+    "karma-jasmine": "^0.1.5",
+    "karma-mocha": "^0.1.3",
+    "karma-osx-reporter": "^0.1.0",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-sourcemap-loader": "^0.2.0",
+    "mocha": "^1.19.0"
+  },
+  "dependencies": {}
+}

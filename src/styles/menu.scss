@@ -1,0 +1,22 @@
+ul.things-context-menu {
+  position: absolute;
+  display: none;
+  background-color: menu;
+  list-style-type: none !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+ul.things-context-menu * {
+  color: menutext;
+}
+ul.things-context-menu > li {
+  border: 1px solid black;
+  margin: 0px !important;
+  padding: 2px 5px !important;
+}
+ul.things-context-menu > li:hover {
+  background-color: activecaption;
+}
+ul.things-context-menu > li a {
+  display: block;
+}

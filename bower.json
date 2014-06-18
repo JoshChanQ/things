@@ -1,0 +1,13 @@
+{
+  "name": "things",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1",
+    "magictouch": "git://github.com/borismus/MagicTouch"
+  },
+  "devDependencies": {
+    "mocha": "~1.19.0",
+    "chai": "^1.9.1"
+  }
+}
