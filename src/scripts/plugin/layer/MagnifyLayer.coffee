@@ -34,6 +34,9 @@ define [
         'offset-x': (@target.canvas.width / 2) - r
         'offset-y': (@target.canvas.height / 2) - r
 
+      @canvas.setAttribute('width', 2 * r)
+      @canvas.setAttribute('height', 2 * r)
+
       @magnify_handle.set
         'cx': r
         'cy': r
