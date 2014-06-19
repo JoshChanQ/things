@@ -23,7 +23,7 @@ define [
       cx = @target.get('cx')
       cy = @target.get('cy')
 
-      theta = Math.random() * 360 * Math.PI / 180
+      theta = @get('theta') || 0 # * Math.PI / 180
 
       points = [
         [
@@ -40,6 +40,7 @@ define [
 
     setup: ->
       @set('clip', false)
+      @set('theta', 0)
 
       @target = @select(@get('target'))[0]
 
@@ -62,10 +63,65 @@ define [
       @draw()
 
     ondragstart: (e) ->
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
 
     ondrag: (e) ->
 
+      handle = e.target
+
+      delta =
+        x: e.offsetX - @startpos.x
+        y: e.offsetY - @startpos.y
+
+      newcx = handle.get('cx') + delta.x
+      newcy = handle.get('cy') + delta.y
+
+      handle.set
+        cx: newcx
+        cy: newcy
+
+      dx = newcx - @target.get('cx')
+      dy = newcy - @target.get('cy')
+
+      @set
+        theta: Math.atan2(dy, dx)
+
+      r = Math.round(Math.sqrt dx * dx + dy * dy)
+
+      @target.set
+        r: r
+
+      # @draw()
+
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
+
     ondragend: (e) ->
+      # handle = e.target
+
+      # delta =
+      #   x: e.offsetX - @startpos.x
+      #   y: e.offsetY - @startpos.y
+
+      # newcx = handle.get('cx') + delta.x
+      # newcy = handle.get('cy') + delta.y
+
+      # handle.set
+      #   cx: newcx
+      #   cy: newcy
+
+      # dx = newcx - @target.get('cx')
+      # dy = newcy - @target.get('cy')
+
+      # r = Math.round(Math.sqrt dx * dx + dy * dy)
+
+      # @target.set
+      #   r: r
+
+      # @target.draw()
 
     event_map: ->
       '?target':
@@ -80,7 +136,7 @@ define [
     @spec:
       type: 'circle-handle'
 
-      containable: false
+      containable: true
 
       description: 'Circle Handle'
 

@@ -92,7 +92,7 @@ define [
     @spec:
       type: 'bound-handle'
 
-      containable: false
+      containable: true
 
       description: 'Bound Handle'
 

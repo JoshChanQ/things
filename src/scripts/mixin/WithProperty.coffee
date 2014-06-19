@@ -14,7 +14,34 @@ define [
 
   WithProperty =
 
-    set: (key, val)->
+    silentSet: (key, val) ->
+
+      return this if !key
+
+      if arguments.length > 1 && typeof(arguments[0]) is 'string'
+        attrs = {}
+        attrs[key] = val
+        return @silentSet attrs
+
+      @attrs || (@attrs = {})
+
+      attrs = key
+      after = {}
+      before = {}
+
+      (before[key] = val) for own key, val of @attrs
+
+      _.merge @attrs, attrs
+
+      for own key, val of @attrs
+        if val isnt before[key]
+          after[key] = val
+        else
+          delete before[key]
+
+      return this
+
+    set: (key, val) ->
 
       return this if !key
 

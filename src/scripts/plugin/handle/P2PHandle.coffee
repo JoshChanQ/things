@@ -61,8 +61,43 @@ define [
       @draw()
 
     ondragstart: (e) ->
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
 
     ondrag: (e) ->
+      handle = e.target
+
+      delta =
+        x: e.offsetX - @startpos.x
+        y: e.offsetY - @startpos.y
+
+      newcx = handle.get('cx') + delta.x
+      newcy = handle.get('cy') + delta.y
+
+      handle.set
+        cx: newcx
+        cy: newcy
+
+      index = handle.get('index')
+
+      switch index
+        when 0
+          to =
+            x1: @target.get('x1') + delta.x
+            y1: @target.get('y1') + delta.y
+        when 1
+          to =
+            x2: @target.get('x2') + delta.x
+            y2: @target.get('y2') + delta.y
+
+      @target.set to
+
+      # @draw()
+
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
 
     ondragend: (e) ->
 
@@ -79,7 +114,7 @@ define [
     @spec:
       type: 'p2p-handle'
 
-      containable: false
+      containable: true
 
       description: 'Point-to-Point Handle'
 
