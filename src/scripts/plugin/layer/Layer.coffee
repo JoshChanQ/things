@@ -20,7 +20,7 @@ define [
 
   class Layer extends Container
 
-    clear: ->
+    clearCanvas: ->
 
       @canvas.getContext('2d').clearRect(0, 0, @canvas.width, @canvas.height)
 
@@ -37,7 +37,8 @@ define [
       context.translate -@get('offset-x'), -@get('offset-y')
 
     draw: ->
-      @pender.pend()
+      @_draw()
+      # @pender.pend()
 
     capture: ->
       false

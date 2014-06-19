@@ -12,7 +12,7 @@ define [
 
   "use strict"
 
-  Property =
+  WithProperty =
 
     set: (key, val)->
 

@@ -7,7 +7,7 @@
 define [
   './Layer'
   '../../validator/LayerProps'
-  '../widget/Text'
+  '../shape/Text'
   '../../util/PrettyPrint'
 ], (
   Layer

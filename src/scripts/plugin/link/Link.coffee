@@ -5,18 +5,14 @@
 # ==========================================
 
 define [
-  './Widget'
-  '../../validator/P2P'
   '../../validator/Graphic'
 ], (
-  Widget
-  P2P
   Graphic
 ) ->
 
   'use strict'
 
-  class Link extends Widget
+  class Link extends Shape
 
     draw: (context) ->
       context.beginPath()
@@ -67,6 +63,15 @@ define [
       dependencies: {}
 
       properties: [
-        P2P
         Graphic
+        {
+          'source':
+            type: 'string'
+          'source-dock':
+            type: 'string'
+          'target':
+            type: 'string'
+          'target-dock':
+            type: 'string'
+        }
       ]

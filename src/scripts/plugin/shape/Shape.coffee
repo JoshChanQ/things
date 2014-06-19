@@ -7,11 +7,15 @@
 define [
   'lodash'
   '../../base/Component'
+  '../../mixin/Dockable'
+  '../../mixin/Serializable'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
   _
   Component
+  Dockable
+  Serializable
   Bound
   Graphic
 ) ->
@@ -19,6 +23,9 @@ define [
   'use strict'
 
   class Widget extends Component
+    @include Dockable
+    @include Serializable
+
     _shape: (context) ->
 
     draw: (context) ->
@@ -46,8 +53,8 @@ define [
       (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
       (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
 
-    _move_set: ->
-      [['x'], ['y']]
+    _points: ->
+      [['x', 'y']]
 
     move: (option) ->
       {delta} = option
@@ -56,10 +63,9 @@ define [
 
       to = {}
 
-      if delta.x
-        (to[x] = Math.round(@get(x) + delta.x)) for x in @_move_set()[0]
-      if delta.y
-        (to[y] = Math.round(@get(y) + delta.y)) for y in @_move_set()[1]
+      for p in @_points()
+        to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
+        to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
 
       @set to
 

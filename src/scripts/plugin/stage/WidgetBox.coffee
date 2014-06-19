@@ -10,6 +10,8 @@ define [
   '../../plugin/layer/WidgetLayer'
   '../../plugin/layer/DebugLayer'
   '../../plugin/layer/OutlineLayer'
+  # '../../plugin/layer/HandleLayer'
+  '../../plugin/layer/SelectionLayer'
   '../../plugin/layer/MagnifyLayer'
   '../../handler/ContextMenu'
 ], (
@@ -18,6 +20,8 @@ define [
   WidgetLayer
   DebugLayer
   OutlineLayer
+  # HandleLayer
+  SelectionLayer
   MagnifyLayer
   ContextMenu
 ) ->
@@ -45,6 +49,8 @@ define [
         'widget-layer': WidgetLayer
         'debug-layer': DebugLayer
         'outline-layer': OutlineLayer
+        # 'handle-layer': HandleLayer
+        'selection-layer': SelectionLayer
         'magnify-layer': MagnifyLayer
 
       properties: [
@@ -54,11 +60,19 @@ define [
       components: [{
         type: 'widget-layer'
         attrs: {}
+      # }, {
+      #   type: 'outline-layer'
+      #   attrs:
+      #     'outline-target': 'widget-layer'
+      #     'slide-target': 'widget-layer'
       }, {
-        type: 'outline-layer'
+        type: 'selection-layer'
         attrs:
-          'outline-target': 'widget-layer'
-          'slide-target': 'widget-layer'
+          'target': 'widget-layer'
+      # }, {
+      #   type: 'handle-layer'
+      #   attrs:
+      #     'handle-target': 'widget-layer'
       }, {
         type: 'magnify-layer'
         attrs:

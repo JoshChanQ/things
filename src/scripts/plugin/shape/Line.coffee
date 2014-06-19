@@ -6,26 +6,32 @@
 
 define [
   'lodash'
-  './Widget'
+  './Shape'
   '../../validator/P2P'
   '../../validator/Graphic'
 ], (
   _
-  Widget
+  Shape
   P2P
   Graphic
 ) ->
 
   'use strict'
 
-  class Line extends Widget
+  class Line extends Shape
 
     _shape: (context) ->
       context.moveTo @get('x1'), @get('y1')
       context.lineTo @get('x2'), @get('y2')
 
-    _move_set: ->
-      [['x1', 'x2'], ['y1', 'y2']]
+    _points: ->
+      [['x1', 'y1'], ['x2', 'y2']]
+
+    dockPoints: ->
+      [
+        [@get('x1'), @get('y1')]
+        [@get('x2'), @get('y2')]
+      ]
 
     event_map: ->
 

@@ -6,10 +6,12 @@
 
 define [
   '../../base/Container'
+  '../../mixin/Dockable'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
   Container
+  Dockable
   Bound
   Graphic
 ) ->
@@ -17,6 +19,8 @@ define [
   'use strict'
 
   class Group extends Container
+    @include Dockable
+
     _shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
 

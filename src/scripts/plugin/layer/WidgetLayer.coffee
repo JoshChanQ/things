@@ -26,8 +26,6 @@ define [
       for widget in widgets
         @build(widget, @)
 
-    capture: ->
-
     event_map: ->
       [
         Redraw

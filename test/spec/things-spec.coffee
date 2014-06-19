@@ -2,10 +2,10 @@ define [
   '../../scripts/things',
   '../../scripts/plugin/stage/WidgetBox'
   '../../scripts/plugin/group/Group'
-  '../../scripts/plugin/widget/Rect'
-  '../../scripts/plugin/widget/Line'
-  '../../scripts/plugin/widget/Circle'
-  '../../scripts/plugin/widget/Magnifier'
+  '../../scripts/plugin/shape/Rect'
+  '../../scripts/plugin/shape/Line'
+  '../../scripts/plugin/shape/Circle'
+  '../../scripts/plugin/shape/Magnifier'
   'jquery'
 ], (
   things,
@@ -39,7 +39,7 @@ define [
           widgets.push
             type: 'rect'
             attrs:
-              id: 'rect-' + i
+              # id: 'rect-' + i
               x: Math.random() * 600
               y: Math.random() * 300
               w: Math.random() * 200
@@ -52,7 +52,7 @@ define [
           widgets.push
             type: 'line'
             attrs:
-              id: 'line-' + i
+              # id: 'line-' + i
               x1: Math.random() * 800
               y1: Math.random() * 500
               x2: Math.random() * 800
@@ -64,7 +64,7 @@ define [
           widgets.push
             type: 'circle'
             attrs:
-              id: 'circle-' + i
+              # id: 'circle-' + i
               cx: Math.random() * 600
               cy: Math.random() * 300
               r: Math.random() * 50
@@ -76,7 +76,7 @@ define [
         widgets.push
           type: 'group'
           attrs:
-            id: 'group-' + i
+            # id: 'group-' + i
             x: 100
             y: 100
             w: 300

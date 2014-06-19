@@ -14,7 +14,7 @@ define [
 
   "use strict"
 
-  Event =
+  WithEvent =
     # withEvent: ->
     #     (this[method] = Event[method]) for method in ['on', 'off', 'once', 'delegate_on', 'delegate_off', 'trigger']
 
@@ -172,7 +172,7 @@ define [
 
   delegateEvents = (delegators, args) ->
     delegators.forEach (delegator) ->
-      Event.delegate.apply(delegator, args)
+      WithEvent.delegate.apply(delegator, args)
 
   listenMethods =
     listenTo: 'on'
@@ -182,7 +182,7 @@ define [
   # listen to an event in another object ... keeping track of what it's
   # listening to.
   for method, implementation of listenMethods
-    Event[method] = (obj, name, callback) ->
+    WithEvent[method] = (obj, name, callback) ->
       listeningTo = this._listeningTo || (this._listeningTo = {})
       id = obj._listenId || (obj._listenId = _.uniqueId('l'))
       listeningTo[id] = obj
@@ -191,4 +191,4 @@ define [
 
       return this
 
-  Event
+  WithEvent

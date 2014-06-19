@@ -5,18 +5,18 @@
 # ==========================================
 
 define [
-  './Widget'
+  './Shape'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
-  Widget
+  Shape
   Bound
   Graphic
 ) ->
 
   'use strict'
 
-  class Rect extends Widget
+  class Rect extends Shape
 
     _shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')

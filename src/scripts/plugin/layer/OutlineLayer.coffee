@@ -9,7 +9,7 @@ define [
   '../../validator/LayerProps'
   '../../handler/Outline'
   '../../handler/Slider'
-  '../widget/Circle'
+  '../shape/Circle'
 ], (
   Layer
   LayerProps
@@ -30,11 +30,8 @@ define [
 
       super()
 
-    capture: (position) ->
-      false
-
     _draw: ->
-      @clear()
+      @clearCanvas()
 
       context = @canvas.getContext '2d'
 

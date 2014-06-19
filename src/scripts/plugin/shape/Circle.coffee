@@ -6,25 +6,37 @@
 
 define [
   'lodash'
-  './Widget'
+  './Shape'
   '../../validator/Graphic'
   '../../validator/Circle'
 ], (
   _
-  Widget
+  Shape
   Graphic
   CircleProps
 ) ->
 
   'use strict'
 
-  class Circle extends Widget
+  class Circle extends Shape
 
     _shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
 
-    _move_set: ->
-      [['cx'], ['cy']]
+    _points: ->
+      [['cx', 'cy']]
+
+    dockPoints: ->
+      cx = @get('cx')
+      cy = @get('cy')
+      r = @get('r')
+
+      points = []
+
+      for angle in [0..359] by 45
+        points.push [cx + Math.cos(angle * Math.PI / 180) * r, cy - Math.sin(angle * Math.PI / 180) * r]
+
+      points
 
     @spec:
       type: 'circle'

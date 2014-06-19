@@ -10,7 +10,7 @@ define [
 
   "use strict"
 
-  LifeCycle =
+  WithLifeCycle =
 
     initialize: (@attrs, @property_spec) ->
       # only assign identity if there isn't one (initialize can be called multiple times)

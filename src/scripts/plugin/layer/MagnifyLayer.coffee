@@ -9,7 +9,7 @@ define [
   '../../validator/LayerProps'
   '../../validator/Graphic'
   '../../handler/Magnify'
-  '../widget/Circle'
+  '../shape/Circle'
 ], (
   Layer
   LayerProps
@@ -25,7 +25,7 @@ define [
     setup: ->
       @target = @select(@get('magnify-target'))[0]
 
-      @magnify_handle = @select('#magnify-handle')[0]
+      @magnify_edge = @select('#magnify-edge')[0]
 
       r = @get('r')
       @set
@@ -37,19 +37,16 @@ define [
       @canvas.setAttribute('width', 2 * r)
       @canvas.setAttribute('height', 2 * r)
 
-      @magnify_handle.set
+      @magnify_edge.set
         'cx': r
         'cy': r
         'r': r - 5
 
       super()
 
-    capture: (position) ->
-      false
-
     _draw: ->
 
-      @clear()
+      @clearCanvas()
 
       context = @canvas.getContext '2d'
 
@@ -58,7 +55,7 @@ define [
       context.save()
 
       r = @get('r')
-      ratio = @get('ratio') || 10
+      ratio = @get('ratio')
 
       context.arc(r, r, r - 1, 0, Math.PI * 2, false)
 
@@ -109,12 +106,24 @@ define [
       components: [{
         type: 'circle'
         attrs:
-          'id': 'magnify-handle'
+          'id': 'magnify-edge'
           'cx': 100
           'cy': 100
           'r': 95
           'lineWidth': 10
-          'strokeStyle': 'gray'
+          'strokeStyle': 'black'
+          capturable: true
+          draggable: true
+      }, {
+        type: 'circle'
+        attrs:
+          'id': 'magnify-handle'
+          'cx': 180
+          'cy': 180
+          'r': 16
+          'lineWidth': 8
+          'strokeStyle': 'black'
+          'fillStyle': 'red'
           capturable: true
           draggable: true
       }]

@@ -5,12 +5,12 @@
 # ==========================================
 
 define [
-  './Widget'
+  './Shape'
   '../../validator/Bound'
   '../../validator/Graphic'
   '../../validator/Font'
 ], (
-  Widget
+  Shape
   Bound
   Graphic
   Font
@@ -18,7 +18,7 @@ define [
 
   'use strict'
 
-  class Text extends Widget
+  class Text extends Shape
 
     _wrap: (context, text, x, y, max_width, line_height) ->
       words = text.split(' ')

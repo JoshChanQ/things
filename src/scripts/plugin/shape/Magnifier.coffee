@@ -6,19 +6,19 @@
 
 define [
   'lodash'
-  './Widget'
+  './Shape'
   '../../validator/Graphic'
   '../../validator/Circle'
 ], (
   _
-  Widget
+  Shape
   Graphic
   CircleProps
 ) ->
 
   'use strict'
 
-  class Magnifier extends Widget
+  class Magnifier extends Shape
     setup: ->
       return unless @get('target')
 
@@ -69,8 +69,8 @@ define [
     _shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
 
-    _move_set: ->
-      [['cx'], ['cy']]
+    _points: ->
+      [['cx', 'cy']]
 
     @spec:
       type: 'magnifier'

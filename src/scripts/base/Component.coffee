@@ -6,25 +6,24 @@
 
 define [
   './Module'
-  './Property'
-  './LifeCycle'
-  './Event'
-  './Serialize'
+  '../mixin/WithProperty'
+  '../mixin/WithLifeCycle'
+  '../mixin/WithEvent'
+  '../mixin/Serializable'
 ], (
   Module
-  Property
-  LifeCycle
-  Event
-  Serialize
+  WithProperty
+  WithLifeCycle
+  WithEvent
+  Serializable
 ) ->
 
   "use strict"
 
   class Component extends Module
-    @include Property
-    @include LifeCycle
-    @include Event
-    @include Serialize
+    @include WithProperty
+    @include WithLifeCycle
+    @include WithEvent
 
     constructor : (type, container) ->
       @type = type

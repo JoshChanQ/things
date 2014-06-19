@@ -75,6 +75,9 @@ define [
 
     this
 
+  removeAll = ->
+    @remove _.clone @__components__
+
   getAt = (index) ->
     return @__components__[index] if @__components__
 
@@ -143,6 +146,7 @@ define [
 
     add: add
     remove: remove
+    removeAll: removeAll
     size: size
     getAt: getAt
     indexOf: indexOf

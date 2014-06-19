@@ -5,7 +5,9 @@
 # ==========================================
 
 define [
+  'lodash'
 ], (
+  _
 ) ->
 
   'use strict'
@@ -44,6 +46,8 @@ define [
       throw new Error('module (' + model.type + ') is not registered yet.') unless klass
 
       # TODO validation for initialization
+      model.attrs = {} unless model.attrs
+      model.attrs.id = _.uniqueId() unless model.attrs.hasOwnProperty('id')
       component = new klass(model.type).initialize(model.attrs, klass.spec.properties)
 
       component.setController @controller

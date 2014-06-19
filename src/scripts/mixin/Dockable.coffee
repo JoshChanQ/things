@@ -10,12 +10,20 @@ define [
 
   "use strict"
 
-  Serialize =
-    serialize: ->
-      [
-        "type: #{this.name}"
-        "id: #{this.id}"
-        "props: #{JSON.stringify(this.attrs)}"
-      ].join(',')
+  Dockable =
 
-    deserialize: ->
+    dockType: ->
+
+
+    dockPoints: ->
+      x = @get('x')
+      y = @get('y')
+      w = @get('w')
+      h = @get('h')
+
+      [
+        [x, y]
+        [x + w, y]
+        [x, y + h]
+        [x + w, y + h]
+      ]
