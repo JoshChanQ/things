@@ -8,14 +8,16 @@ define [
   './Layer'
   '../../validator/LayerProps'
   '../../handler/SelectionHandler'
-  '../handle/Handle'
+  '../handle/BoundHandle'
+  '../handle/CircleHandle'
+  '../handle/P2PHandle'
 ], (
   Layer
   LayerProps
   SelectionHandler
-  # Outline
-  # Slider
-  Handle
+  BoundHandle
+  CircleHandle
+  P2PHandle
 ) ->
 
   'use strict'
@@ -58,15 +60,19 @@ define [
       return unless @focus.dockPoints
       points = @focus.dockPoints()
 
-      for p, index in points
+      # for p, index in points
+      for handle in @focus.handles()
         @build
-          type: 'handle'
+          type: handle
           attrs:
-            x: p[0]
-            y: p[1]
-            index: index
             target: '#' + @focus.get('id')
-            draggable: true
+          # type: 'handle'
+          # attrs:
+          #   x: p[0]
+          #   y: p[1]
+          #   index: index
+          #   target: '#' + @focus.get('id')
+          #   draggable: true
 
     setFocus: (focus) ->
       return if @focus == focus
@@ -94,7 +100,9 @@ define [
       description: 'Selection Layer'
 
       dependencies:
-        'handle': Handle
+        'bound-handle': BoundHandle
+        'circle-handle': CircleHandle
+        'p2p-handle': P2PHandle
 
       properties: [
         LayerProps

@@ -37,7 +37,7 @@ define [
 
       context.fillText line, x, y
 
-    _shape: (context) ->
+    shape: (context) ->
       @_wrap context, @get('text'), @get('x'), @get('y'), @get('w'), 10
 
       # draw text

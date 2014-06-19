@@ -7,11 +7,13 @@
 define [
   '../../base/Container'
   '../../mixin/Dockable'
+  '../../mixin/GroupShapable'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
   Container
   Dockable
+  GroupShapable
   Bound
   Graphic
 ) ->
@@ -20,46 +22,17 @@ define [
 
   class Group extends Container
     @include Dockable
+    @include GroupShapable
 
-    _shape: (context) ->
-      context.rect @get('x'), @get('y'), @get('w'), @get('h')
+    isPointInBound: (position) ->
+      return true unless @get('clip')
+      super(position)
 
-    draw: (context) ->
-      context.beginPath()
+    handles: ->
+      ['bound-handle']
 
-      context.save()
-
-      @_shape context
-
-      if @get('fillStyle')
-        context.fillStyle = @get('fillStyle')
-        context.fill()
-
-      if @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
-        context.strokeStyle = @get('strokeStyle')
-        context.stroke()
-
-      context.clip();
-
-      @forEach (child) ->
-        child.draw context
-
-      context.restore()
-
-    capture: (position, context) ->
-      context.beginPath()
-
-      @_shape context
-
-      if @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
-
-      (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
-      (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
-
-    _move_set: ->
-      [['x'], ['y']]
+    positions: ->
+      [['x', 'y']]
 
     move: (option) ->
       {delta} = option
@@ -68,10 +41,9 @@ define [
 
       to = {}
 
-      if delta.x
-        (to[x] = Math.round(@get(x) + delta.x)) for x in @_move_set()[0]
-      if delta.y
-        (to[y] = Math.round(@get(y) + delta.y)) for y in @_move_set()[1]
+      for p in @positions()
+        to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
+        to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
 
       @set to
 
@@ -94,4 +66,9 @@ define [
       properties: [
         Bound
         Graphic
+        {
+          clip:
+            type: 'boolean'
+            default: true
+        }
       ]

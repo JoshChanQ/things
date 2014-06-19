@@ -16,17 +16,19 @@ define [
 
   'use strict'
 
-  class P2PHandle extends Group
+  class CircleHandle extends Group
 
     align: ->
+      r = @target.get('r')
+      cx = @target.get('cx')
+      cy = @target.get('cy')
+
+      theta = Math.random() * 360 * Math.PI / 180
+
       points = [
         [
-          @target.get('x1')
-          @target.get('y1')
-        ]
-        [
-          @target.get('x2')
-          @target.get('y2')
+          Math.round(cx + Math.cos(theta) * r)
+          Math.round(cy + Math.sin(theta) * r)
         ]
       ]
 
@@ -41,18 +43,17 @@ define [
 
       @target = @select(@get('target'))[0]
 
-      for i in [0..1]
-        @build
-          type: 'circle'
-          attrs:
-            x: 0
-            y: 0
-            r: 5
-            index: i
-            fillStyle: 'white'
-            strokeStyle: 'black'
-            lineWidth: 1
-            draggable: true
+      @build
+        type: 'circle'
+        attrs:
+          x: 0
+          y: 0
+          r: 5
+          index: 0
+          fillStyle: 'white'
+          strokeStyle: 'black'
+          lineWidth: 1
+          draggable: true
 
       @align()
 
@@ -77,11 +78,11 @@ define [
           dragend: @ondragend
 
     @spec:
-      type: 'p2p-handle'
+      type: 'circle-handle'
 
       containable: false
 
-      description: 'Point-to-Point Handle'
+      description: 'Circle Handle'
 
       dependencies: {
         'circle': Circle

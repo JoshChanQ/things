@@ -16,32 +16,45 @@ define [
 
   'use strict'
 
-  class P2PHandle extends Group
+  TOP = -1
+  MIDDLE = 0
+  BOTTOM = 1
+  LEFT = -1
+  CENTER = 0
+  RIGHT = 1
+
+  points =
+    [
+      [TOP, LEFT]
+      [TOP, CENTER]
+      [TOP, RIGHT]
+      [MIDDLE, LEFT]
+      [MIDDLE, RIGHT]
+      [BOTTOM, LEFT]
+      [BOTTOM, CENTER]
+      [BOTTOM, RIGHT]
+    ]
+
+  class BoundHandle extends Group
 
     align: ->
-      points = [
-        [
-          @target.get('x1')
-          @target.get('y1')
-        ]
-        [
-          @target.get('x2')
-          @target.get('y2')
-        ]
-      ]
+      rw = Math.round(@target.get('w') / 2)
+      rh = Math.round(@target.get('h') / 2)
+      cx = Math.round(@target.get('x') + rw)
+      cy = Math.round(@target.get('y') + rh)
 
       @forEach (component) ->
         index = component.get('index')
         component.set
-          cx: points[index][0]
-          cy: points[index][1]
+          cx: cx + points[index][0] * rw
+          cy: cy + points[index][1] * rh
 
     setup: ->
       @set('clip', false)
 
       @target = @select(@get('target'))[0]
 
-      for i in [0..1]
+      for point, i in points
         @build
           type: 'circle'
           attrs:
@@ -77,11 +90,11 @@ define [
           dragend: @ondragend
 
     @spec:
-      type: 'p2p-handle'
+      type: 'bound-handle'
 
       containable: false
 
-      description: 'Point-to-Point Handle'
+      description: 'Bound Handle'
 
       dependencies: {
         'circle': Circle

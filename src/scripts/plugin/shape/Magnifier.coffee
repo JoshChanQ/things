@@ -66,10 +66,10 @@ define [
         context.lineWidth = @get('lineWidth')
         context.stroke();
 
-    _shape: (context) ->
+    shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
 
-    _points: ->
+    positions: ->
       [['cx', 'cy']]
 
     @spec:

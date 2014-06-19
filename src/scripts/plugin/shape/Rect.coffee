@@ -18,7 +18,7 @@ define [
 
   class Rect extends Shape
 
-    _shape: (context) ->
+    shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
 
     @spec:

@@ -9,6 +9,7 @@ define [
   '../../base/Component'
   '../../mixin/Dockable'
   '../../mixin/Serializable'
+  '../../mixin/Shapable'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
@@ -16,44 +17,22 @@ define [
   Component
   Dockable
   Serializable
+  Shapable
   Bound
   Graphic
 ) ->
 
   'use strict'
 
-  class Widget extends Component
+  class Shape extends Component
     @include Dockable
     @include Serializable
+    @include Shapable
 
-    _shape: (context) ->
+    handles: ->
+      ['bound-handle']
 
-    draw: (context) ->
-      context.beginPath()
-
-      @_shape context
-
-      if @get('fillStyle')
-        context.fillStyle = @get('fillStyle')
-        context.fill()
-
-      if @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
-        context.strokeStyle = @get('strokeStyle')
-        context.stroke()
-
-    capture: (position, context) ->
-      context.beginPath()
-
-      @_shape context
-
-      if @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
-
-      (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
-      (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
-
-    _points: ->
+    positions: ->
       [['x', 'y']]
 
     move: (option) ->
@@ -63,22 +42,24 @@ define [
 
       to = {}
 
-      for p in @_points()
+      for p in @positions()
         to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
         to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
 
       @set to
 
-    event_map: null
+    event_map: ->
+      null
 
     @spec:
-      type: 'widget'
+      type: 'shape'
 
       containable: false
 
-      description: 'Abstract Widget'
+      description: 'Abstract Shape'
 
-      dependencies: {}
+      dependencies: {
+      }
 
       properties: [
         Bound

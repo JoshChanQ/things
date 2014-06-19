@@ -20,10 +20,13 @@ define [
 
   class Circle extends Shape
 
-    _shape: (context) ->
+    shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
 
-    _points: ->
+    handles: ->
+      ['circle-handle']
+
+    positions: ->
       [['cx', 'cy']]
 
     dockPoints: ->
@@ -45,7 +48,8 @@ define [
 
       description: 'Circle'
 
-      dependencies: {}
+      dependencies: {
+      }
 
       properties: [
         CircleProps

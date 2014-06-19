@@ -63,6 +63,6 @@ define [
           index:
             type: 'string'
           target:
-            type: 'object'
+            type: 'string'
         }
       ]

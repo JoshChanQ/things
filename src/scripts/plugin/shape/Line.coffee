@@ -9,22 +9,27 @@ define [
   './Shape'
   '../../validator/P2P'
   '../../validator/Graphic'
+  '../handle/P2PHandle'
 ], (
   _
   Shape
   P2P
   Graphic
+  P2PHandle
 ) ->
 
   'use strict'
 
   class Line extends Shape
 
-    _shape: (context) ->
+    shape: (context) ->
       context.moveTo @get('x1'), @get('y1')
       context.lineTo @get('x2'), @get('y2')
 
-    _points: ->
+    handles: ->
+      ['p2p-handle']
+
+    positions: ->
       [['x1', 'y1'], ['x2', 'y2']]
 
     dockPoints: ->
@@ -42,7 +47,9 @@ define [
 
       description: 'Direct Line'
 
-      dependencies: {}
+      dependencies: {
+        'p2p-handle': P2PHandle
+      }
 
       properties: [
         P2P
