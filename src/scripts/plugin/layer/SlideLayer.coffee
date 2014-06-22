@@ -7,13 +7,11 @@
 define [
   './Layer'
   '../../validator/LayerProps'
-  '../../handler/Outline'
   '../../handler/Slider'
   '../shape/Circle'
 ], (
   Layer
   LayerProps
-  Outline
   Slider
   Circle
 ) ->
@@ -57,18 +55,17 @@ define [
 
     event_map: ->
       [
-        Outline
         Slider
       ]
 
     @spec:
-      type: 'outline-layer'
+      type: 'slide-layer'
 
       containable: true
 
       container_type: 'layer'
 
-      description: 'Outline Layer'
+      description: 'Slide Layer'
 
       dependencies:
         'circle': Circle

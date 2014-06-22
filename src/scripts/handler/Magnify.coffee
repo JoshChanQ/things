@@ -30,7 +30,6 @@ define [
         'x': pos_x
         'y': pos_y
 
-      # @set(offset)
       @set(position)
 
       @handle_last_position =
@@ -51,13 +50,6 @@ define [
       @last_ratio = @get('ratio')
 
     ondrag: (e) ->
-      # cx = @get('offset-x') + @get('w') / 2
-      # cy = @get('offset-y') + @get('h') / 2
-
-      # x1 = e.offsetX - cx
-      # y1 = e.offsetY - cy
-      # x2 = @edge_last_position.x - cx
-      # y2 = @edge_last_position.y - cy
 
       delta = e.offsetY - @edge_last_position.y
 
@@ -74,8 +66,6 @@ define [
     @draw()
 
   onchange = (target, before, after) ->
-    # @canvas.style.left = after['offset-x'] + 'px' if after.hasOwnProperty('offset-x')
-    # @canvas.style.top = after['offset-y'] + 'px' if after.hasOwnProperty('offset-y')
     @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
     @canvas.style.top = after['y'] + 'px' if after.hasOwnProperty('y')
 

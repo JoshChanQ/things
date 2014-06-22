@@ -15,7 +15,6 @@ define [
   'use strict'
 
   oncontextmenu = (e, context) ->
-    @debug 'touch', 'xxx'
     ContextMenu.show
       x: e.origin.pageX
       y: e.origin.pageY

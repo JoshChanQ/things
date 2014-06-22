@@ -9,8 +9,7 @@ define [
   '../../validator/StageProps'
   '../../plugin/layer/WidgetLayer'
   '../../plugin/layer/DebugLayer'
-  '../../plugin/layer/OutlineLayer'
-  # '../../plugin/layer/HandleLayer'
+  '../../plugin/layer/SlideLayer'
   '../../plugin/layer/SelectionLayer'
   '../../plugin/layer/MagnifyLayer'
   '../../handler/ContextMenu'
@@ -19,8 +18,7 @@ define [
   StageProps
   WidgetLayer
   DebugLayer
-  OutlineLayer
-  # HandleLayer
+  SlideLayer
   SelectionLayer
   MagnifyLayer
   ContextMenu
@@ -48,8 +46,7 @@ define [
       dependencies:
         'widget-layer': WidgetLayer
         'debug-layer': DebugLayer
-        'outline-layer': OutlineLayer
-        # 'handle-layer': HandleLayer
+        'slide-layer': SlideLayer
         'selection-layer': SelectionLayer
         'magnify-layer': MagnifyLayer
 
@@ -64,19 +61,10 @@ define [
           'offset-y': -150
           'x': 100
           'y': 100
-      # }, {
-      #   type: 'outline-layer'
-      #   attrs:
-      #     'outline-target': 'widget-layer'
-      #     'slide-target': 'widget-layer'
       }, {
         type: 'selection-layer'
         attrs:
           'target': 'widget-layer'
-      # }, {
-      #   type: 'handle-layer'
-      #   attrs:
-      #     'handle-target': 'widget-layer'
       }, {
         type: 'magnify-layer'
         attrs:
@@ -85,6 +73,10 @@ define [
           'strokeStyle': 'gray'
           'r': 100
           'ratio': 2
+      }, {
+        type: 'slide-layer'
+        attrs:
+          'slide-target': 'widget-layer'
       # }, {
       #   type: 'debug-layer'
       }]

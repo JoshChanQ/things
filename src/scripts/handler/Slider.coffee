@@ -32,6 +32,8 @@ define [
       'offset-x': offset.x + delta.x
       'offset-y': offset.y + delta.y
 
+    @slide_handle.move {delta:delta}
+
     @slide_last_position =
       x: e.offsetX
       y: e.offsetY

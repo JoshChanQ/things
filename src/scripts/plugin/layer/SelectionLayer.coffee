@@ -22,14 +22,30 @@ define [
 
   'use strict'
 
+  parent_groups_translate = (item, context, container) ->
+
+    parent = item.getContainer()
+
+    parent_groups_translate parent, context, true unless parent.canvas
+
+    return unless container
+
+    rotate = item.get('rotate') || 0
+
+    center = item.center()
+
+    context.translate(center.x, center.y)
+    context.rotate(rotate * Math.PI / 180)
+    context.translate(-center.x, -center.y)
+
+    context.translate(item.get('x'), item.get('y'))
+
   class SelectionLayer extends Layer
 
     capture: (position) ->
       context = @canvas.getContext '2d'
 
       context.beginPath()
-
-      # HERE ; consider get 'x', 'y'
 
       translated_position =
         x: position.x - @get('offset-x') - @get('x')
@@ -62,25 +78,6 @@ define [
 
       super()
 
-    _prepare: (item, context, container) ->
-
-      parent = item.getContainer()
-
-      @_prepare parent, context, true unless parent.canvas
-
-      return unless container
-
-      rotate = item.get('rotate') || 0
-
-      center = item.center()
-
-      context.translate(center.x, center.y)
-      context.rotate(rotate * Math.PI / 180)
-      context.translate(-center.x, -center.y)
-
-      context.translate(item.get('x'), item.get('y'))
-
-
     _draw: ->
 
       @clearCanvas()
@@ -99,7 +96,7 @@ define [
         context.translate @offset.x, @offset.y if @offset # dragging offset
         for item in @selections
           context.save()
-          @_prepare item, context
+          parent_groups_translate item, context
           item.draw context
           context.restore()
 
