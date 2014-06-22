@@ -24,11 +24,62 @@ define [
 
   class SelectionLayer extends Layer
 
+    capture: (position) ->
+      context = @canvas.getContext '2d'
+
+      context.beginPath()
+
+      # HERE ; consider get 'x', 'y'
+
+      translated_position =
+        x: position.x - @get('offset-x') - @get('x')
+        y: position.y - @get('offset-y') - @get('y')
+
+      @shape context
+
+      if @size() > 0
+        for i in [(@size() - 1)..0]
+          child = @getAt(i)
+          captured = child.capture translated_position, context
+          return captured if captured
+
+      return null
+
+
     setup: ->
+
+      @target = @select(@get('target'))[0]
+
+      position =
+        'offset-x': @get('offset-x') || @target.get('offset-x')
+        'offset-y': @get('offset-y') || @target.get('offset-y')
+        'x': @get('x') || @target.get('x')
+        'y': @get('y') || @target.get('y')
+
+      @set position
 
       @selections = []
 
       super()
+
+    _prepare: (item, context, container) ->
+
+      parent = item.getContainer()
+
+      @_prepare parent, context, true unless parent.canvas
+
+      return unless container
+
+      rotate = item.get('rotate') || 0
+
+      center = item.center()
+
+      context.translate(center.x, center.y)
+      context.rotate(rotate * Math.PI / 180)
+      context.translate(-center.x, -center.y)
+
+      context.translate(item.get('x'), item.get('y'))
+
 
     _draw: ->
 
@@ -36,43 +87,39 @@ define [
 
       context = @canvas.getContext '2d'
 
-      offset =
-        x: @get('offset-x')
-        y: @get('offset-y')
+      context.save()
 
-      context.translate offset.x, offset.y
+      context.translate @get('offset-x'), @get('offset-y') # canvas offset
 
       context.globalAlpha = 0.4 # Half opacity
 
       if @selections.length > 0
-        context.translate @offset.x, @offset.y if @offset
-        (item.draw context) for item in @selections
-        context.translate -@offset.x, -@offset.y if @offset
+        context.save()
+
+        context.translate @offset.x, @offset.y if @offset # dragging offset
+        for item in @selections
+          context.save()
+          @_prepare item, context
+          item.draw context
+          context.restore()
+
+        context.restore()
 
       context.globalAlpha = 1 # Half opacity
 
-      @forEach (child) ->
-        child.draw context
+      if @focus
+        @forEach (child) ->
+          child.draw context
 
-      context.translate -offset.x, -offset.y
+      context.restore()
 
     buildHandles: ->
-      return unless @focus.dockPoints
-      points = @focus.dockPoints()
 
-      # for p, index in points
       for handle in @focus.handles()
         @build
           type: handle
           attrs:
             target: '#' + @focus.get('id')
-          # type: 'handle'
-          # attrs:
-          #   x: p[0]
-          #   y: p[1]
-          #   index: index
-          #   target: '#' + @focus.get('id')
-          #   draggable: true
 
     setFocus: (focus) ->
       return if @focus == focus

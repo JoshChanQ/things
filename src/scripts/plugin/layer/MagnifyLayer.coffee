@@ -31,8 +31,8 @@ define [
       @set
         'w': 2 * r
         'h': 2 * r
-        'offset-x': (@target.canvas.width / 2) - r
-        'offset-y': (@target.canvas.height / 2) - r
+        'x': (@target.canvas.width / 2) - r
+        'y': (@target.canvas.height / 2) - r
 
       @canvas.setAttribute('width', 2 * r)
       @canvas.setAttribute('height', 2 * r)
@@ -67,8 +67,8 @@ define [
         context.fillStyle = @get('fillStyle')
         context.fill()
 
-      target_x = @get('offset-x') + r
-      target_y = @get('offset-y') + r
+      target_x = @get('x') - @target.get('x') + r
+      target_y = @get('y') - @target.get('y') + r
       target_w = Math.round(r / ratio)
       target_h = target_w
 

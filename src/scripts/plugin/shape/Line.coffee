@@ -7,22 +7,36 @@
 define [
   'lodash'
   './Shape'
+  '../handle/P2PHandle'
   '../../validator/P2P'
   '../../validator/Graphic'
-  '../handle/P2PHandle'
 ], (
   _
   Shape
+  P2PHandle
   P2P
   Graphic
-  P2PHandle
 ) ->
 
   'use strict'
 
   class Line extends Shape
 
+    center: ->
+      {
+        x: (@get('x1') + @get('x2')) / 2
+        y: (@get('y1') + @get('y2')) / 2
+      }
+
     shape: (context) ->
+      # x1 = @get('x1')
+      # y1 = @get('y1')
+      # x2 = @get('x2')
+      # y2 = @get('y2')
+
+      # context.moveTo -(x2 - x1) / 2, -(y2 - y1) / 2
+      # context.lineTo (x2 - x1) / 2, (y2 - y1) / 2
+
       context.moveTo @get('x1'), @get('y1')
       context.lineTo @get('x2'), @get('y2')
 

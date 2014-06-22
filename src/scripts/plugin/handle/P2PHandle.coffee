@@ -6,12 +6,12 @@
 
 define [
   'lodash'
+  './Handle'
   '../group/Group'
-  '../shape/Circle'
 ], (
   _
+  Handle
   Group
-  Circle
 ) ->
 
   'use strict'
@@ -19,6 +19,7 @@ define [
   class P2PHandle extends Group
 
     align: ->
+
       points = [
         [
           @target.get('x1')
@@ -33,8 +34,8 @@ define [
       @forEach (component) ->
         index = component.get('index')
         component.set
-          cx: points[index][0]
-          cy: points[index][1]
+          x: points[index][0]
+          y: points[index][1]
 
     setup: ->
       @set('clip', false)
@@ -43,15 +44,13 @@ define [
 
       for i in [0..1]
         @build
-          type: 'circle'
+          type: 'handle'
           attrs:
-            x: 0
-            y: 0
-            r: 5
+            r: 8
             index: i
-            fillStyle: 'white'
-            strokeStyle: 'black'
-            lineWidth: 1
+            strokeStyle: 'red'
+            fillStyle: 'black'
+            lineWidth: 2
             draggable: true
 
       @align()
@@ -106,7 +105,7 @@ define [
         '?target':
           change: @onchange
       '(self)':
-        'circle':
+        'handle':
           dragstart: @ondragstart
           drag: @ondrag
           dragend: @ondragend
@@ -119,7 +118,7 @@ define [
       description: 'Point-to-Point Handle'
 
       dependencies: {
-        'circle': Circle
+        'handle': Handle
       }
 
       properties: [

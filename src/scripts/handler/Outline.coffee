@@ -27,7 +27,6 @@ define [
     @draw()
 
   ondragend = (e) ->
-    @debug 'xxxxx', 'yyyyy'
     @outline_target = null
 
     if e.target.move

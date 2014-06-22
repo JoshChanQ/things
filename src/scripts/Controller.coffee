@@ -8,7 +8,6 @@ define [
   'jquery'
   'lodash'
   './base/Component'
-  './base/Container'
   './base/ComponentRegistry'
   './base/ComponentSelector'
   './base/ComponentFactory'
@@ -21,7 +20,6 @@ define [
   $
   _
   Component
-  Container
   ComponentRegistry
   ComponentSelector
   ComponentFactory
@@ -63,19 +61,14 @@ define [
       throw new Error('controller not initialized') unless @controller
       @controller.select selector, target
 
+    abs: (v) ->
+      rel = @get(v) || 0
+      container = @getContainer()
+      rel += (container.abs(v) || 0) if container
+      rel
+
     debug: (category, text) ->
       @require('debug-layer').debug category, text
-
-  Container.include
-    isPointInBound: (point) ->
-      x1 = @get('x')
-      x2 = x1 + @get('w')
-      return false if point.x < Math.min(x1, x2) || point.x > Math.max(x1, x2)
-      y1 = @get('y')
-      y2 = y1 + @get('h')
-      return false if point.y < Math.min(y1, y2) || point.y > Math.max(y1, y2)
-
-      true
 
   class Controller
     constructor: (options) ->

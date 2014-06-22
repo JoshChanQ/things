@@ -41,8 +41,8 @@ define [
       origin: origin
       type: type
       target: target
-      offsetX: origin.offsetX
-      offsetY: origin.offsetY
+      offsetX: origin.offsetX + (if origin.target.tagName == 'CANVAS' then origin.target.offsetLeft else 0)
+      offsetY: origin.offsetY + (if origin.target.tagName == 'CANVAS' then origin.target.offsetTop else 0)
 
     target.trigger e.type, e
 

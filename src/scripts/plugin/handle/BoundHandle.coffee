@@ -6,12 +6,12 @@
 
 define [
   'lodash'
+  './Handle'
   '../group/Group'
-  '../shape/Circle'
 ], (
   _
+  Handle
   Group
-  Circle
 ) ->
 
   'use strict'
@@ -25,14 +25,14 @@ define [
 
   points =
     [
-      [TOP, LEFT]
-      [TOP, CENTER]
-      [TOP, RIGHT]
-      [MIDDLE, LEFT]
-      [MIDDLE, RIGHT]
-      [BOTTOM, LEFT]
-      [BOTTOM, CENTER]
-      [BOTTOM, RIGHT]
+      [LEFT, TOP]
+      [CENTER, TOP]
+      [RIGHT, TOP]
+      [LEFT, MIDDLE]
+      [RIGHT, MIDDLE]
+      [LEFT, BOTTOM]
+      [CENTER, BOTTOM]
+      [RIGHT, BOTTOM]
     ]
 
   class BoundHandle extends Group
@@ -46,8 +46,8 @@ define [
       @forEach (component) ->
         index = component.get('index')
         component.set
-          cx: cx + points[index][0] * rw
-          cy: cy + points[index][1] * rh
+          x: cx + points[index][0] * rw
+          y: cy + points[index][1] * rh
 
     setup: ->
       @set('clip', false)
@@ -56,15 +56,14 @@ define [
 
       for point, i in points
         @build
-          type: 'circle'
+          type: 'handle'
           attrs:
-            x: 0
-            y: 0
             r: 5
+            strokeStyle: 'red'
+            lineWidth: 2
+            capturable: false
+            fillStyle: 'black'
             index: i
-            fillStyle: 'white'
-            strokeStyle: 'black'
-            lineWidth: 1
             draggable: true
 
       @align()
@@ -74,8 +73,33 @@ define [
       @draw()
 
     ondragstart: (e) ->
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
 
     ondrag: (e) ->
+      handle = e.target
+
+      delta =
+        x: e.offsetX - @startpos.x
+        y: e.offsetY - @startpos.y
+
+      index = handle.get('index')
+
+      target_to =
+        w: @target.get('w') + delta.x * points[index][0]
+        h: @target.get('h') + delta.y * points[index][1]
+
+      target_to['x'] = @target.abs('x') + delta.x if points[index][0] == LEFT
+      target_to['y'] = @target.abs('y') + delta.y if points[index][1] == TOP
+
+      @target.set target_to
+
+      # @draw()
+
+      @startpos =
+        x: e.offsetX
+        y: e.offsetY
 
     ondragend: (e) ->
 
@@ -84,7 +108,7 @@ define [
         '?target':
           change: @onchange
       '(self)':
-        'circle':
+        'handle':
           dragstart: @ondragstart
           drag: @ondrag
           dragend: @ondragend
@@ -97,7 +121,7 @@ define [
       description: 'Bound Handle'
 
       dependencies: {
-        'circle': Circle
+        'handle': Handle
       }
 
       properties: [

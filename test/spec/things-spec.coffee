@@ -35,28 +35,29 @@ define [
 
       it 'should create canvas set under the html-container', ->
         widgets = []
-        for i in [1..2]
+        for i in [1..1]
           widgets.push
             type: 'rect'
             attrs:
               # id: 'rect-' + i
-              x: Math.random() * 600
-              y: Math.random() * 300
-              w: Math.random() * 200
-              h: Math.random() * 200
+              x: 100 #Math.round(Math.random() * 600)
+              y: 100 #Math.round(Math.random() * 300)
+              w: 200 #Math.round(Math.random() * 200)
+              h: 200 #Math.round(Math.random() * 200)
               strokeStyle: 'black'
               fillStyle: 'white'
               lineWidth: 7
+              rotate: 30
               draggable: true
 
           widgets.push
             type: 'line'
             attrs:
               # id: 'line-' + i
-              x1: Math.random() * 800
-              y1: Math.random() * 500
-              x2: Math.random() * 800
-              y2: Math.random() * 500
+              x1: 500 #Math.round(Math.random() * 800)
+              y1: 100 #Math.round(Math.random() * 500)
+              x2: 600 #Math.round(Math.random() * 800)
+              y2: 300 #Math.round(Math.random() * 500)
               lineWidth: 10
               strokeStyle: 'gray'
               draggable: true
@@ -65,9 +66,9 @@ define [
             type: 'circle'
             attrs:
               # id: 'circle-' + i
-              cx: Math.random() * 600
-              cy: Math.random() * 300
-              r: Math.random() * 50
+              cx: 350 #Math.round(Math.random() * 600)
+              cy: 150 #Math.round(Math.random() * 300)
+              r: 100 #Math.round(Math.random() * 50)
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5
@@ -81,6 +82,7 @@ define [
             y: 100
             w: 300
             h: 300
+            rotate: 30
             draggable: true
             fillStyle: 'lightgray'
             strokeStyle: 'blue'
@@ -88,10 +90,29 @@ define [
           components: [{
             type: 'rect'
             attrs:
-              x: 200
-              y: 200
+              x: 50
+              y: 50
               w: 100
               h: 100
+              strokeStyle: 'black'
+              fillStyle: 'orange'
+              draggable: true
+          }, {
+            type: 'circle'
+            attrs:
+              cx: 200
+              cy: 200
+              r: 50
+              strokeStyle: 'black'
+              fillStyle: 'orange'
+              draggable: true
+          }, {
+            type: 'line'
+            attrs:
+              x1: 280
+              y1: 50
+              x2: 280
+              y2: 250
               strokeStyle: 'black'
               fillStyle: 'orange'
               draggable: true

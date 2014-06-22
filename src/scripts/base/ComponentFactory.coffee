@@ -38,6 +38,8 @@ define [
       # component lifecycle 'setup'
       component.setup(model) if component.setup
 
+      component
+
     createModel: (model) ->
       (@componentRegistry.register depspec) for deptype, depspec of model.dependencies if model.dependencies
 

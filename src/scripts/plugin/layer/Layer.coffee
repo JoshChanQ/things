@@ -6,11 +6,13 @@
 
 define [
   '../../base/Container'
+  '../../mixin/GroupShapable'
   '../../validator/LayerProps'
   '../../handler/Redraw'
   '../../util/JobPender'
 ], (
   Container
+  GroupShapable
   LayerProps
   Redraw
   JobPender
@@ -19,6 +21,7 @@ define [
   'use strict'
 
   class Layer extends Container
+    # @include GroupShapable
 
     clearCanvas: ->
 
@@ -29,19 +32,47 @@ define [
 
       context.clearRect(0, 0, @canvas.width, @canvas.height)
 
-      context.translate @get('offset-x'), @get('offset-y')
+      context.save()
+
+      # HERE ; consider get 'x', 'y'
+      # console.log @get('x'), @get('y')
+
+      offsetx = @get('offset-x')
+      offsety = @get('offset-y')
+      context.translate offsetx, offsety
 
       @forEach (child) ->
         child.draw context
 
-      context.translate -@get('offset-x'), -@get('offset-y')
+      context.restore()
 
     draw: ->
       @_draw()
       # @pender.pend()
 
-    capture: ->
-      false
+    shape: (context) ->
+      context.rect @get('x'), @get('y'), @get('w'), @get('h')
+
+    capture: (position) ->
+      context = @canvas.getContext '2d'
+
+      context.beginPath()
+
+      # HERE ; consider get 'x', 'y'
+
+      translated_position =
+        x: position.x - @get('offset-x') - @get('x')
+        y: position.y - @get('offset-y') - @get('y')
+
+      @shape context
+
+      if @size() > 0
+        for i in [(@size() - 1)..0]
+          child = @getAt(i)
+          captured = child.capture translated_position, context
+          return captured if captured
+
+      return null
 
     init: (model) ->
       @pender = new JobPender(@, @_draw)

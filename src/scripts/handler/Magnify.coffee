@@ -23,14 +23,15 @@ define [
         x: e.offsetX - @handle_last_position.x
         y: e.offsetY - @handle_last_position.y
 
-      offset_x = @get('offset-x') + delta.x
-      offset_y = @get('offset-y') + delta.y
+      pos_x = @get('x') + delta.x
+      pos_y = @get('y') + delta.y
 
-      offset =
-        'offset-x': offset_x
-        'offset-y': offset_y
+      position =
+        'x': pos_x
+        'y': pos_y
 
-      @set(offset)
+      # @set(offset)
+      @set(position)
 
       @handle_last_position =
         x: e.offsetX
@@ -73,8 +74,11 @@ define [
     @draw()
 
   onchange = (target, before, after) ->
-    @canvas.style.left = after['offset-x'] + 'px' if after.hasOwnProperty('offset-x')
-    @canvas.style.top = after['offset-y'] + 'px' if after.hasOwnProperty('offset-y')
+    # @canvas.style.left = after['offset-x'] + 'px' if after.hasOwnProperty('offset-x')
+    # @canvas.style.top = after['offset-y'] + 'px' if after.hasOwnProperty('offset-y')
+    @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
+    @canvas.style.top = after['y'] + 'px' if after.hasOwnProperty('y')
+
     if after.hasOwnProperty('r')
       @set({w: 2 * after.r, h: 2 * after.r})
       @canvas.setAttribute('width', 2 * after.r)

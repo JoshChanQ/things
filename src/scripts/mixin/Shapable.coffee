@@ -12,6 +12,12 @@ define [
 
   Shapable =
 
+    center: ->
+      {
+        x: @get('x') + @get('w') / 2
+        y: @get('y') + @get('h') / 2
+      }
+
     shape: (context) ->
 
     draw: (context) ->
@@ -19,7 +25,19 @@ define [
 
       context.beginPath()
 
+      rotate = @get('rotate') || 0
+
+      center = @center()
+
+      context.save()
+
+      context.translate(center.x, center.y)
+      context.rotate(rotate * Math.PI / 180)
+      context.translate(-center.x, -center.y)
+
       @shape context
+
+      context.restore()
 
       if @get('fillStyle')
         context.fillStyle = @get('fillStyle')
@@ -33,10 +51,24 @@ define [
     capture: (position, context) ->
       context.beginPath()
 
+      rotate = @get('rotate') || 0
+
+      center = @center()
+
+      context.save()
+
+      context.translate(center.x, center.y)
+      context.rotate(rotate * Math.PI / 180)
+      context.translate(-center.x, -center.y)
+
       @shape context
+
+      context.restore()
 
       if @get('strokeStyle')
         context.lineWidth = @get('lineWidth')
 
-      (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
-      (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
+      return @ if (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
+        (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
+
+      return null

@@ -6,10 +6,14 @@
 
 define [
   './Shape'
+  '../handle/BoundHandle'
+  '../handle/RotationHandle'
   '../../validator/Bound'
   '../../validator/Graphic'
 ], (
   Shape
+  BoundHandle
+  RotationHandle
   Bound
   Graphic
 ) ->
@@ -20,6 +24,12 @@ define [
 
     shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
+      # w = @get('w')
+      # h = @get('h')
+      # context.rect -w / 2, -h / 2, w, h
+
+    handles: ->
+      ['bound-handle', 'rotation-handle']
 
     @spec:
       type: 'rect'
@@ -28,7 +38,10 @@ define [
 
       description: 'Rectangle'
 
-      dependencies: {}
+      dependencies: {
+        'bound-handle': BoundHandle
+        'rotation-handle': RotationHandle
+      }
 
       properties: [
         Bound

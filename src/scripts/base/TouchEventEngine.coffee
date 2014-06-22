@@ -70,14 +70,14 @@ define [
 
     @event = save_event(e)
 
-    offset = calc_offset(@app.html_container, e)
-    @captured = @capture @app, offset
+    offset = calc_offset(@stage.html_container, e)
+    @captured = @capture @stage, offset
 
   ontouchmove = (e) ->
     e.preventDefault()
 
     if @dragging
-      offset = calc_offset(@app.html_container, e)
+      offset = calc_offset(@stage.html_container, e)
       return @ondrag e, offset
 
     if @longtouchtimer
@@ -92,8 +92,8 @@ define [
 
     lastCaptured = @captured
 
-    offset = calc_offset(@app.html_container, e)
-    @captured = @capture @app, offset
+    offset = calc_offset(@stage.html_container, e)
+    @captured = @stage.capture offset
 
     if lastEvent && lastEvent.type == 'touchstart' && lastCaptured.get('draggable')
       return @ondragstart e, offset
@@ -114,7 +114,7 @@ define [
 
   class TouchEventEngine extends MouseEventEngine
 
-    constructor: (@app) ->
+    constructor: (@stage) ->
       @ontouchstart = ontouchstart.bind(@)
       @ontouchmove = ontouchmove.bind(@)
       @ontouchend = ontouchend.bind(@)
@@ -123,13 +123,13 @@ define [
       @ondragend = ondragend.bind(@)
       @ondrag = ondrag.bind(@)
 
-      @app.html_container.addEventListener 'touchstart', @ontouchstart
-      @app.html_container.addEventListener 'touchmove', @ontouchmove
-      @app.html_container.addEventListener 'touchend', @ontouchend
+      @stage.html_container.addEventListener 'touchstart', @ontouchstart
+      @stage.html_container.addEventListener 'touchmove', @ontouchmove
+      @stage.html_container.addEventListener 'touchend', @ontouchend
 
       @
 
     dispose: ->
-      @app.html_container.removeEventListener 'touchstart', @ontouchstart
-      @app.html_container.removeEventListener 'touchmove', @ontouchmove
-      @app.html_container.removeEventListener 'touchend', @ontouchend
+      @stage.html_container.removeEventListener 'touchstart', @ontouchstart
+      @stage.html_container.removeEventListener 'touchmove', @ontouchmove
+      @stage.html_container.removeEventListener 'touchend', @ontouchend

@@ -16,34 +16,36 @@ define [
 
   'use strict'
 
-  class CircleHandle extends Group
+  class RotationHandle extends Group
 
     align: ->
-      r = @target.get('r')
-      cx = @target.get('cx')
-      cy = @target.get('cy')
+      x = @target.get('x')
+      y = @target.get('y')
+      w = @target.get('w')
+      h = @target.get('h')
 
-      theta = @get('theta') || 0 # * Math.PI / 180
+      rw = Math.round(w / 2)
+      rh = Math.round(h / 2)
+      cx = Math.round(x + w / 2)
+      cy = Math.round(y - 20)
 
       @handle.set
-        x: cx + Math.round(Math.cos(theta) * r)
-        y: cy + Math.round(Math.sin(theta) * r)
+        x: cx
+        y: cy
 
     setup: ->
       @set('clip', false)
-      @set('theta', 0)
 
       @target = @select(@get('target'))[0]
 
       @handle = @build
         type: 'handle'
         attrs:
-          r: 8
-          index: 0
+          r: 5
+          draggable: true
           strokeStyle: 'red'
           fillStyle: 'black'
           lineWidth: 1
-          draggable: true
 
       @align()
 
@@ -63,24 +65,22 @@ define [
         x: e.offsetX - @startpos.x
         y: e.offsetY - @startpos.y
 
-      newcx = handle.get('x') + delta.x
-      newcy = handle.get('y') + delta.y
+      index = handle.get('index')
 
-      handle.set
-        x: newcx
-        y: newcy
+      x = @target.get('x')
+      y = @target.get('y')
+      w = @target.get('w')
+      h = @target.get('h')
 
-      dx = newcx - @target.get('cx')
-      dy = newcy - @target.get('cy')
+      ox = Math.round(x + w / 2)
+      oy = Math.round(y + h / 2)
 
-      @set
-        theta: Math.atan2(dy, dx)
+      theta = Math.atan2(e.offsetY - oy, e.offsetX - ox)
+      theta -= Math.atan2(@startpos.y - oy, @startpos.x - ox)
 
-      r = Math.round(Math.sqrt dx * dx + dy * dy)
-
-      # 주의 : 단순히 회전만 하는 경우 r 의 변화가 없어서 이벤트가 발생하지 않을 수도 있음
+      rotate = @target.get('rotate') || 0
       @target.set
-        r: r
+        rotate: rotate + (theta * 180 / Math.PI)
 
       # @draw()
 
@@ -89,28 +89,6 @@ define [
         y: e.offsetY
 
     ondragend: (e) ->
-      # handle = e.target
-
-      # delta =
-      #   x: e.offsetX - @startpos.x
-      #   y: e.offsetY - @startpos.y
-
-      # newcx = handle.get('cx') + delta.x
-      # newcy = handle.get('cy') + delta.y
-
-      # handle.set
-      #   cx: newcx
-      #   cy: newcy
-
-      # dx = newcx - @target.get('cx')
-      # dy = newcy - @target.get('cy')
-
-      # r = Math.round(Math.sqrt dx * dx + dy * dy)
-
-      # @target.set
-      #   r: r
-
-      # @target.draw()
 
     event_map: ->
       '?target':
@@ -123,11 +101,11 @@ define [
           dragend: @ondragend
 
     @spec:
-      type: 'circle-handle'
+      type: 'rotation-handle'
 
       containable: true
 
-      description: 'Circle Handle'
+      description: 'Rotation Handle'
 
       dependencies: {
         'handle': Handle

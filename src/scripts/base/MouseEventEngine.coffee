@@ -16,6 +16,13 @@ define [
 
   "use strict"
 
+  convert_offset = (e, position)->
+    return position unless e.target.tagName == 'CANVAS'
+
+    newposition =
+      x: position.x + e.target.offsetLeft
+      y: position.y + e.target.offsetTop
+
   ondragstart = (e) ->
     @dragging = true
     MouseEvent.dragstart @captured, e
@@ -38,8 +45,8 @@ define [
 
   onmousemove = (e) ->
     # TODO 여기서부터 - offset 위치 정보를 만드는 부분을 정비해야 함.
-    if @event && (@event.target != e.target)
-      return
+    # if @event && (@event.target != e.target)
+    #   return
     # 여기까지.
 
     if @dragging
@@ -49,9 +56,12 @@ define [
     @event = e
 
     lastCaptured = @captured
-    @captured = @capture @app,
+
+    position = convert_offset e,
       x: e.offsetX
       y: e.offsetY
+
+    @captured = @stage.capture position
 
     if lastEvent && lastEvent.type == 'mousedown' && lastCaptured.get('draggable')
       return @ondragstart e
@@ -89,24 +99,28 @@ define [
   onmouseenter = (e) ->
 
   onclick = (e) ->
-    @captured = @capture @app,
+    position = convert_offset e,
       x: e.offsetX
       y: e.offsetY
+
+    @captured = @stage.capture position
 
     MouseEvent.click @captured, e
 
   oncontextmenu = (e) ->
     e.preventDefault()
 
-    @captured = @capture @app,
+    position = convert_offset e,
       x: e.offsetX
       y: e.offsetY
+
+    @captured = @stage.capture position
 
     MouseEvent.contextmenu @captured, e
 
   class MouseEventEngine
 
-    constructor: (@app) ->
+    constructor: (@stage) ->
       @onmousemove = onmousemove.bind(@)
       @onmouseleave = onmouseleave.bind(@)
       @onmouseenter = onmouseenter.bind(@)
@@ -118,49 +132,75 @@ define [
       @onclick = onclick.bind(@)
       @oncontextmenu = oncontextmenu.bind(@)
 
-      @app.html_container.addEventListener 'mousemove', @onmousemove
-      @app.html_container.addEventListener 'mouseleave', @onmouseleave
-      @app.html_container.addEventListener 'mouseenter', @onmouseenter
-      @app.html_container.addEventListener 'mouseup', @onmouseup
-      @app.html_container.addEventListener 'mousedown', @onmousedown
-      @app.html_container.addEventListener 'click', @onclick
-      @app.html_container.addEventListener 'contextmenu', @oncontextmenu
+      @stage.html_container.addEventListener 'mousemove', @onmousemove
+      @stage.html_container.addEventListener 'mouseleave', @onmouseleave
+      @stage.html_container.addEventListener 'mouseenter', @onmouseenter
+      @stage.html_container.addEventListener 'mouseup', @onmouseup
+      @stage.html_container.addEventListener 'mousedown', @onmousedown
+      @stage.html_container.addEventListener 'click', @onclick
+      @stage.html_container.addEventListener 'contextmenu', @oncontextmenu
 
       @
 
-    capture: (target, position, context) ->
-      if target.constructor.spec.container_type == 'layer'
-        context = target.canvas.getContext '2d'
-        position =
-          x: position.x - (target.get('offset-x') || 0)
-          y: position.y - (target.get('offset-y') || 0)
+    # capture: (target, position, context) ->
+    #   if target.constructor.spec.container_type == 'layer'
+    #     context = target.canvas.getContext '2d'
+    #     position =
+    #       x: position.x - (target.get('offset-x') || 0)
+    #       y: position.y - (target.get('offset-y') || 0)
 
-      unless target.constructor.spec.containable
-        if target.get('capturable') != false && target.capture(position, context)
-          return target
-        else
-          return
+    #   unless target.constructor.spec.containable
+    #     if target.get('capturable') != false && target.capture(position, context)
+    #       return target
+    #     else
+    #       return
 
-      return unless target.isPointInBound(position)
+    #   return unless target.isPointInBound(position)
 
-      captured = null
+    #   captured = null
 
-      if target.size() > 0
-        for i in [(target.size() - 1)..0]
-          component = target.getAt(i)
-          captured = @capture component, position, context
-          return captured if captured
+    #   if target.size() > 0
+    #     for i in [(target.size() - 1)..0]
+    #       component = target.getAt(i)
+    #       captured = @capture component, position, context
+    #       return captured if captured
 
-      return captured if captured
-      return target if target.get('capturable') != false && target.capture(position, context)
+    #   return captured if captured
+    #   return target if target.get('capturable') != false && target.capture(position, context)
 
-      return null
+    #   return null
 
+      # if target.constructor.spec.container_type == 'layer'
+      #   context = target.canvas.getContext '2d'
+      #   position =
+      #     x: position.x - (target.get('offset-x') || 0)
+      #     y: position.y - (target.get('offset-y') || 0)
+
+      # unless target.constructor.spec.containable
+      #   if target.get('capturable') != false && target.capture(position, context)
+      #     return target
+      #   else
+      #     return
+
+      # return unless target.isPointInBound(position)
+
+      # captured = null
+
+      # if target.size() > 0
+      #   for i in [(target.size() - 1)..0]
+      #     component = target.getAt(i)
+      #     captured = @capture component, position, context
+      #     return captured if captured
+
+      # return captured if captured
+      # return target if target.get('capturable') != false && target.capture(position, context)
+
+      # return null
     dispose: ->
-      @app.html_container.removeEventListener 'mousemove', @onmousemove
-      @app.html_container.removeEventListener 'mouseleave', @onmouseleave
-      @app.html_container.removeEventListener 'mouseenter', @onmouseenter
-      @app.html_container.removeEventListener 'mouseup', @onmouseup
-      @app.html_container.removeEventListener 'mousedown', @onmousedown
-      @app.html_container.removeEventListener 'click', @onclick
-      @app.html_container.removeEventListener 'contextmenu', @oncontextmenu
+      @stage.html_container.removeEventListener 'mousemove', @onmousemove
+      @stage.html_container.removeEventListener 'mouseleave', @onmouseleave
+      @stage.html_container.removeEventListener 'mouseenter', @onmouseenter
+      @stage.html_container.removeEventListener 'mouseup', @onmouseup
+      @stage.html_container.removeEventListener 'mousedown', @onmousedown
+      @stage.html_container.removeEventListener 'click', @onclick
+      @stage.html_container.removeEventListener 'contextmenu', @oncontextmenu

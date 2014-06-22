@@ -29,7 +29,7 @@ define [
       super(position)
 
     handles: ->
-      ['bound-handle']
+      ['bound-handle', 'rotation-handle']
 
     positions: ->
       [['x', 'y']]
@@ -47,9 +47,6 @@ define [
 
       @set to
 
-      @forEach (child) ->
-        child.move(option)
-
     event_map: null
 
     @spec:
@@ -61,7 +58,8 @@ define [
 
       description: 'Group'
 
-      dependencies: {}
+      dependencies: {
+      }
 
       properties: [
         Bound

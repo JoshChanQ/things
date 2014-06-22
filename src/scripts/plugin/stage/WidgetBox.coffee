@@ -59,7 +59,11 @@ define [
 
       components: [{
         type: 'widget-layer'
-        attrs: {}
+        attrs:
+          'offset-x': -150
+          'offset-y': -150
+          'x': 100
+          'y': 100
       # }, {
       #   type: 'outline-layer'
       #   attrs:
@@ -81,6 +85,6 @@ define [
           'strokeStyle': 'gray'
           'r': 100
           'ratio': 2
-      }, {
-        type: 'debug-layer'
+      # }, {
+      #   type: 'debug-layer'
       }]

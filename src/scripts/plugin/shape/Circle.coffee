@@ -7,11 +7,13 @@
 define [
   'lodash'
   './Shape'
+  '../handle/CircleHandle'
   '../../validator/Graphic'
   '../../validator/Circle'
 ], (
   _
   Shape
+  CircleHandle
   Graphic
   CircleProps
 ) ->
@@ -20,8 +22,15 @@ define [
 
   class Circle extends Shape
 
+    center: ->
+      {
+        x: @get('cx')
+        y: @get('cy')
+      }
+
     shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
+      # context.arc(0, 0, @get('r'), 0, 2 * Math.PI, false)
 
     handles: ->
       ['circle-handle']
@@ -49,6 +58,7 @@ define [
       description: 'Circle'
 
       dependencies: {
+        'circle-handle': CircleHandle
       }
 
       properties: [

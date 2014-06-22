@@ -40,7 +40,13 @@ define [
       @controller.dispose()
 
     capture: (position) ->
-      @
+      if @size() > 0
+        for i in [(@size() - 1)..0]
+          child = @getAt(i)
+          captured = child.capture position
+          return captured if captured
+
+      return @
 
     @spec:
       type: 'stage'

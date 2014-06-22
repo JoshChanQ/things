@@ -72,9 +72,12 @@ define [
     @draw()
 
   onchange = (target, before, after) ->
-
-    picked = _.pick after, ['offset-x', 'offset-y']
+    picked = _.pick after, ['offset-x', 'offset-y', 'x', 'y']
     @set picked unless _.isEmpty(picked)
+
+  onselfchange = (target, before, after) ->
+    @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
+    @canvas.style.top = after['y'] + 'px' if after.hasOwnProperty('y')
 
   {
     '?target':
@@ -85,4 +88,7 @@ define [
         'dragend': ondragend
       '?target':
         'change': onchange
+    '(self)':
+      '(self)':
+        'change': onselfchange
   }
