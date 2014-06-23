@@ -1,21 +1,23 @@
 # things Application 구조
 
-Stage <=> Controller <= All Components
-- Layer A
-     - Component
-     - Container
-          - Component
-          - Container
-               - Component
-               - Component
-               - ..
-- Layer B
-- Layer C
-- Layer ..
-
 1. 최상위에 Stage 컴포넌트가 있다.
 1. 차상위에는 Layer 컴포넌트로 구성된다.
 1. Layer 아래에서는 컴포넌트 / 컨테이너들로 구성된다.
+
+```
+- Stage <=> Controller <= All Components
+  - Layer A
+    - Component
+    - Container
+       - Component
+       - Container
+         - Component
+         - Component
+         - ..
+  - Layer B
+  - Layer C
+  - Layer ..
+```
 
 ## Controller
 
