@@ -90,8 +90,8 @@ define [
         w: @target.get('w') + delta.x * points[index][0]
         h: @target.get('h') + delta.y * points[index][1]
 
-      target_to['x'] = @target.abs('x') + delta.x if points[index][0] == LEFT
-      target_to['y'] = @target.abs('y') + delta.y if points[index][1] == TOP
+      target_to['x'] = @target.get('x') + delta.x if points[index][0] == LEFT
+      target_to['y'] = @target.get('y') + delta.y if points[index][1] == TOP
 
       @target.set target_to
 

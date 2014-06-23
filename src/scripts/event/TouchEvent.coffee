@@ -34,6 +34,7 @@ define [
     'drag'
     'dragend'
     'longtouch'
+    'tap'
   ]
 
   _.reduce event_types, (result, event_type) ->

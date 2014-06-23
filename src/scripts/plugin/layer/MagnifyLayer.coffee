@@ -50,9 +50,9 @@ define [
 
       context = @canvas.getContext '2d'
 
-      context.beginPath()
-
       context.save()
+
+      context.beginPath()
 
       r = @get('r')
       ratio = @get('ratio')

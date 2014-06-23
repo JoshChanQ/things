@@ -83,6 +83,7 @@ define [
     '?target':
       '(all)':
         'click': onclick
+        'tap': onclick
         'dragstart': ondragstart
         'drag': ondrag
         'dragend': ondragend

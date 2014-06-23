@@ -109,6 +109,11 @@ define [
     if @dragging
       return @ondragend e
 
+    position = calc_offset(@stage.html_container, e)
+
+    @captured = @stage.capture position
+    TouchEvent.tap @captured, e
+
     @captured = null
     @event = null
 
