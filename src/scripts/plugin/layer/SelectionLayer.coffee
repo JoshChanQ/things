@@ -64,6 +64,8 @@ define [
 
     setup: ->
 
+      @selections = []
+
       @target = @select(@get('target'))[0]
 
       position =
@@ -73,8 +75,6 @@ define [
         'y': @get('y') || @target.get('y')
 
       @set position
-
-      @selections = []
 
       super()
 

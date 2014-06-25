@@ -78,6 +78,7 @@ define [
   onselfchange = (target, before, after) ->
     @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
     @canvas.style.top = after['y'] + 'px' if after.hasOwnProperty('y')
+    @draw()
 
   {
     '?target':

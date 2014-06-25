@@ -41,7 +41,7 @@ define [
       @handle = @build
         type: 'handle'
         attrs:
-          r: 5
+          r: 8
           draggable: true
           strokeStyle: 'red'
           fillStyle: 'black'

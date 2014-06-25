@@ -19,9 +19,6 @@ define [
       }
 
     shape: (context) ->
-      # w = @get('w')
-      # h = @get('h')
-      # context.rect -w / 2, -h / 2, w, h
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
 
     draw: (context) ->

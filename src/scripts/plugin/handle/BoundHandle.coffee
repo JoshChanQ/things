@@ -58,7 +58,7 @@ define [
         @build
           type: 'handle'
           attrs:
-            r: 5
+            r: 8
             strokeStyle: 'red'
             lineWidth: 2
             capturable: false

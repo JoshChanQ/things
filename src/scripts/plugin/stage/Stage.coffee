@@ -5,9 +5,11 @@
 # ==========================================
 
 define [
+  '../../Global'
   '../../base/Container'
   '../../validator/StageProps'
 ], (
+  Global
   Container
   StageProps
 ) ->
@@ -16,27 +18,24 @@ define [
 
   class Stage extends Container
 
-    isPositionInBound: ->
-      true
-
     draw: ->
       @forEach (layer) ->
         layer.draw
 
     init: ->
-      @_container = document.getElementById(@get('container'))
+      @client_container = document.getElementById(@get('container'))
 
       # clear content inside container
-      @_container.innerHTML = ''
+      @client_container.innerHTML = ''
 
       @html_container = document.createElement('div')
       @html_container.style.position = 'relative'
       @html_container.style.display = 'inline-block'
 
-      @_container.appendChild(@html_container)
+      @client_container.appendChild(@html_container)
 
     dispose: ->
-      @_container.removeChild(@html_container)
+      @client_container.removeChild(@html_container)
       @controller.dispose()
 
     capture: (position) ->
@@ -47,6 +46,49 @@ define [
           return captured if captured
 
       return @
+
+    position: ->
+      return if @html_container.getBoundingClientRect then @html_container.getBoundingClientRect() else { top: 0, left: 0 }
+
+    point: (e) ->
+      return @point_pos unless e
+
+      stagePosition = @position()
+
+      x = null
+      y = null
+
+      if e.touches != undefined # touch event
+        if e.touches.length > 0
+          touch = e.touches[0]
+
+          x = touch.clientX - stagePosition.left
+          y = touch.clientY - stagePosition.top
+
+      else # mouse event
+        div_to_canvas_x = 0
+        div_to_canvas_y = 0
+
+        if e.target.tagName == 'CANVAS'
+          div_to_canvas_x = e.target.offsetLeft
+          div_to_canvas_y = e.target.offsetTop
+
+        if e.offsetX != undefined
+          x = e.offsetX + div_to_canvas_x
+          y = e.offsetY + div_to_canvas_y
+        else if Global.UA.browser == 'mozilla'
+          x = e.layerX + div_to_canvas_x
+          y = e.layerY + div_to_canvas_y
+        else if e.clientX != undefined && stagePosition
+          x = e.clientX - stagePosition.left + div_to_canvas_x
+          y = e.clientY - stagePosition.top + div_to_canvas_y
+
+      if x != null && y != null
+        @point_pos =
+          x: x
+          y: y
+
+      @point_pos
 
     @spec:
       type: 'stage'

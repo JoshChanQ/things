@@ -6,127 +6,110 @@
 
 # TouchEventEngine은 캔버스에서 터치 이벤트가 발생했을 때
 # 캔버스내의 컴포넌트 트리에서 최종 이벤트를 캡쳐하는 컴포넌트를 찾아낸 후
-# 적절한 이벤트 가공을 통해서 Application까지 이벤트 버블링을 시키는 엔진이다.
+# 적절한 이벤트 가공을 통해서 Stage까지 이벤트 버블링을 시키는 엔진이다.
 
 define [
-  './MouseEventEngine'
-  '../util/Dimension'
-  '../event/TouchEvent'
+  '../event/PointEvent'
+  './DragAndDrop'
 ], (
-  MouseEventEngine
-  Dimension
-  TouchEvent
+  PointEvent
+  DragAndDrop
 ) ->
 
   "use strict"
 
-  calc_offset = (elem, e) ->
-    touch = e.targetTouches[0]
-
-    Dimension.page_to_offset elem,
-      x: touch.pageX
-      y: touch.pageY
-
-  save_event = (e) ->
-    return null unless e
-
-    {
-      type: e.type
-      targetTouches: [{
-        pageX: e.targetTouches[0].pageX
-        pageY: e.targetTouches[0].pageY
-      }]
-    }
-
-  ondragstart = (e, offset) ->
-    @dragging = true
-    TouchEvent.dragstart @captured, e, offset
-
-  ondrag = (e, offset) ->
-    TouchEvent.drag @captured, e, offset
-
-    @event = save_event(e)
-
-  ondragend = (e) ->
-    TouchEvent.dragend @captured, e
-
-    @dragging = false
-    @captured = null
-    @event = null
-
-  onlongtouch = (e) ->
-
-    @longtouchtimer = null
-    @dragging = false
-    TouchEvent.longtouch @captured, e if @captured
-
   ontouchstart = (e) ->
-    e.preventDefault()
 
+    position = @stage.point e
+
+    target = @stage.capture position
+
+    # ready to detect tap event
+    @tap_target = target
+
+    # ready to detect long touch event
     self = @
-    @longtouchtimer = setTimeout ->
-      onlongtouch.call self, e
+    @longtouch_triggered = false
+    @longtouch_timer = setTimeout ->
+      self.longtouch_timer = null
+      PointEvent.longtouch target, e, position if target
+      self.longtouch_triggered = true
     , 500
 
-    @event = save_event(e)
+    PointEvent.touchstart target, e, position
 
-    offset = calc_offset(@stage.html_container, e)
-    @captured = @capture @stage, offset
-
-  ontouchmove = (e) ->
-    e.preventDefault()
-
-    if @dragging
-      offset = calc_offset(@stage.html_container, e)
-      return @ondrag e, offset
-
-    if @longtouchtimer
-      clearTimeout(@longtouchtimer)
-      @longtouchtimer = null
-    else
-      return
-
-    lastEvent = save_event(@event)
-
-    @event = save_event(e)
-
-    lastCaptured = @captured
-
-    offset = calc_offset(@stage.html_container, e)
-    @captured = @stage.capture offset
-
-    if lastEvent && lastEvent.type == 'touchstart' && lastCaptured.get('draggable')
-      return @ondragstart e, offset
+    if e.preventDefault
+      e.preventDefault()
 
   ontouchend = (e) ->
-    e.preventDefault()
 
-    if @longtouchtimer
-      clearTimeout(@longtouchtimer)
-      @longtouchtimer = null
+    position = @stage.point e
 
-    @event = e
-    if @dragging
-      return @ondragend e
+    target = @stage.capture position
 
-    position = calc_offset(@stage.html_container, e)
+    if @longtouch_timer
+      clearTimeout(@longtouch_timer)
+      @longtouch_timer = null
 
-    @captured = @stage.capture position
-    TouchEvent.tap @captured, e
+    dbl_click_detected = false
 
-    @captured = null
-    @event = null
+    if @listening_dbl_click
+      dbl_click_detected = true
+      @listening_dbl_click = false
+    else
+      @listening_dbl_click = true
 
-  class TouchEventEngine extends MouseEventEngine
+    self = @
+    setTimeout ->
+      self.listening_dbl_click = false
+    , 500
+
+    if target && !DragAndDrop.dragging
+      PointEvent.touchend target, e, position
+
+      # detect if tap or double tap occurred
+      if @tap_target && target == @tap_target
+        PointEvent.tap target, e, position
+
+        if dbl_click_detected
+          PointEvent.doubletap target, e, position
+          @listening_dbl_click = false
+
+    @tap_target = null
+
+    if e.preventDefault
+      e.preventDefault()
+
+  ontouchmove = (e) ->
+    position = @stage.point e
+
+    if @longtouch_timer && DragAndDrop.dragging
+      clearTimeout(@longtouch_timer)
+      @longtouch_timer = null
+    else if @longtouch_triggered
+      if e.preventDefault
+          e.preventDefault()
+      return
+
+    target = @stage.capture position
+
+    if !DragAndDrop.dragging && target
+      PointEvent.touchmove target, e, position
+
+      if e.preventDefault
+          e.preventDefault()
+
+    DragAndDrop.drag target, e, position
+
+    if DragAndDrop.dragging && e.preventDefault
+      e.preventDefault()
+
+  class TouchEventEngine
 
     constructor: (@stage) ->
       @ontouchstart = ontouchstart.bind(@)
       @ontouchmove = ontouchmove.bind(@)
       @ontouchend = ontouchend.bind(@)
-
-      @ondragstart = ondragstart.bind(@)
-      @ondragend = ondragend.bind(@)
-      @ondrag = ondrag.bind(@)
 
       @stage.html_container.addEventListener 'touchstart', @ontouchstart
       @stage.html_container.addEventListener 'touchmove', @ontouchmove

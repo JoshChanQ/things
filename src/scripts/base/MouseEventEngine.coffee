@@ -6,39 +6,35 @@
 
 # MouseEventEngine은 캔버스에서 마우스 이벤트가 발생했을 때
 # 캔버스내의 컴포넌트 트리에서 최종 이벤트를 캡쳐하는 컴포넌트를 찾아낸 후
-# 적절한 이벤트 가공을 통해서 Application까지 이벤트 버블링을 시키는 엔진이다.
+# 적절한 이벤트 가공을 통해서 Stage까지 이벤트 버블링을 시키는 엔진이다.
 
 define [
-  '../event/MouseEvent'
+  '../base/DragAndDrop'
+  '../event/PointEvent'
 ], (
-  MouseEvent
+  DragAndDrop
+  PointEvent
 ) ->
 
   "use strict"
 
-  convert_offset = (e, position)->
-    return position unless e.target.tagName == 'CANVAS'
-
-    newposition =
-      x: position.x + e.target.offsetLeft
-      y: position.y + e.target.offsetTop
-
-  ondragstart = (e) ->
+  ondragstart = (e, position) ->
     @dragging = true
-    MouseEvent.dragstart @captured, e
+
+    PointEvent.dragstart @captured, e, position
 
     if (e.preventDefault)
       e.preventDefault()
 
-  ondrag = (e) ->
-    MouseEvent.drag @captured, e
+  ondrag = (e, position) ->
+    PointEvent.drag @captured, e, position
     @event = e
 
     if (e.preventDefault)
       e.preventDefault()
 
-  ondragend = (e) ->
-    MouseEvent.dragend @captured, e
+  ondragend = (e, position) ->
+    PointEvent.dragend @captured, e, position
     @dragging = false
 
     if (e.preventDefault)
@@ -46,45 +42,84 @@ define [
 
   onmousedown = (e) ->
     @event = e
+    @listening_drag = true
 
   onmouseup = (e) ->
     # TODO Double Click Support
 
     @event = e
-    if @dragging
-      return @ondragend e
+    @listening_drag = false
 
-    position = convert_offset e,
-      x: e.offsetX
-      y: e.offsetY
+    position = @stage.point e
+
+    if @dragging
+      return @ondragend e, position
 
     @captured = @stage.capture position
-    MouseEvent.click @captured, e
+    PointEvent.click @captured, e, position
+
+  # onmousemove = (e) ->
+
+  #   # workaround fake mousemove event in chrome browser https://code.google.com/p/chromium/issues/detail?id=161464
+  #   return if ((typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY == 0 && e.webkitMovementX == 0)
+
+  #   position = @stage.point e
+
+  #   lastEvent = @event
+  #   @event = e
+
+  #   lastCaptured = @captured
+
+  #   @captured = @stage.capture position
+
+  #   # if lastEvent && lastEvent.type == 'mousedown' && lastCaptured.get('draggable')
+  #   #   return @ondragstart e, position
+
+  #   if @captured == lastCaptured
+  #     PointEvent.mousemove @captured, e, position
+  #     return
+
+  #   newAscendant = [@captured]
+  #   newAscendant.unshift(component) while component = (component||@captured).getContainer()
+
+  #   oldAscendant = [lastCaptured]
+  #   oldAscendant.unshift(component) while component = (component||lastCaptured).getContainer() if lastCaptured
+
+  #   while oldAscendant[0] == newAscendant[0]
+  #     oldAscendant.shift()
+  #     newAscendant.shift()
+
+  #   PointEvent.mouseout component, e ,position while component = oldAscendant.pop()
+  #   PointEvent.mouseover component, e, position while component = newAscendant.shift()
+
+  #   # 마우스 버튼이 눌린 상태여야 함.
+  #   DragAndDrop.drag @captured, e, position if @listening_drag
+
+  #   if e.preventDefault
+  #     e.preventDefault()
 
   onmousemove = (e) ->
 
     # workaround fake mousemove event in chrome browser https://code.google.com/p/chromium/issues/detail?id=161464
     return if ((typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY == 0 && e.webkitMovementX == 0)
 
+    position = @stage.point e
+
     if @dragging
-      return @ondrag e
+      return @ondrag e, position
 
     lastEvent = @event
     @event = e
 
     lastCaptured = @captured
 
-    position = convert_offset e,
-      x: e.offsetX
-      y: e.offsetY
-
     @captured = @stage.capture position
 
     if lastEvent && lastEvent.type == 'mousedown' && lastCaptured.get('draggable')
-      return @ondragstart e
+      return @ondragstart e, position
 
     if @captured == lastCaptured
-      MouseEvent.mousemove @captured, e
+      PointEvent.mousemove @captured, e, position
       return
 
     newAscendant = [@captured]
@@ -97,8 +132,8 @@ define [
       oldAscendant.shift()
       newAscendant.shift()
 
-    MouseEvent.mouseout component, e while component = oldAscendant.pop()
-    MouseEvent.mouseover component, e while component = newAscendant.shift()
+    PointEvent.mouseout component, e ,position while component = oldAscendant.pop()
+    PointEvent.mouseover component, e, position while component = newAscendant.shift()
 
     # always call preventDefault for desktop events because some browsers
     # try to drag and drop the canvas element
@@ -110,10 +145,12 @@ define [
       return
 
     if @captured
+      position = @stage.point e
+
       component = @captured
       oldAscendant = [@captured]
       oldAscendant.unshift(component) while component = component.getContainer()
-      MouseEvent.mouseout component, e while component = oldAscendant.pop()
+      PointEvent.mouseout component, e, position while component = oldAscendant.pop()
 
     @captured = null
     @event = null
@@ -123,13 +160,10 @@ define [
   oncontextmenu = (e) ->
     e.preventDefault()
 
-    position = convert_offset e,
-      x: e.offsetX
-      y: e.offsetY
-
+    position = @stage.point e
     @captured = @stage.capture position
 
-    MouseEvent.contextmenu @captured, e
+    PointEvent.contextmenu @captured, e, position
 
   class MouseEventEngine
 

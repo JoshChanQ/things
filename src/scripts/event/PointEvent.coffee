@@ -35,20 +35,23 @@ define [
   #   offsetY: true
   # }
 
-  trigger = (target, type, origin) ->
+  trigger = (target, type, origin, position) ->
+    unless position
+      stage = target.getStage()
+      position = stage.point origin
 
     e =
       origin: origin
       type: type
       target: target
-      offsetX: origin.offsetX + (if origin.target.tagName == 'CANVAS' then origin.target.offsetLeft else 0)
-      offsetY: origin.offsetY + (if origin.target.tagName == 'CANVAS' then origin.target.offsetTop else 0)
+      offsetX: position.x
+      offsetY: position.y
 
     target.trigger e.type, e
 
   event_fn = (type) ->
-    (target, origin) ->
-      trigger target, type, origin
+    (target, origin, position) ->
+      trigger target, type, origin, position
 
   event_types = [
     'mousemove'
@@ -61,6 +64,12 @@ define [
     'dragstart'
     'drag'
     'dragend'
+    'touchstart'
+    'touchmove'
+    'touchend'
+    'longtouch'
+    'tap'
+    'doubletap'
   ]
 
   _.reduce event_types, (result, event_type) ->

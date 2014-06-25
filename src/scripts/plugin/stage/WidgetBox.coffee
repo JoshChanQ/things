@@ -77,6 +77,6 @@ define [
         type: 'slide-layer'
         attrs:
           'slide-target': 'widget-layer'
-      # }, {
-      #   type: 'debug-layer'
+      }, {
+        type: 'debug-layer'
       }]

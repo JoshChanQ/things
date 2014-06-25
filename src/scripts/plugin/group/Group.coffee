@@ -24,10 +24,6 @@ define [
     @include Dockable
     @include GroupShapable
 
-    isPointInBound: (position) ->
-      return true unless @get('clip')
-      super(position)
-
     handles: ->
       ['bound-handle', 'rotation-handle']
 
