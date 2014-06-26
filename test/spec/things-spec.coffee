@@ -6,6 +6,7 @@ define [
   '../../scripts/plugin/shape/Line'
   '../../scripts/plugin/shape/Circle'
   '../../scripts/plugin/shape/Ruler'
+  '../../scripts/plugin/shape/ImageBox'
   'jquery'
 ], (
   things,
@@ -15,6 +16,7 @@ define [
   Line
   Circle
   Ruler
+  ImageBox
   $
 ) ->
 
@@ -39,11 +41,10 @@ define [
           widgets.push
             type: 'rect'
             attrs:
-              # id: 'rect-' + i
-              x: 100 #Math.round(Math.random() * 600)
-              y: 100 #Math.round(Math.random() * 300)
-              w: 200 #Math.round(Math.random() * 200)
-              h: 200 #Math.round(Math.random() * 200)
+              x: 100
+              y: 100
+              w: 200
+              h: 200
               strokeStyle: 'black'
               fillStyle: 'white'
               lineWidth: 7
@@ -53,11 +54,10 @@ define [
           widgets.push
             type: 'line'
             attrs:
-              # id: 'line-' + i
-              x1: 500 #Math.round(Math.random() * 800)
-              y1: 100 #Math.round(Math.random() * 500)
-              x2: 600 #Math.round(Math.random() * 800)
-              y2: 300 #Math.round(Math.random() * 500)
+              x1: 500
+              y1: 100
+              x2: 600
+              y2: 300
               lineWidth: 10
               strokeStyle: 'gray'
               draggable: true
@@ -66,22 +66,34 @@ define [
             type: 'circle'
             attrs:
               # id: 'circle-' + i
-              cx: 350 #Math.round(Math.random() * 600)
-              cy: 150 #Math.round(Math.random() * 300)
-              r: 100 #Math.round(Math.random() * 50)
+              cx: 350
+              cy: 150
+              r: 100
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5
               draggable: true
 
           widgets.push
+            type: 'image'
+            attrs:
+              x: 400
+              y: 100
+              w: 400
+              h: 400
+              strokeStyle: 'yellow'
+              fillStyle: 'green'
+              lineWidth: 5
+              src: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+              draggable: true
+
+          widgets.push
             type: 'ruler'
             attrs:
-              # id: 'rect-' + i
-              x: 600 #Math.round(Math.random() * 600)
-              y: 200 #Math.round(Math.random() * 300)
-              w: 400 #Math.round(Math.random() * 200)
-              h: 30 #Math.round(Math.random() * 200)
+              x: 600
+              y: 100
+              w: 400
+              h: 30
               strokeStyle: 'navy'
               # fillStyle: 'yellow'
               lineWidth: 1
@@ -93,11 +105,10 @@ define [
           widgets.push
             type: 'ruler'
             attrs:
-              # id: 'rect-' + i
-              x: 600 #Math.round(Math.random() * 600)
-              y: 200 #Math.round(Math.random() * 300)
-              w: 30 #Math.round(Math.random() * 200)
-              h: 400 #Math.round(Math.random() * 200)
+              x: 600
+              y: 100
+              w: 30
+              h: 400
               strokeStyle: 'blue'
               # fillStyle: 'yellow'
               lineWidth: 1
@@ -110,7 +121,6 @@ define [
         widgets.push
           type: 'group'
           attrs:
-            # id: 'group-' + i
             x: 100
             y: 100
             w: 300
@@ -159,6 +169,7 @@ define [
             'line': Line
             'circle': Circle
             'ruler': Ruler
+            'image': ImageBox
           type: 'widget-box'
           attrs:
             container: 'container'

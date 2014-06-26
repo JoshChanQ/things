@@ -26,10 +26,13 @@ define [
   PIXEL_PER_MM = 3.779527559
 
   class Ruler extends Shape
+
     capture_shape: (context) ->
+
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
 
     shape: (context) ->
+
       dimension =
         x: @get('x')
         y: @get('y')
