@@ -72,8 +72,42 @@ define [
       target_w = Math.round(r / ratio)
       target_h = target_w
 
-      context.drawImage @target.canvas, target_x - target_w, target_y - target_h, 2 * target_w, 2 * target_h,
-      0, 0, 2 * r, 2 * r
+      from_x = target_x - target_w
+      from_y = target_y - target_h
+      from_w = target_w * 2
+      from_h = target_h * 2
+
+      to_x = 0
+      to_y = 0
+      to_w = 2 * r
+      to_h = 2 * r
+
+      if from_x < 0
+        to_x += Math.round(-from_x * ratio)
+        to_w -= to_x
+        from_w -= -from_x
+        from_x = 0
+
+      if from_y < 0
+        to_y += Math.round(-from_y * ratio)
+        to_h -= to_y
+        from_h -= -from_y
+        from_y = 0
+
+      max_x = @target.canvas.width
+      exceed_w = (from_x + from_w) - max_x
+      if exceed_w > 0
+        from_w -= exceed_w
+        to_w -= Math.round(exceed_w * ratio)
+
+      max_y = @target.canvas.height
+      exceed_h = (from_y + from_h) - max_y
+      if exceed_h > 0
+        from_h -= exceed_h
+        to_h -= Math.round(exceed_h * ratio)
+
+      context.drawImage @target.canvas, from_x, from_y, from_w, from_h,
+      to_x, to_y, to_w, to_h
 
       context.restore()
 

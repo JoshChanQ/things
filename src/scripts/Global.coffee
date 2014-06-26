@@ -111,7 +111,6 @@ define [
         ua.indexOf('compatible') < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
         []
 
-      # adding mobile flag as well
       mobile = !!(userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i))
       ieMobile = !!(userAgent.match(/IEMobile/i))
 
@@ -119,12 +118,10 @@ define [
         browser: match[ 1 ] || ''
         version: match[ 2 ] || '0'
 
-        # adding mobile flab
         mobile: mobile
         ieMobile: ieMobile  # If this is true (i.e., WP8), then things touch events are executed instead of equivalent things mouse events
       }
 
-    # user agent
     UA: undefined
 
   Global.UA = Global._parseUA((navigator && navigator.userAgent) || '')

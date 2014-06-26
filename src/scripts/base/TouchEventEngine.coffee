@@ -101,7 +101,7 @@ define [
 
     DragAndDrop.drag target, e, position
 
-    if DragAndDrop.dragging && e.preventDefault
+    if e.preventDefault
       e.preventDefault()
 
   class TouchEventEngine

@@ -18,85 +18,56 @@ define [
 
   "use strict"
 
-  ondragstart = (e, position) ->
-    @dragging = true
-
-    PointEvent.dragstart @captured, e, position
-
-    if (e.preventDefault)
-      e.preventDefault()
-
-  ondrag = (e, position) ->
-    PointEvent.drag @captured, e, position
-    @event = e
-
-    if (e.preventDefault)
-      e.preventDefault()
-
-  ondragend = (e, position) ->
-    PointEvent.dragend @captured, e, position
-    @dragging = false
-
-    if (e.preventDefault)
-      e.preventDefault()
-
   onmousedown = (e) ->
-    @event = e
-    @listening_drag = true
+    position = @stage.point e
+
+    @captured = @stage.capture position
+
+    # ready to detect click event.
+    @click_target = @captured
+
+    # draggable flag will be reset when mouse button goes to up
+    DragAndDrop.draggable = true
+
+    PointEvent.mousedown @captured, e, position
+
+    if e.preventDefault
+      e.preventDefault()
 
   onmouseup = (e) ->
-    # TODO Double Click Support
-
-    @event = e
-    @listening_drag = false
 
     position = @stage.point e
 
-    if @dragging
-      return @ondragend e, position
-
     @captured = @stage.capture position
-    PointEvent.click @captured, e, position
 
-  # onmousemove = (e) ->
+    dbl_click_detected = false
 
-  #   # workaround fake mousemove event in chrome browser https://code.google.com/p/chromium/issues/detail?id=161464
-  #   return if ((typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY == 0 && e.webkitMovementX == 0)
+    if @listening_dbl_click
+      dbl_click_detected = true
+      @listening_dbl_click = false
+    else
+      @listening_dbl_click = true
 
-  #   position = @stage.point e
+    self = @
+    setTimeout ->
+      self.listening_dbl_click = false
+    , 500
 
-  #   lastEvent = @event
-  #   @event = e
+    if @captured && !DragAndDrop.dragging
+      PointEvent.mouseup @captured, e, position
 
-  #   lastCaptured = @captured
+      # detect if click or double click occurred
+      if @click_target && @captured == @click_target
+        PointEvent.click @captured, e, position
 
-  #   @captured = @stage.capture position
+        if dbl_click_detected
+          PointEvent.doubleclick @captured, e, position
+          @listening_dbl_click = false
 
-  #   # if lastEvent && lastEvent.type == 'mousedown' && lastCaptured.get('draggable')
-  #   #   return @ondragstart e, position
+    @click_target = null
 
-  #   if @captured == lastCaptured
-  #     PointEvent.mousemove @captured, e, position
-  #     return
-
-  #   newAscendant = [@captured]
-  #   newAscendant.unshift(component) while component = (component||@captured).getContainer()
-
-  #   oldAscendant = [lastCaptured]
-  #   oldAscendant.unshift(component) while component = (component||lastCaptured).getContainer() if lastCaptured
-
-  #   while oldAscendant[0] == newAscendant[0]
-  #     oldAscendant.shift()
-  #     newAscendant.shift()
-
-  #   PointEvent.mouseout component, e ,position while component = oldAscendant.pop()
-  #   PointEvent.mouseover component, e, position while component = newAscendant.shift()
-
-  #   # 마우스 버튼이 눌린 상태여야 함.
-  #   DragAndDrop.drag @captured, e, position if @listening_drag
-
-  #   if e.preventDefault
-  #     e.preventDefault()
+    if e.preventDefault
+      e.preventDefault()
 
   onmousemove = (e) ->
 
@@ -105,39 +76,32 @@ define [
 
     position = @stage.point e
 
-    if @dragging
-      return @ondrag e, position
-
-    lastEvent = @event
-    @event = e
-
     lastCaptured = @captured
 
     @captured = @stage.capture position
 
-    if lastEvent && lastEvent.type == 'mousedown' && lastCaptured.get('draggable')
-      return @ondragstart e, position
+    if !DragAndDrop.dragging
 
-    if @captured == lastCaptured
-      PointEvent.mousemove @captured, e, position
-      return
+      PointEvent.mousemove @captured, e, position if @captured
 
-    newAscendant = [@captured]
-    newAscendant.unshift(component) while component = (component||@captured).getContainer()
+      if @captured != lastCaptured
 
-    oldAscendant = [lastCaptured]
-    oldAscendant.unshift(component) while component = (component||lastCaptured).getContainer() if lastCaptured
+        newAscendant = [@captured]
+        newAscendant.unshift(component) while component = (component||@captured).getContainer() if @captured
 
-    while oldAscendant[0] == newAscendant[0]
-      oldAscendant.shift()
-      newAscendant.shift()
+        oldAscendant = [lastCaptured]
+        oldAscendant.unshift(component) while component = (component||lastCaptured).getContainer() if lastCaptured
 
-    PointEvent.mouseout component, e ,position while component = oldAscendant.pop()
-    PointEvent.mouseover component, e, position while component = newAscendant.shift()
+        while oldAscendant[0] == newAscendant[0]
+          oldAscendant.shift()
+          newAscendant.shift()
 
-    # always call preventDefault for desktop events because some browsers
-    # try to drag and drop the canvas element
-    if (e.preventDefault)
+        PointEvent.mouseout component, e ,position while component = oldAscendant.pop()
+        PointEvent.mouseover component, e, position while component = newAscendant.shift()
+
+    DragAndDrop.drag @captured, e, position if DragAndDrop.draggable && @captured
+
+    if e.preventDefault
       e.preventDefault()
 
   onmouseleave = (e) ->
@@ -153,7 +117,6 @@ define [
       PointEvent.mouseout component, e, position while component = oldAscendant.pop()
 
     @captured = null
-    @event = null
 
   onmouseenter = (e) ->
 
@@ -173,9 +136,6 @@ define [
       @onmouseenter = onmouseenter.bind(@)
       @onmouseup = onmouseup.bind(@)
       @onmousedown = onmousedown.bind(@)
-      @ondragstart = ondragstart.bind(@)
-      @ondragend = ondragend.bind(@)
-      @ondrag = ondrag.bind(@)
       @oncontextmenu = oncontextmenu.bind(@)
 
       @stage.html_container.addEventListener 'mousemove', @onmousemove

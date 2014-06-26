@@ -58,6 +58,7 @@ define [
     'mousedown'
     'mouseup'
     'click'
+    'doubleclick'
     'contextmenu'
     'mouseover'
     'mouseout'

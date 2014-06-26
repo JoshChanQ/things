@@ -7,6 +7,7 @@
 define [
   'jquery'
   'lodash'
+  './Global'
   './base/Component'
   './base/ComponentRegistry'
   './base/ComponentSelector'
@@ -19,6 +20,7 @@ define [
 ], (
   $
   _
+  Global
   Component
   ComponentRegistry
   ComponentSelector
@@ -103,7 +105,8 @@ define [
 
       @componentFactory.setupDescendant @stage
 
-      @mouseEvent = new MouseEventEngine(@stage)
+      unless Global.mobile
+        @mouseEvent = new MouseEventEngine(@stage)
       @touchEvent = new TouchEventEngine(@stage)
 
     setStage: (stage) ->
@@ -128,7 +131,7 @@ define [
       @componentFactory.dispose()
       @eventEngine.dispose()
       @componentRegistry.dispose()
-      @mouseEvent.dispose()
+      @mouseEvent.dispose() if @mouseEvent
       @touchEvent.dispose()
       @exportsManager.dispose()
 
