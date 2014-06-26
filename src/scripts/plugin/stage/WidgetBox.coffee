@@ -57,8 +57,8 @@ define [
       components: [{
         type: 'widget-layer'
         attrs:
-          'offset-x': -150
-          'offset-y': -150
+          'offset-x': -50
+          'offset-y': -50
           'x': 100
           'y': 100
       }, {

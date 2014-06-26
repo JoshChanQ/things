@@ -37,8 +37,6 @@ define [
 
       @shape context
 
-      context.restore()
-
       if @get('fillStyle')
         context.fillStyle = @get('fillStyle')
         context.fill()
@@ -47,6 +45,8 @@ define [
         context.lineWidth = @get('lineWidth')
         context.strokeStyle = @get('strokeStyle')
         context.stroke()
+
+      context.restore()
 
     capture: (position, context) ->
       context.beginPath()
@@ -63,12 +63,14 @@ define [
 
       @shape context
 
-      context.restore()
-
       if @get('strokeStyle')
         context.lineWidth = @get('lineWidth')
 
-      return @ if (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
+      itsme = (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
         (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))
+
+      context.restore()
+
+      return @ if itsme
 
       return null

@@ -5,7 +5,7 @@ define [
   '../../scripts/plugin/shape/Rect'
   '../../scripts/plugin/shape/Line'
   '../../scripts/plugin/shape/Circle'
-  '../../scripts/plugin/shape/Magnifier'
+  '../../scripts/plugin/shape/Ruler'
   'jquery'
 ], (
   things,
@@ -14,7 +14,7 @@ define [
   Rect
   Line
   Circle
-  Magnifier
+  Ruler
   $
 ) ->
 
@@ -74,6 +74,39 @@ define [
               lineWidth: 5
               draggable: true
 
+          widgets.push
+            type: 'ruler'
+            attrs:
+              # id: 'rect-' + i
+              x: 600 #Math.round(Math.random() * 600)
+              y: 200 #Math.round(Math.random() * 300)
+              w: 400 #Math.round(Math.random() * 200)
+              h: 30 #Math.round(Math.random() * 200)
+              strokeStyle: 'navy'
+              fillStyle: 'yellow'
+              lineWidth: 1
+              margin: [10, 10]
+              zeropos: 0
+              # rotate: 30
+              draggable: true
+
+          widgets.push
+            type: 'ruler'
+            attrs:
+              # id: 'rect-' + i
+              x: 600 #Math.round(Math.random() * 600)
+              y: 200 #Math.round(Math.random() * 300)
+              w: 30 #Math.round(Math.random() * 200)
+              h: 400 #Math.round(Math.random() * 200)
+              strokeStyle: 'blue'
+              fillStyle: 'yellow'
+              lineWidth: 1
+              margin: [10, 10]
+              zeropos: 0
+              direction: 'vertical'
+              # rotate: 30
+              draggable: true
+
         widgets.push
           type: 'group'
           attrs:
@@ -125,7 +158,7 @@ define [
             'rect': Rect
             'line': Line
             'circle': Circle
-            'magnifier': Magnifier
+            'ruler': Ruler
           type: 'widget-box'
           attrs:
             container: 'container'

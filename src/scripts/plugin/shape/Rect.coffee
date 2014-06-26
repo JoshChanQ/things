@@ -24,9 +24,6 @@ define [
 
     shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
-      # w = @get('w')
-      # h = @get('h')
-      # context.rect -w / 2, -h / 2, w, h
 
     handles: ->
       ['bound-handle', 'rotation-handle']
