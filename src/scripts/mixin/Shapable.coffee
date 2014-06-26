@@ -20,6 +20,9 @@ define [
 
     shape: (context) ->
 
+    capture_shape: (context) ->
+      @shape(context)
+
     draw: (context) ->
       return @getContainer().draw() unless context
 
@@ -61,7 +64,7 @@ define [
       context.rotate(rotate * Math.PI / 180)
       context.translate(-center.x, -center.y)
 
-      @shape context
+      @capture_shape context
 
       if @get('strokeStyle')
         context.lineWidth = @get('lineWidth')

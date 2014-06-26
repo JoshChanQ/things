@@ -26,6 +26,8 @@ define [
   PIXEL_PER_MM = 3.779527559
 
   class Ruler extends Shape
+    capture_shape: (context) ->
+      context.rect @get('x'), @get('y'), @get('w'), @get('h')
 
     shape: (context) ->
       dimension =
@@ -91,6 +93,9 @@ define [
           context.moveTo(x, baseY + 11)
           context.lineTo(x, bottomY)
 
+      context.textAlign = 'left'
+      context.textBaseline = 'bottom'
+
       for i in [0..(plusCount - 1)] by 10
         x = startX + i * PIXEL_PER_MM
         break if x > marginRight
@@ -150,17 +155,20 @@ define [
           context.moveTo(baseX + 11, y)
           context.lineTo(endX, y)
 
+      context.textAlign = 'right'
+      context.textBaseline = 'top'
+
       for i in [0..(plusCount - 1)] by 10
         y = startY + i * PIXEL_PER_MM
         break if y > marginBottom
         continue if y < marginTop
-        context.fillText "#{i / 10}", baseX + 1, y + 10
+        context.fillText "#{i / 10}", baseX + 8, y + 2
 
       for i in [10..(minusCount - 1)] by 10
         y = startY - i * PIXEL_PER_MM
         break if y < marginTop
         continue if y > marginBottom
-        context.fillText "-#{i / 10}", baseX + 1, y + 10
+        context.fillText "-#{i / 10}", baseX + 8, y + 2
 
     @spec:
       type: 'ruler'

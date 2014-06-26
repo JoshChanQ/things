@@ -83,7 +83,7 @@ define [
               w: 400 #Math.round(Math.random() * 200)
               h: 30 #Math.round(Math.random() * 200)
               strokeStyle: 'navy'
-              fillStyle: 'yellow'
+              # fillStyle: 'yellow'
               lineWidth: 1
               margin: [10, 10]
               zeropos: 0
@@ -99,7 +99,7 @@ define [
               w: 30 #Math.round(Math.random() * 200)
               h: 400 #Math.round(Math.random() * 200)
               strokeStyle: 'blue'
-              fillStyle: 'yellow'
+              # fillStyle: 'yellow'
               lineWidth: 1
               margin: [10, 10]
               zeropos: 0
