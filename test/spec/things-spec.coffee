@@ -7,6 +7,7 @@ define [
   '../../scripts/plugin/shape/Circle'
   '../../scripts/plugin/shape/Ruler'
   '../../scripts/plugin/shape/ImageBox'
+  '../../scripts/plugin/shape/Barcode'
   'jquery'
 ], (
   things,
@@ -17,6 +18,7 @@ define [
   Circle
   Ruler
   ImageBox
+  Barcode
   $
 ) ->
 
@@ -85,6 +87,22 @@ define [
               fillStyle: 'green'
               lineWidth: 5
               src: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+              draggable: true
+
+          widgets.push
+            type: 'barcode'
+            attrs:
+              x: 200
+              y: 100
+              w: 400
+              h: 400
+              strokeStyle: 'navy'
+              # fillStyle: 'green'
+              lineWidth: 5
+              symbol: 'qrcode'
+              text: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+              'scale-w': 4
+              'scale-h': 4
               draggable: true
 
           widgets.push
@@ -170,6 +188,7 @@ define [
             'circle': Circle
             'ruler': Ruler
             'image': ImageBox
+            'barcode': Barcode
           type: 'widget-box'
           attrs:
             container: 'container'

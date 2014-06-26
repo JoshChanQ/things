@@ -45,9 +45,9 @@ define [
 
     event_map: ->
       map =
-        '(self)' :
-          '(self)' :
-            change : (component, before, after) ->
+        '(self)':
+          '(self)':
+            change: (component, before, after) ->
               return unless after.hasOwnProperty('src')
 
               @image.src = after['src']

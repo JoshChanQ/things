@@ -21,3 +21,6 @@ define [
       type: 'number'
     h:
       type: 'number'
+    rotate:
+      type: 'number'
+      default: 0
