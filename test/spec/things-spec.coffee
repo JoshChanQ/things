@@ -101,7 +101,6 @@ define [
               lineWidth: 5
               symbol: 'qrcode'
               text: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
-              # text: '1234567890-'
               'scale-w': 4
               'scale-h': 4
               draggable: true

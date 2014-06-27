@@ -12,6 +12,7 @@ define [
   '../../plugin/layer/SlideLayer'
   '../../plugin/layer/SelectionLayer'
   '../../plugin/layer/MagnifyLayer'
+  '../../plugin/layer/RulerLayer'
   '../../handler/ContextMenu'
 ], (
   Stage
@@ -21,6 +22,7 @@ define [
   SlideLayer
   SelectionLayer
   MagnifyLayer
+  RulerLayer
   ContextMenu
 ) ->
 
@@ -49,6 +51,7 @@ define [
         'slide-layer': SlideLayer
         'selection-layer': SelectionLayer
         'magnify-layer': MagnifyLayer
+        'ruler-layer': RulerLayer
 
       properties: [
         StageProps
@@ -61,6 +64,10 @@ define [
           'offset-y': -50
           'x': 100
           'y': 100
+      }, {
+        type: 'ruler-layer'
+        attrs:
+          'target': 'widget-layer'
       }, {
         type: 'selection-layer'
         attrs:

@@ -165,13 +165,13 @@ define [
         y = startY + i * PIXEL_PER_MM
         break if y > marginBottom
         continue if y < marginTop
-        context.fillText "#{i / 10}", baseX + 8, y + 2
+        context.fillText "#{i / 10}", baseX + 10, y + 2
 
       for i in [10..(minusCount - 1)] by 10
         y = startY - i * PIXEL_PER_MM
         break if y < marginTop
         continue if y > marginBottom
-        context.fillText "-#{i / 10}", baseX + 8, y + 2
+        context.fillText "-#{i / 10}", baseX + 10, y + 2
 
     @spec:
       type: 'ruler'
