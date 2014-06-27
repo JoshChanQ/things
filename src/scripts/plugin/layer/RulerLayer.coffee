@@ -28,12 +28,12 @@ define [
       @vert = rulers[1]
 
       @hori.set
-        w: @target.get('w')
+        w: @target.canvas.width
         h: 20
 
       @vert.set
         w: 20
-        h: @target.get('h')
+        h: @target.canvas.height
 
       @set
         x: @target.get('x')
@@ -83,7 +83,6 @@ define [
 
       properties: [
         LayerProps
-        # Graphic
         {
           target:
             type: 'string'
@@ -99,8 +98,6 @@ define [
             opacity: 0.8
             x: 0
             y: 0
-            w: 1000
-            h: 20
             zeropos: 20
             strokeStyle: 'navy'
             lineWidth: 1
@@ -112,8 +109,6 @@ define [
             opacity: 0.8
             x: 0
             y: 0
-            w: 20
-            h: 1000
             zeropos: 20
             strokeStyle: 'navy'
             lineWidth: 1
