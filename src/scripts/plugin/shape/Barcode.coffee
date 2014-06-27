@@ -40,8 +40,6 @@ define [
     shape: (context) ->
       return unless @barcode
 
-      context.rect @get('x'), @get('y'), @get('w'), @get('h')
-
       try
         context.drawImage @barcode, @get('x'), @get('y'), @get('w'), @get('h')
       catch
@@ -50,7 +48,7 @@ define [
       # src = document.location.protocol + '://' + document.location.host;
       # if(document.location.port != 80)
       #   src += ':' + document.location.port
-      src = '/barcode/?'
+      src = 'http://barcode.hatiolab.com:81/?'
       src += 'text=' + window.escape(@get('text'))
       src += '&bcid=' + (@get('symbol') || 'code128')
       src += '&wscale=' + (@get('scale-w') || 2)
@@ -62,9 +60,9 @@ define [
       else if(@get('includetext'))
         src += '&alttext=' + window.escape(@get('text'))
 
-      if(@get('barcolor') != '#000000')
+      if(@get('barcolor') && @get('barcolor') != '#000000')
         src += '&barcolor=' + window.escape(@get('barcolor'))
-      if(@get('backgroundcolor') != '#FFFFFF')
+      if(@get('backgroundcolor') && @get('backgroundcolor') != '#FFFFFF')
         src += '&backgroundcolor=' + window.escape(@get('backgroundcolor'))
 
       src
