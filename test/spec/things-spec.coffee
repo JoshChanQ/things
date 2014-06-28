@@ -5,6 +5,7 @@ define [
   '../../scripts/plugin/shape/Rect'
   '../../scripts/plugin/shape/Line'
   '../../scripts/plugin/shape/Circle'
+  '../../scripts/plugin/shape/Ellipse'
   '../../scripts/plugin/shape/Ruler'
   '../../scripts/plugin/shape/ImageBox'
   '../../scripts/plugin/shape/Barcode'
@@ -16,6 +17,7 @@ define [
   Rect
   Line
   Circle
+  Ellipse
   Ruler
   ImageBox
   Barcode
@@ -67,13 +69,26 @@ define [
           widgets.push
             type: 'circle'
             attrs:
-              # id: 'circle-' + i
               cx: 350
               cy: 150
               r: 100
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5
+              draggable: true
+
+          widgets.push
+            type: 'ellipse'
+            attrs:
+              x: 400
+              y: 250
+              w: 200
+              h: 100
+              draggable: true
+              strokeStyle: 'green'
+              fillStyle: 'lightgray'
+              lineWidth: 1
+              rotate: 15
               draggable: true
 
           widgets.push
@@ -117,7 +132,7 @@ define [
               lineWidth: 1
               margin: [10, 10]
               zeropos: 0
-              # rotate: 30
+              # rotate: 30x
               draggable: true
 
           widgets.push
@@ -186,6 +201,7 @@ define [
             'rect': Rect
             'line': Line
             'circle': Circle
+            'ellipse': Ellipse
             'ruler': Ruler
             'image': ImageBox
             'barcode': Barcode
