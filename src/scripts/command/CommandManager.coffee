@@ -14,10 +14,10 @@ define [
 
   class CommandManager
     constructor : (params) ->
-      this.reset()
+      @reset()
 
     dispose : ->
-      this.reset()
+      @reset()
 
     execute: (command) ->
       return if not command instanceof Command

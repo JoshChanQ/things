@@ -29,14 +29,6 @@ define [
       }
 
     shape: (context) ->
-      # x1 = @get('x1')
-      # y1 = @get('y1')
-      # x2 = @get('x2')
-      # y2 = @get('y2')
-
-      # context.moveTo -(x2 - x1) / 2, -(y2 - y1) / 2
-      # context.lineTo (x2 - x1) / 2, (y2 - y1) / 2
-
       context.moveTo @get('x1'), @get('y1')
       context.lineTo @get('x2'), @get('y2')
 

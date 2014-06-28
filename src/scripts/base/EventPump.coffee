@@ -19,15 +19,15 @@ define [
       for own event_name, handler of event_map when event_name is event.name
         event.listener = listener
 
-        (handler.apply this, args)
+        (handler.apply @, args)
 
   event_handler_fn = ->
     args = arguments
     e = args[args.length - 1]
-    eventPump = this.eventPump
+    eventPump = @eventPump
 
     for item in eventPump.listeners
-      control.call this.context, eventPump.deliverer, item.listener, item.clonedHandlers, e, args
+      control.call @context, eventPump.deliverer, item.listener, item.clonedHandlers, e, args
 
   class EventPump
     # Construct a new event pump.
@@ -42,7 +42,7 @@ define [
       @deliverer = deliverer
 
     start: (context) ->
-      @deliverer.on 'all', event_handler_fn, {context:(context||null), eventPump:this}
+      @deliverer.on 'all', event_handler_fn, {context:(context||null), eventPump:@}
 
     stop: ->
       @deliverer.off 'all', event_handler_fn

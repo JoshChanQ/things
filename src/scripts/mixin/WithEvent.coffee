@@ -16,86 +16,86 @@ define [
 
   WithEvent =
     # withEvent: ->
-    #     (this[method] = Event[method]) for method in ['on', 'off', 'once', 'delegate_on', 'delegate_off', 'trigger']
+    #     (@[method] = Event[method]) for method in ['on', 'off', 'once', 'delegate_on', 'delegate_off', 'trigger']
 
     on: (name, callback, context) ->
-      return this if (!eventsApi(this, 'on', name, [callback, context]) || !callback)
+      return @ if (!eventsApi(@, 'on', name, [callback, context]) || !callback)
 
-      this._listeners || (this._listeners = {});
-      events = this._listeners[name] || (this._listeners[name] = []);
+      @_listeners || (@_listeners = {});
+      events = @_listeners[name] || (@_listeners[name] = []);
       events.push
         callback: callback
         context: context
-        ctx: context || this
-      this
+        ctx: context || @
+      @
 
     # Bind an event to only be triggered a single time. After the first time
     # the callback is invoked, it will be removed.
     once: (name, callback, context) ->
-      return this if (!eventsApi(this, 'once', name, [callback, context]) || !callback)
+      return @ if (!eventsApi(@, 'once', name, [callback, context]) || !callback)
 
-      self = this
+      self = @
 
       once = _.once ->
         self.off name, once
-        callback.apply this, arguments
+        callback.apply @, arguments
 
       once._callback = callback
 
-      this.on name, once, context
+      @on name, once, context
 
     # Remove one or many callbacks. If `context` is null, removes all
     # callbacks with that function. If `callback` is null, removes all
     # callbacks for the event. If `name` is null, removes all bound
     # callbacks for all events.
     off: (name, callback, context) ->
-      return this if (!this._listeners || !eventsApi(this, 'off', name, [callback, context]))
+      return @ if (!@_listeners || !eventsApi(@, 'off', name, [callback, context]))
 
       if (!name && !callback && !context)
-        this._listeners = undefined;
-        return this;
+        @_listeners = undefined;
+        return @;
 
-      names = if name then [name] else Object.keys(this._listeners);
+      names = if name then [name] else Object.keys(@_listeners);
 
       for name, i in names
-        if (events = this._listeners[name])
-          this._listeners[name] = retain = []
+        if (events = @_listeners[name])
+          @_listeners[name] = retain = []
           if (callback || context)
             for ev, j in events
               if ((callback && callback isnt ev.callback && callback isnt ev.callback._callback) || (context && context isnt ev.context))
                 retain.push ev
 
-          delete this._listeners[name] if (!retain.length)
+          delete @_listeners[name] if (!retain.length)
 
-      this
+      @
 
     delegate_on: (delegator) ->
-      this._delegators || (this._delegators = new Collection.List());
-      this._delegators.append delegator
+      @_delegators || (@_delegators = new Collection.List());
+      @_delegators.append delegator
 
-      this
+      @
 
     delegate_off: (delegator) ->
-      return this if not this._delegators
-      this._delegators.remove delegator
+      return @ if not @_delegators
+      @_delegators.remove delegator
 
-      this
+      @
 
     delegate: ->
-      delegateEvents(this._delegators, arguments) if this._delegators and this._delegators.size() > 0
+      delegateEvents(@_delegators, arguments) if @_delegators and @_delegators.size() > 0
 
-      return this if (!this._listeners)
+      return @ if (!@_listeners)
 
       event = arguments[arguments.length - 1]
-      event.deliverer = this
+      event.deliverer = @
 
-      listeners = this._listeners[event.name]
-      listenersForAll = this._listeners.all
+      listeners = @_listeners[event.name]
+      listenersForAll = @_listeners.all
 
       triggerEvents(listeners, arguments) if (listeners)
       triggerEvents(listenersForAll, arguments) if (listenersForAll)
 
-      this
+      @
 
     # Trigger one or many events, firing all bound callbacks. Callbacks are
     # passed the same arguments as `trigger` is, apart from the event name
@@ -105,43 +105,43 @@ define [
       args = [].slice.call(arguments, 1)
 
       args.push({
-        origin: this,
+        origin: @,
         name: name,
-        deliverer: this
+        deliverer: @
       });
 
-      delegateEvents(this._delegators, args) if this._delegators and this._delegators.size() > 0
+      delegateEvents(@_delegators, args) if @_delegators and @_delegators.size() > 0
 
-      return this if not this._listeners
+      return @ if not @_listeners
 
-      return this if (!eventsApi(this, 'trigger', name, args))
+      return @ if (!eventsApi(@, 'trigger', name, args))
 
-      listeners = this._listeners[name]
-      listenersForAll = this._listeners.all
+      listeners = @_listeners[name]
+      listenersForAll = @_listeners.all
 
       triggerEvents(listeners, args) if (listeners)
       triggerEvents(listenersForAll, args) if (listenersForAll)
 
-      this
+      @
 
-    # Tell this object to stop listening to either specific events ... or
+    # Tell @ object to stop listening to either specific events ... or
     # to every object it's currently listening to.
     stopListening: (obj, name, callback) ->
-      listeningTo = this._listeningTo
+      listeningTo = @_listeningTo
 
-      return this if (!listeningTo)
+      return @ if (!listeningTo)
 
       remove = !name && !callback;
 
-      callback = this if (!callback && typeof name is 'object')
+      callback = @ if (!callback && typeof name is 'object')
 
       (listeningTo = {})[obj._listenId] = obj if (obj)
 
       for id, obj of listeningTo
-        obj.off(name, callback, this)
-        delete this._listeningTo[id] if (remove || _.isEmpty(obj._events))
+        obj.off(name, callback, @)
+        delete @_listeningTo[id] if (remove || _.isEmpty(obj._events))
 
-      this
+      @
 
   # Regular expression used to split event strings.
   eventSplitter = /\s+/
@@ -178,17 +178,17 @@ define [
     listenTo: 'on'
     listenToOnce: 'once'
 
-  # Inversion-of-control versions of `on` and `once`. Tell *this* object to
+  # Inversion-of-control versions of `on` and `once`. Tell *@* object to
   # listen to an event in another object ... keeping track of what it's
   # listening to.
   for method, implementation of listenMethods
     WithEvent[method] = (obj, name, callback) ->
-      listeningTo = this._listeningTo || (this._listeningTo = {})
+      listeningTo = @_listeningTo || (@_listeningTo = {})
       id = obj._listenId || (obj._listenId = _.uniqueId('l'))
       listeningTo[id] = obj
-      callback = this if (!callback && typeof name is 'object')
-      obj[implementation](name, callback, this)
+      callback = @ if (!callback && typeof name is 'object')
+      obj[implementation](name, callback, @)
 
-      return this
+      return @
 
   WithEvent

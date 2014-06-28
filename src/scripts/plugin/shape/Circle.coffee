@@ -30,7 +30,6 @@ define [
 
     shape: (context) ->
       context.arc(@get('cx'), @get('cy'), @get('r'), 0, 2 * Math.PI, false)
-      # context.arc(0, 0, @get('r'), 0, 2 * Math.PI, false)
 
     handles: ->
       ['circle-handle']

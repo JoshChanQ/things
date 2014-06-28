@@ -18,14 +18,14 @@ define [
 
       # merge defaults with supplied options
       #
-      # cloned = Object.create(attrs) : Not sure why this code does not work
+      # cloned = Object.create(attrs) : Not sure why @ code does not work
       # cloned = {}
       # (cloned[key] = val) for own key, val of attrs
 
-      # (cloned[key] = val) for own key, val of this.defaults when !cloned.hasOwnProperty(key)
+      # (cloned[key] = val) for own key, val of @defaults when !cloned.hasOwnProperty(key)
 
-      # this.set(cloned)
+      # @set(cloned)
 
-      this
+      @
 
     dispose: ->
