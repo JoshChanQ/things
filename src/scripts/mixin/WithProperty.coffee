@@ -27,11 +27,10 @@ define [
 
       attrs = key
       after = {}
-      before = {}
 
-      (before[key] = val) for own key, val of @attrs
+      before = _.clone @attrs
 
-      _.merge @attrs, attrs
+      _.assign @attrs, attrs
 
       for own key, val of @attrs
         if val isnt before[key]
@@ -54,11 +53,10 @@ define [
 
       attrs = key
       after = {}
-      before = {}
 
-      (before[key] = val) for own key, val of @attrs
+      before = _.clone @attrs
 
-      _.merge @attrs, attrs
+      _.assign @attrs, attrs
 
       for own key, val of @attrs
         if val isnt before[key]

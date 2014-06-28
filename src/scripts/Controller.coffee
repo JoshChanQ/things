@@ -16,6 +16,7 @@ define [
   './base/MouseEventEngine'
   './base/TouchEventEngine'
   './base/ExportsManager'
+  './command/CommandManager'
   './handler/ControllerHandler'
 ], (
   $
@@ -29,6 +30,7 @@ define [
   MouseEventEngine
   TouchEventEngine
   ExportsManager
+  CommandManager
   ControllerHandler
 ) ->
 
@@ -78,6 +80,8 @@ define [
       @exports = {}
 
       @exportsManager = new ExportsManager(@)
+
+      @commandManager = new CommandManager()
 
       @componentRegistry = new ComponentRegistry
 
@@ -129,6 +133,7 @@ define [
 
     dispose: ->
       @componentFactory.dispose()
+      @comandManager.dispose()
       @eventEngine.dispose()
       @componentRegistry.dispose()
       @mouseEvent.dispose() if @mouseEvent

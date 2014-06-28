@@ -26,7 +26,7 @@ define [
 
     capture_shape: (context) ->
 
-      context.rect @get('x'), @get('y'), @get('w'), @get('h')
+      context.rect @get('x'), @get('y'), @barcode.width, @barcode.height
 
     setup: ->
       @barcode = new Image()
@@ -41,7 +41,12 @@ define [
       return unless @barcode
 
       try
-        context.drawImage @barcode, @get('x'), @get('y'), @get('w'), @get('h')
+
+        if @get('w')
+          context.drawImage @barcode, @get('x'), @get('y'), @get('w'), @get('h')
+        else
+          context.drawImage @barcode, @get('x'), @get('y')
+
       catch
 
     makeurl: ->

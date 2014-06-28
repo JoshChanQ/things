@@ -16,20 +16,11 @@ define [
 
   'use strict'
 
-  class P2PHandle extends Group
+  class PathHandle extends Group
 
     align: ->
 
-      points = [
-        [
-          @target.get('x1')
-          @target.get('y1')
-        ]
-        [
-          @target.get('x2')
-          @target.get('y2')
-        ]
-      ]
+      points = @target.get('path')
 
       @forEach (component) ->
         index = component.get('index')
@@ -42,7 +33,9 @@ define [
 
       @target = @select(@get('target'))[0]
 
-      for i in [0..1]
+      path = @target.get('path')
+
+      for i in [0..(path.length - 1)]
         @build
           type: 'handle'
           attrs:
@@ -80,17 +73,12 @@ define [
 
       index = handle.get('index')
 
-      switch index
-        when 0
-          to =
-            x1: @target.get('x1') + delta.x
-            y1: @target.get('y1') + delta.y
-        when 1
-          to =
-            x2: @target.get('x2') + delta.x
-            y2: @target.get('y2') + delta.y
+      path = _.clone @target.get('path')
 
-      @target.set to
+      path[index][0] += delta.x
+      path[index][1] += delta.y
+
+      @target.set 'path', path
 
       # @draw()
 
@@ -111,11 +99,11 @@ define [
           dragend: @ondragend
 
     @spec:
-      type: 'p2p-handle'
+      type: 'path-handle'
 
       containable: true
 
-      description: 'Point-to-Point Handle'
+      description: 'Path Handle'
 
       dependencies: {
         'handle': Handle

@@ -42,9 +42,20 @@ define [
 
       to = {}
 
-      for p in @positions()
-        to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
-        to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
+      positions = @positions()
+
+      if positions instanceof Array
+        # Array Type : array of the property names for the points
+        for p in positions
+          to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
+          to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
+      else
+        # String Type : property name of the points array possessing current value
+        path = _.clone @get(positions)
+        for p in path
+          p[0] += Math.round(delta.x) if delta.x
+          p[1] += Math.round(delta.y) if delta.y
+        to[positions] = path
 
       @set to
 

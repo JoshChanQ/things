@@ -75,9 +75,9 @@ define [
 
       properties: [
         {
-          cx:
+          x:
             type: 'number'
-          cy:
+          y:
             type: 'number'
           r:
             type: 'number'

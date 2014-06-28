@@ -4,6 +4,7 @@ define [
   '../../scripts/plugin/group/Group'
   '../../scripts/plugin/shape/Rect'
   '../../scripts/plugin/shape/Line'
+  '../../scripts/plugin/shape/Path'
   '../../scripts/plugin/shape/Circle'
   '../../scripts/plugin/shape/Ellipse'
   '../../scripts/plugin/shape/Ruler'
@@ -16,6 +17,7 @@ define [
   Group
   Rect
   Line
+  Path
   Circle
   Ellipse
   Ruler
@@ -96,8 +98,8 @@ define [
             attrs:
               x: 400
               y: 100
-              w: 400
-              h: 400
+              # w: 400
+              # h: 400
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5
@@ -107,10 +109,10 @@ define [
           widgets.push
             type: 'barcode'
             attrs:
-              x: 200
-              y: 100
-              w: 400
-              h: 400
+              x: 100
+              y: 350
+              # w: 400
+              # h: 400
               strokeStyle: 'navy'
               fillStyle: 'green'
               lineWidth: 5
@@ -148,6 +150,17 @@ define [
               margin: [10, 10]
               zeropos: 0
               direction: 'vertical'
+              # rotate: 30
+              draggable: true
+
+          widgets.push
+            type: 'path'
+            attrs:
+              path: [[100, 400], [200, 300], [300, 500], [350, 350]]
+              strokeStyle: 'blue'
+              # fillStyle: 'yellow'
+              lineWidth: 10
+              margin: [10, 10]
               # rotate: 30
               draggable: true
 
@@ -200,6 +213,7 @@ define [
             'group': Group
             'rect': Rect
             'line': Line
+            'path': Path
             'circle': Circle
             'ellipse': Ellipse
             'ruler': Ruler
