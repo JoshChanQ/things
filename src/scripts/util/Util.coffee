@@ -5,22 +5,11 @@
 # ==========================================
 
 define [
-  '../util/Util'
-  './Bound'
+  '_'
 ], (
-  _
-  Bound
+  lodash
 ) ->
 
   'use strict'
 
-  _.merge {}, Bound,
-    alpha:
-      type: 'number'
-      default: 100
-    'offset-x':
-      type: 'number'
-      default: 0
-    'offset-y':
-      type: 'number'
-      default: 0
+  lodash

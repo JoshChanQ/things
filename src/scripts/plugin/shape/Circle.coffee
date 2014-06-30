@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  'lodash'
+  '../../util/Util'
   './Shape'
   '../handle/CircleHandle'
   '../../validator/Graphic'

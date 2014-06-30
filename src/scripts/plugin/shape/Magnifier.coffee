@@ -5,12 +5,10 @@
 # ==========================================
 
 define [
-  'lodash'
   './Shape'
   '../../validator/Graphic'
   '../../validator/Circle'
 ], (
-  _
   Shape
   Graphic
   CircleProps

@@ -22,6 +22,6 @@ module.exports = {
     new BannerPlugin('Things v' + version + ' | (c) Hatio, Lab. | MIT License')
   ],
   externals: {
-    "lodash": "lodash"
+    "_": "lodash"
   }
 };

@@ -3,8 +3,7 @@ require.config({
   paths: {
     'mocha'         : '../bower_components/mocha/mocha',
     'chai'          : '../bower_components/chai/chai',
-    'jquery'        : '../bower_components/jquery/dist/jquery.min',
-    'lodash'        : '../bower_components/lodash/dist/lodash.min',
+    '_'             : '../bower_components/lodash/dist/lodash.min',
   },
   shim: {
     mocha: {

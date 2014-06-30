@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  'lodash'
+  '../util/Util'
   './EventPump'
   './ComponentSelector'
 ], (

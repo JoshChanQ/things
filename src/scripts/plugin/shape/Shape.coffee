@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  'lodash'
+  '../../util/Util'
   '../../base/Component'
   '../../mixin/Dockable'
   '../../mixin/Serializable'

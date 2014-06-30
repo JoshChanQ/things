@@ -5,11 +5,9 @@
 # ==========================================
 
 define [
-  'lodash'
   './Handle'
   '../group/Group'
 ], (
-  _
   Handle
   Group
 ) ->
