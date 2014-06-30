@@ -12,7 +12,7 @@ module.exports = {
   },
   entry: './src/scripts/things',
   output: {
-    path: __dirname + '/',
+    path: __dirname + '/dist',
     filename: 'things.js',
     library: 'things',
     libraryTarget: 'umd',
