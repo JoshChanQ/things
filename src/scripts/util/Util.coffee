@@ -7,9 +7,9 @@
 define [
   '_'
 ], (
-  lodash
+  _
 ) ->
 
   'use strict'
 
-  lodash
+  _
