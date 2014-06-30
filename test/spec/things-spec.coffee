@@ -1,27 +1,27 @@
 define [
   '../../scripts/things',
-  '../../scripts/plugin/stage/WidgetBox'
-  '../../scripts/plugin/group/Group'
-  '../../scripts/plugin/shape/Rect'
-  '../../scripts/plugin/shape/Line'
-  '../../scripts/plugin/shape/Path'
-  '../../scripts/plugin/shape/Circle'
-  '../../scripts/plugin/shape/Ellipse'
-  '../../scripts/plugin/shape/Ruler'
-  '../../scripts/plugin/shape/ImageBox'
-  '../../scripts/plugin/shape/Barcode'
+  # '../../scripts/plugin/stage/WidgetBox'
+  # '../../scripts/plugin/group/Group'
+  # '../../scripts/plugin/shape/Rect'
+  # '../../scripts/plugin/shape/Line'
+  # '../../scripts/plugin/shape/Path'
+  # '../../scripts/plugin/shape/Circle'
+  # '../../scripts/plugin/shape/Ellipse'
+  # '../../scripts/plugin/shape/Ruler'
+  # '../../scripts/plugin/shape/ImageBox'
+  # '../../scripts/plugin/shape/Barcode'
 ], (
   things,
-  WidgetBox
-  Group
-  Rect
-  Line
-  Path
-  Circle
-  Ellipse
-  Ruler
-  ImageBox
-  Barcode
+  # WidgetBox
+  # Group
+  # Rect
+  # Line
+  # Path
+  # Circle
+  # Ellipse
+  # Ruler
+  # ImageBox
+  # Barcode
 ) ->
 
   describe 'things', ->
@@ -207,16 +207,16 @@ define [
 
         thing = things.create
           dependencies:
-            'widget-box': WidgetBox
-            'group': Group
-            'rect': Rect
-            'line': Line
-            'path': Path
-            'circle': Circle
-            'ellipse': Ellipse
-            'ruler': Ruler
-            'image': ImageBox
-            'barcode': Barcode
+            'widget-box': things.stage.WidgetBox
+            'group': things.group.Group
+            'rect': things.shape.Rect
+            'line': things.shape.Line
+            'path': things.shape.Path
+            'circle': things.shape.Circle
+            'ellipse': things.shape.Ellipse
+            'ruler': things.shape.Ruler
+            'image': things.shape.ImageBox
+            'barcode': things.shape.Barcode
           type: 'widget-box'
           attrs:
             container: 'container'
