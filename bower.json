@@ -2,8 +2,7 @@
   "name": "things",
   "private": true,
   "dependencies": {
-    "lodash": "~2.4.1",
-    "magictouch": "git://github.com/borismus/MagicTouch"
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "~1.19.0",
