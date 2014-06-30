@@ -10,7 +10,6 @@ define [
   '../../scripts/plugin/shape/Ruler'
   '../../scripts/plugin/shape/ImageBox'
   '../../scripts/plugin/shape/Barcode'
-  'jquery'
 ], (
   things,
   WidgetBox
@@ -23,7 +22,6 @@ define [
   Ruler
   ImageBox
   Barcode
-  $
 ) ->
 
   describe 'things', ->
