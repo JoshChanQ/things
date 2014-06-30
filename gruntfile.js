@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     coffee: {
       options: {
         sourceMap: true,
-        bare: false
+        bare: true
       },
       server: {
         expand: true,
@@ -116,18 +116,29 @@ module.exports = function(grunt) {
           livereload: 35729
         }
       }
+    },
+
+    exec: {
+      webpack: {
+        command: 'npm run webpack'
+      },
+      webpack_minified: {
+        command: 'npm run webpack-minified'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-exec');
 
   // Default task(s).
   grunt.registerTask('default', ['clean', 'compass', 'coffee', 'connect', 'watch']);
 
+  grunt.registerTask('release', ['exec:webpack', 'exec:webpack_minified']);
 };

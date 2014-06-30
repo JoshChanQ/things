@@ -5,7 +5,6 @@
 # ==========================================
 
 define [
-  'jquery'
   'lodash'
   './Global'
   './base/Component'
@@ -19,7 +18,6 @@ define [
   './command/CommandManager'
   './handler/ControllerHandler'
 ], (
-  $
   _
   Global
   Component
