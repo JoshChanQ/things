@@ -1,11 +1,44 @@
 {
-  "name": "things",
-  "private": true,
+  "name": "io-things",
+  "main": "things.js",
+  "version": "0.0.4",
+  "homepage": "https://github.com/heartyoh/things",
+  "authors": [
+    "heartyoh <heartyoh@gmail.com>"
+  ],
+  "description": "Javascript graphic framework",
+  "keywords": [
+    "canvas",
+    "framework"
+  ],
   "dependencies": {
     "lodash": "~2.4.1"
   },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "*.gemspec",
+    "*.gem",
+    "Gemfile",
+    "Gruntfile.js",
+    "package.json",
+    "Rakefile",
+    "karma.conf.js",
+    "webpack.config.js",
+    "node_modules",
+    "bower_components",
+    "build",
+    "src",
+    "tools",
+    "vendor",
+    "lib",
+    "example",
+    "test",
+    "tests"
+  ],
   "devDependencies": {
     "mocha": "~1.19.0",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "requirejs": ">=2.1.11"
   }
 }

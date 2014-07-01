@@ -1,5 +1,7 @@
-node_modules
 .tmp
 .sass-cache
-bower_components
+.bundle/
 npm-debug.log
+/**/node_modules/
+/**/bower_components/
+/**/*.gem

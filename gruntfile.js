@@ -6,7 +6,8 @@ module.exports = function(grunt) {
 
     clean: {
       temp: [".tmp"],
-      dist: ["dist/*"]
+      dist: ["dist/*"],
+      rails: ["vendor/assets/javascripts/*"]
     },
 
     // Add vendor prefixed styles
@@ -118,12 +119,62 @@ module.exports = function(grunt) {
       }
     },
 
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        updateConfigs: ['pkg'],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['-a'], //['package.json', 'bower.json'], // '-a' for all files
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'upstream',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+      }
+    },
+
+    replace: {
+      'bump-gem': {
+        src: ['lib/things/version.rb'],
+        overwrite: true, // overwrite matched source files
+        replacements: [{
+          from: /VERSION = \"\S*\"/,
+          to: "VERSION = \"<%= pkg.version %>\""
+        }]
+      }
+    },
+
+    copy: {
+      rails: {
+        files: [
+          {
+            expand: true,
+            cwd: './dist',
+            src: ['things.js', 'things.min.js'],
+            dest: 'vendor/assets/javascripts/',
+            filter: 'isFile'
+          }
+        ]
+      }
+    },
+
     exec: {
       webpack: {
         command: 'npm run webpack'
       },
       webpack_minified: {
         command: 'npm run webpack-minified'
+      },
+      build_gem: {
+        command: "gem build things.gemspec"
+      },
+      push_gem: {
+        command: "gem push things-rails-<%= pkg.version %>.gem"
+      },
+      publish_npm: {
+        command: "npm publish"
       }
     }
   });
@@ -134,11 +185,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-text-replace');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'compass', 'coffee', 'connect', 'watch']);
+  grunt.registerTask('build', ['clean', 'compass', 'coffee', 'exec:webpack', 'exec:webpack_minified']);
 
-  grunt.registerTask('release', ['exec:webpack', 'exec:webpack_minified']);
+  grunt.registerTask('bumpup', ['bump-only', 'replace:bump-gem'])
+
+  grunt.registerTask('release', ['build', 'bumpup', 'exec:webpack', 'exec:webpack_minified', 'copy:rails']);
+
+  grunt.registerTask('publish', ['release', 'exec:build_gem', 'exec:push_gem', 'exec:publish_npm']);
+
+  grunt.registerTask('default', ['build', 'connect', 'watch']);
+
 };

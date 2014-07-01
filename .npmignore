@@ -1,0 +1,13 @@
+/.gitignore
+/.jshintrc
+/.travis.yml
+/.tmp
+/.sass-cache
+/Gemfile
+/Rakefile
+/*.gem
+/*.gemspec
+/lib/
+/vendor/
+/node_modules/
+/bower_components/

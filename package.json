@@ -1,6 +1,6 @@
 {
-  "name": "things",
-  "version": "0.0.0",
+  "name": "io-things",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -10,7 +10,10 @@
     "webpack": "webpack --progress --colors",
     "webpack-minified": "webpack --progress --colors --optimize-minimize --output-file things.min.js"
   },
-  "author": "",
+  "author": {
+    "name": "Hearty, Oh.",
+    "email": "heartyoh@gmail.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "chai": "^1.9.1",
@@ -18,13 +21,16 @@
     "coffee-script": "^1.7.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.8.0",
+    "grunt-bump": "0.0.14",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-compass": "^0.8.0",
     "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-exec": "^0.4.5",
+    "grunt-text-replace": "^0.3.12",
     "gulp": "^3.6.2",
     "gulp-cache": "^0.1.11",
     "gulp-clean": "^0.3.0",
@@ -51,6 +57,5 @@
     "mocha": "^1.19.0",
     "webpack": "^1.3.1-beta4"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
