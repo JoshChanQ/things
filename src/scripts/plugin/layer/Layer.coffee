@@ -85,8 +85,8 @@ define [
 
       x = @get('x') || 0
       y = @get('y') || 0
-      w = @get('w') || app_attrs.w || (@html_container.offsetWidth - x)
-      h = @get('h') || app_attrs.h || (@html_container.offsetHeight - y)
+      w = @get('w') || app_attrs.w - x || (@html_container.offsetWidth - x)
+      h = @get('h') || app_attrs.h - y || (@html_container.offsetHeight - y)
 
       @set
         x: x
