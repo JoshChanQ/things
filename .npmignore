@@ -1,8 +1,10 @@
 /.gitignore
 /.jshintrc
 /.travis.yml
-/.tmp
-/.sass-cache
+/.tmp/
+/.sass-cache/
+/webpack.config.js
+/karma.conf.js
 /Gemfile
 /Rakefile
 /*.gem
@@ -11,3 +13,4 @@
 /vendor/
 /node_modules/
 /bower_components/
+/test/
