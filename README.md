@@ -4,6 +4,7 @@ things
 Graphic Modeling Framework based on Javascript canvas.
 
 ## 'things' means ..
+ * Things I love.
  * 모든 사물을 그 특징과 자료 구조대로 쉽고 잘 묘사할 수 있도록 표현 기능을 제공하고자 함
  * Things of the 'Internet of Things' 사물 ID 라벨링 및 모니터링 기능으로 모든 사물의 연결에 기여하고자 함
 

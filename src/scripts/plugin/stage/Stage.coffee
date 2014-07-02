@@ -35,12 +35,11 @@ define [
       @html_container = document.createElement('div')
       @html_container.style.position = 'relative'
       @html_container.style.display = 'inline-block'
-      # @html_container.style.width = @get('w') + 'px'
-      # @html_container.style.height = @get('h') + 'px'
+
       w = @get('w')
       h = @get('h')
-      @html_container.style.width = if w == undefined then '100%' else w + 'px'
-      @html_container.style.height = if h == undefined then '100%' else h + 'px'
+      @html_container.style.width = if w == undefined || w == null then '100%' else w + 'px'
+      @html_container.style.height = if h == undefined || h == null then '100%' else h + 'px'
 
       @client_container.appendChild(@html_container)
 
