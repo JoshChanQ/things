@@ -541,7 +541,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, BoundHandle, RotationHandle, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, BoundHandle, RotationHandle, Bound, Graphic) {
   "use strict";
   var Barcode;
   return Barcode = (function(_super) {
@@ -677,7 +677,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(23), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, CircleHandle, Graphic, CircleProps) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(23), __webpack_require__(58), __webpack_require__(59)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, CircleHandle, Graphic, CircleProps) {
   'use strict';
   var Circle;
   return Circle = (function(_super) {
@@ -741,7 +741,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
   'use strict';
   var Ellipse;
   return Ellipse = (function(_super) {
@@ -794,7 +794,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
   "use strict";
   var ImageBox;
   return ImageBox = (function(_super) {
@@ -879,7 +879,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(26), __webpack_require__(60), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, PathHandle, PathProperty, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(26), __webpack_require__(60), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, PathHandle, PathProperty, Graphic) {
   'use strict';
   var Path;
   return Path = (function(_super) {
@@ -956,7 +956,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic) {
   'use strict';
   var Rect;
   return Rect = (function(_super) {
@@ -998,7 +998,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(59), __webpack_require__(57), __webpack_require__(61)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic, Font) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(22), __webpack_require__(27), __webpack_require__(57), __webpack_require__(58), __webpack_require__(61)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, BoundHandle, RotationHandle, Bound, Graphic, Font) {
   "use strict";
   var PIXEL_PER_MM, Ruler;
   PIXEL_PER_MM = 3.779527559;
@@ -1224,7 +1224,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(2), __webpack_require__(47), __webpack_require__(45), __webpack_require__(48), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Component, Dockable, Serializable, Shapable, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(2), __webpack_require__(47), __webpack_require__(45), __webpack_require__(48), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Component, Dockable, Serializable, Shapable, Bound, Graphic) {
   'use strict';
   var Shape;
   return Shape = (function(_super) {
@@ -1307,7 +1307,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(59), __webpack_require__(57), __webpack_require__(61)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, Bound, Graphic, Font) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11), __webpack_require__(57), __webpack_require__(58), __webpack_require__(61)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Shape, Bound, Graphic, Font) {
   'use strict';
   var Text;
   return Text = (function(_super) {
@@ -1370,7 +1370,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(25), __webpack_require__(62), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, P2PHandle, P2P, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(11), __webpack_require__(25), __webpack_require__(62), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, P2PHandle, P2P, Graphic) {
   'use strict';
   var Line;
   return Line = (function(_super) {
@@ -1495,7 +1495,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(52), __webpack_require__(63), __webpack_require__(51), __webpack_require__(53)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Container, GroupShapable, LayerProps, LayerBehavior, JobPender) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(50), __webpack_require__(63), __webpack_require__(51), __webpack_require__(52)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Container, GroupShapable, LayerProps, LayerBehavior, JobPender) {
   'use strict';
   var Layer;
   return Layer = (function(_super) {
@@ -1621,7 +1621,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(15), __webpack_require__(63), __webpack_require__(57), __webpack_require__(50), __webpack_require__(51), __webpack_require__(5)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerProps, Graphic, Magnify, LayerBehavior, Circle) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(15), __webpack_require__(63), __webpack_require__(58), __webpack_require__(53), __webpack_require__(51), __webpack_require__(5)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerProps, Graphic, Magnify, LayerBehavior, Circle) {
   'use strict';
   var MagnifyLayer;
   return MagnifyLayer = (function(_super) {
@@ -1787,11 +1787,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
       this.vert = rulers[1];
       this.hori.set({
         w: this.target.canvas.width,
-        h: 20
+        h: 20,
+        zeropos: this.target.get('offset-x')
       });
       this.vert.set({
         w: 20,
-        h: this.target.canvas.height
+        h: this.target.canvas.height,
+        zeropos: this.target.get('offset-y')
       });
       this.set({
         x: this.target.get('x'),
@@ -1827,10 +1829,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
         this.set(picked);
       }
       return this.draw();
-    };
-
-    RulerLayer.prototype.onselfchange = function(target, before, after) {
-      return RulerLayer.__super__.onselfchange.call(this, target, before, after);
     };
 
     RulerLayer.spec = {
@@ -2185,7 +2183,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(47), __webpack_require__(52), __webpack_require__(59), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Container, Dockable, GroupShapable, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(47), __webpack_require__(50), __webpack_require__(57), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Container, Dockable, GroupShapable, Bound, Graphic) {
   'use strict';
   var Group;
   return Group = (function(_super) {
@@ -3170,8 +3168,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
           attrs: {
             'offset-x': -50,
             'offset-y': -50,
-            'x': 100,
-            'y': 100
+            'x': 50,
+            'y': 50
           }
         }, {
           type: 'ruler-layer',
@@ -4643,6 +4641,181 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  "use strict";
+  var GroupShapable;
+  return GroupShapable = {
+    center: function() {
+      return {
+        x: this.get('x') + this.get('w') / 2,
+        y: this.get('y') + this.get('h') / 2
+      };
+    },
+    shape: function(context) {
+      return context.rect(this.get('x'), this.get('y'), this.get('w'), this.get('h'));
+    },
+    draw: function(context) {
+      var center, rotate;
+      if (!context) {
+        return this.getContainer().draw();
+      }
+      context.beginPath();
+      rotate = this.get('rotate') || 0;
+      center = this.center();
+      context.save();
+      context.translate(center.x, center.y);
+      context.rotate(rotate * Math.PI / 180);
+      context.translate(-center.x, -center.y);
+      this.shape(context);
+      if (this.get('fillStyle')) {
+        context.fillStyle = this.get('fillStyle');
+        context.fill();
+      }
+      if (this.get('strokeStyle')) {
+        context.lineWidth = this.get('lineWidth');
+        context.strokeStyle = this.get('strokeStyle');
+        context.stroke();
+      }
+      if (this.get('clip')) {
+        context.clip();
+      }
+      context.translate(this.get('x'), this.get('y'));
+      this.forEach(function(child) {
+        return child.draw(context);
+      });
+      return context.restore();
+    },
+    capture: function(position, context) {
+      var captured, center, child, i, inbound, rotate, _i, _ref;
+      context.beginPath();
+      center = this.center();
+      rotate = (this.get('rotate') || 0) * Math.PI / 180;
+      context.save();
+      context.translate(center.x, center.y);
+      context.rotate(rotate);
+      context.translate(-center.x, -center.y);
+      this.shape(context);
+      context.lineWidth = this.get('lineWidth');
+      captured = null;
+      inbound = context.isPointInPath(position.x, position.y) || (!!this.get('strokeStyle') && context.isPointInStroke(position.x, position.y));
+      if (!this.get('clip') || inbound) {
+        if (this.size() > 0) {
+          context.translate(this.get('x'), this.get('y'));
+          for (i = _i = _ref = this.size() - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
+            child = this.getAt(i);
+            captured = child.capture(position, context);
+            if (captured) {
+              break;
+            }
+          }
+        }
+      }
+      context.restore();
+      if (captured) {
+        return captured;
+      }
+      if (this.get('capturable') === false) {
+        return null;
+      }
+      if (inbound) {
+        return this;
+      }
+      return null;
+    }
+  };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  'use strict';
+  var onchange, redraw;
+  redraw = function(e) {
+    return this.draw();
+  };
+  onchange = function(target, before, after) {
+    if (after.hasOwnProperty('x')) {
+      this.canvas.style.left = after['x'] + 'px';
+    }
+    if (after.hasOwnProperty('y')) {
+      this.canvas.style.top = after['y'] + 'px';
+    }
+    if (after.hasOwnProperty('w')) {
+      this.canvas.setAttribute('width', after['w']);
+    }
+    if (after.hasOwnProperty('h')) {
+      this.canvas.setAttribute('height', after['h']);
+    }
+    return this.draw();
+  };
+  return {
+    '(self)': {
+      '(all)': {
+        'added': redraw,
+        'removed': redraw,
+        'change': redraw
+      },
+      '(self)': {
+        'change': onchange
+      }
+    }
+  };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  'use strict';
+  var JobPender, TIMEOUT;
+  TIMEOUT = 1;
+  return JobPender = (function() {
+    function JobPender(context, fn) {
+      this.context = context;
+      this.fn = fn;
+      this.dispose = __bind(this.dispose, this);
+      this.flag = false;
+    }
+
+    JobPender.prototype.pend = function() {
+      if (this.flag) {
+        return;
+      }
+      this.flag = true;
+      return setTimeout((function(_this) {
+        return function() {
+          return _this.pended();
+        };
+      })(this), TIMEOUT);
+    };
+
+    JobPender.prototype.pended = function() {
+      this.flag = false;
+      return this.fn.call(this.context);
+    };
+
+    JobPender.prototype.dispose = function() {
+      this.context = null;
+      return this.fn = null;
+    };
+
+    return JobPender;
+
+  })();
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_) {
   'use strict';
   var edge, handle, onchange, ontargetchange;
@@ -4736,181 +4909,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
       }
     }
   };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  'use strict';
-  var onchange, redraw;
-  redraw = function(e) {
-    return this.draw();
-  };
-  onchange = function(target, before, after) {
-    if (after.hasOwnProperty('x')) {
-      this.canvas.style.left = after['x'] + 'px';
-    }
-    if (after.hasOwnProperty('y')) {
-      this.canvas.style.top = after['y'] + 'px';
-    }
-    if (after.hasOwnProperty('w')) {
-      this.canvas.setAttribute('width', after['w']);
-    }
-    if (after.hasOwnProperty('h')) {
-      this.canvas.setAttribute('height', after['h']);
-    }
-    return this.draw();
-  };
-  return {
-    '(self)': {
-      '(all)': {
-        'added': redraw,
-        'removed': redraw,
-        'change': redraw
-      },
-      '(self)': {
-        'change': onchange
-      }
-    }
-  };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  "use strict";
-  var GroupShapable;
-  return GroupShapable = {
-    center: function() {
-      return {
-        x: this.get('x') + this.get('w') / 2,
-        y: this.get('y') + this.get('h') / 2
-      };
-    },
-    shape: function(context) {
-      return context.rect(this.get('x'), this.get('y'), this.get('w'), this.get('h'));
-    },
-    draw: function(context) {
-      var center, rotate;
-      if (!context) {
-        return this.getContainer().draw();
-      }
-      context.beginPath();
-      rotate = this.get('rotate') || 0;
-      center = this.center();
-      context.save();
-      context.translate(center.x, center.y);
-      context.rotate(rotate * Math.PI / 180);
-      context.translate(-center.x, -center.y);
-      this.shape(context);
-      if (this.get('fillStyle')) {
-        context.fillStyle = this.get('fillStyle');
-        context.fill();
-      }
-      if (this.get('strokeStyle')) {
-        context.lineWidth = this.get('lineWidth');
-        context.strokeStyle = this.get('strokeStyle');
-        context.stroke();
-      }
-      if (this.get('clip')) {
-        context.clip();
-      }
-      context.translate(this.get('x'), this.get('y'));
-      this.forEach(function(child) {
-        return child.draw(context);
-      });
-      return context.restore();
-    },
-    capture: function(position, context) {
-      var captured, center, child, i, inbound, rotate, _i, _ref;
-      context.beginPath();
-      center = this.center();
-      rotate = (this.get('rotate') || 0) * Math.PI / 180;
-      context.save();
-      context.translate(center.x, center.y);
-      context.rotate(rotate);
-      context.translate(-center.x, -center.y);
-      this.shape(context);
-      context.lineWidth = this.get('lineWidth');
-      captured = null;
-      inbound = context.isPointInPath(position.x, position.y) || (!!this.get('strokeStyle') && context.isPointInStroke(position.x, position.y));
-      if (!this.get('clip') || inbound) {
-        if (this.size() > 0) {
-          context.translate(this.get('x'), this.get('y'));
-          for (i = _i = _ref = this.size() - 1; _ref <= 0 ? _i <= 0 : _i >= 0; i = _ref <= 0 ? ++_i : --_i) {
-            child = this.getAt(i);
-            captured = child.capture(position, context);
-            if (captured) {
-              break;
-            }
-          }
-        }
-      }
-      context.restore();
-      if (captured) {
-        return captured;
-      }
-      if (this.get('capturable') === false) {
-        return null;
-      }
-      if (inbound) {
-        return this;
-      }
-      return null;
-    }
-  };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  'use strict';
-  var JobPender, TIMEOUT;
-  TIMEOUT = 1;
-  return JobPender = (function() {
-    function JobPender(context, fn) {
-      this.context = context;
-      this.fn = fn;
-      this.dispose = __bind(this.dispose, this);
-      this.flag = false;
-    }
-
-    JobPender.prototype.pend = function() {
-      if (this.flag) {
-        return;
-      }
-      this.flag = true;
-      return setTimeout((function(_this) {
-        return function() {
-          return _this.pended();
-        };
-      })(this), TIMEOUT);
-    };
-
-    JobPender.prototype.pended = function() {
-      this.flag = false;
-      return this.fn.call(this.context);
-    };
-
-    JobPender.prototype.dispose = function() {
-      this.context = null;
-      return this.fn = null;
-    };
-
-    return JobPender;
-
-  })();
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
@@ -5111,54 +5109,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
   'use strict';
   var properties;
   return properties = {
-    lineWidth: {
-      type: 'number'
-    },
-    fillStyle: {
-      type: 'string'
-    },
-    strokeStyle: {
-      type: 'string'
-    },
-    alpha: {
-      type: 'number'
-    }
-  };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  'use strict';
-  var properties;
-  return properties = {
-    cx: {
-      type: 'number',
-      "default": 0
-    },
-    cy: {
-      type: 'number',
-      "default": 0
-    },
-    r: {
-      type: 'number',
-      "default": 100
-    }
-  };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  'use strict';
-  var properties;
-  return properties = {
     x: {
       type: 'number',
       "default": 0
@@ -5176,6 +5126,54 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     rotate: {
       type: 'number',
       "default": 0
+    }
+  };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  'use strict';
+  var properties;
+  return properties = {
+    lineWidth: {
+      type: 'number'
+    },
+    fillStyle: {
+      type: 'string'
+    },
+    strokeStyle: {
+      type: 'string'
+    },
+    alpha: {
+      type: 'number'
+    }
+  };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  'use strict';
+  var properties;
+  return properties = {
+    cx: {
+      type: 'number',
+      "default": 0
+    },
+    cy: {
+      type: 'number',
+      "default": 0
+    },
+    r: {
+      type: 'number',
+      "default": 100
     }
   };
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -5244,7 +5242,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(59)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Bound) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Bound) {
   'use strict';
   return _.merge({}, Bound, {
     alpha: {
@@ -5267,7 +5265,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(59)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Bound) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Bound) {
   'use strict';
   return _.merge({}, Bound, {
     alpha: {

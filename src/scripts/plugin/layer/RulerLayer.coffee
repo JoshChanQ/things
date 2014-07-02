@@ -32,10 +32,12 @@ define [
       @hori.set
         w: @target.canvas.width
         h: 20
+        zeropos: @target.get('offset-x')
 
       @vert.set
         w: 20
         h: @target.canvas.height
+        zeropos: @target.get('offset-y')
 
       @set
         x: @target.get('x')
@@ -66,9 +68,6 @@ define [
       @set picked unless _.isEmpty(picked)
 
       @draw()
-
-    onselfchange: (target, before, after) ->
-      super(target, before, after)
 
     @spec:
       type: 'ruler-layer'

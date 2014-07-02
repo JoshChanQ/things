@@ -62,8 +62,8 @@ define [
         attrs:
           'offset-x': -50
           'offset-y': -50
-          'x': 100
-          'y': 100
+          'x': 50
+          'y': 50
       }, {
         type: 'ruler-layer'
         attrs:
