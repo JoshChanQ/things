@@ -8,10 +8,12 @@ define [
   './Layer'
   '../shape/Ruler'
   '../../validator/LayerProps'
+  '../../handler/LayerBehavior'
 ], (
   Layer
   Ruler
   LayerProps
+  LayerBehavior
 ) ->
 
   "use strict"
@@ -38,17 +40,20 @@ define [
       @set
         x: @target.get('x')
         y: @target.get('y')
+        w: @target.get('w')
+        h: @target.get('h')
 
       super()
 
     event_map: ->
-
-      '?target':
-        '?target':
-          'change': @onchange
-      '(self)':
-        '(self)':
-          'change': @onselfchange
+      [
+        LayerBehavior
+        {
+          '?target':
+            '?target':
+              'change': @onchange
+        }
+      ]
 
     onchange: (target, before, after) ->
 
@@ -63,10 +68,7 @@ define [
       @draw()
 
     onselfchange: (target, before, after) ->
-
-      @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
-      @canvas.style.top = after['y'] + 'px' if after.hasOwnProperty('y')
-      @draw()
+      super(target, before, after)
 
     @spec:
       type: 'ruler-layer'

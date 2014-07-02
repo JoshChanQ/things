@@ -8,13 +8,13 @@ define [
   '../../base/Container'
   '../../mixin/GroupShapable'
   '../../validator/LayerProps'
-  '../../handler/Redraw'
+  '../../handler/LayerBehavior'
   '../../util/JobPender'
 ], (
   Container
   GroupShapable
   LayerProps
-  Redraw
+  LayerBehavior
   JobPender
 ) ->
 
@@ -77,11 +77,22 @@ define [
     init: (model) ->
       @pender = new JobPender(@, @_draw)
 
-      app_attrs = @controller.options.attrs
+      @html_container = @controller.getStage().html_container
 
       @canvas = document.createElement('canvas')
-      @canvas.setAttribute('width', @get('w') || app_attrs.w)
-      @canvas.setAttribute('height', @get('h') || app_attrs.h)
+
+      app_attrs = @controller.options.attrs
+
+      x = @get('x') || 0
+      y = @get('y') || 0
+      w = @get('w') || app_attrs.w || (@html_container.offsetWidth - x)
+      h = @get('h') || app_attrs.h || (@html_container.offsetHeight - y)
+
+      @set
+        x: x
+        y: y
+        w: w
+        h: h
 
       if(@get('visible') != false)
         @canvas.style.display = 'block'
@@ -93,17 +104,20 @@ define [
       @canvas.style.border = 0
       @canvas.style.background = 'transparent'
       @canvas.style.position = 'absolute'
-      @canvas.style.top = @get('y') + 'px'
-      @canvas.style.left = @get('x') + 'px'
 
-      @html_container = @controller.getStage().html_container
+      @canvas.style.top = y + 'px'
+      @canvas.style.left = x + 'px'
+      @canvas.setAttribute 'width', w
+      @canvas.setAttribute 'height', h
+
       @html_container.appendChild(@canvas)
 
     setup: (model) ->
+
       @draw()
 
     event_map: ->
-      Redraw
+      LayerBehavior
 
     dispose: ->
       @html_container.removeChild(@canvas)

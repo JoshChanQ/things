@@ -6,11 +6,9 @@
 
 define [
   './Layer'
-  '../../handler/Redraw'
   '../../validator/LayerProps'
 ], (
   Layer
-  Redraw
   LayerProps
 ) ->
 
@@ -25,11 +23,6 @@ define [
 
       for widget in widgets
         @build(widget, @)
-
-    event_map: ->
-      [
-        Redraw
-      ]
 
     @spec:
       type: 'widget-layer'

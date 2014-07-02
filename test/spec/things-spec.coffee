@@ -220,8 +220,7 @@ define [
           type: 'widget-box'
           attrs:
             container: document.getElementById('container')
-            w: 800
-            h: 500
+            h: 800
           widgets: widgets
 
         # $(html_container).children().get(0).tagName.should.equal 'CANVAS'

@@ -9,12 +9,14 @@ define [
   '../../validator/LayerProps'
   '../../validator/Graphic'
   '../../handler/Magnify'
+  '../../handler/LayerBehavior'
   '../shape/Circle'
 ], (
   Layer
   LayerProps
   Graphic
   Magnify
+  LayerBehavior
   Circle
 ) ->
 
@@ -22,7 +24,7 @@ define [
 
   class MagnifyLayer extends Layer
 
-    setup: ->
+    setup: (model) ->
       @target = @select(@get('magnify-target'))[0]
 
       @magnify_edge = @select('#magnify-edge')[0]
@@ -42,9 +44,11 @@ define [
         'cy': r
         'r': r - 5
 
-      super()
+      super(model)
 
     _draw: ->
+
+      return unless @target
 
       @clearCanvas()
 
@@ -117,6 +121,7 @@ define [
     event_map: ->
       [
         Magnify
+        LayerBehavior
       ]
 
     @spec:

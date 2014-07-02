@@ -8,6 +8,7 @@ define [
   './Layer'
   '../../validator/LayerProps'
   '../../handler/SelectionHandler'
+  '../../handler/LayerBehavior'
   '../handle/BoundHandle'
   '../handle/CircleHandle'
   '../handle/P2PHandle'
@@ -15,6 +16,7 @@ define [
   Layer
   LayerProps
   SelectionHandler
+  LayerBehavior
   BoundHandle
   CircleHandle
   P2PHandle
@@ -61,7 +63,6 @@ define [
 
       return null
 
-
     setup: ->
 
       @selections = []
@@ -73,12 +74,16 @@ define [
         'offset-y': @get('offset-y') || @target.get('offset-y')
         'x': @get('x') || @target.get('x')
         'y': @get('y') || @target.get('y')
+        'w': @target.get('w')
+        'h': @target.get('h')
 
       @set position
 
       super()
 
     _draw: ->
+
+      return unless @selections
 
       @clearCanvas()
 
@@ -132,6 +137,7 @@ define [
     event_map: ->
       [
         SelectionHandler
+        LayerBehavior
       ]
 
     @spec:
