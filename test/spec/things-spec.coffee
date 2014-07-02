@@ -219,7 +219,7 @@ define [
             'barcode': things.shape.Barcode
           type: 'widget-box'
           attrs:
-            container: 'container'
+            container: document.getElementById('container')
             w: 800
             h: 500
           widgets: widgets

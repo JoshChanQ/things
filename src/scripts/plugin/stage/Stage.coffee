@@ -23,7 +23,11 @@ define [
         layer.draw
 
     init: ->
-      @client_container = document.getElementById(@get('container'))
+      container = @get('container')
+      if container instanceof HTMLElement
+        @client_container = container
+      else
+        @client_container = document.getElementById(@get('container'))
 
       # clear content inside container
       @client_container.innerHTML = ''
