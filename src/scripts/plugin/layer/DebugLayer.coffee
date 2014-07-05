@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  './Layer'
+  '../../Layer'
   '../../validator/LayerProps'
   '../shape/Text'
   '../../util/PrettyPrint'

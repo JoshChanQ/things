@@ -5,14 +5,12 @@
 # ==========================================
 
 define [
-  '../../base/Container'
-  '../../mixin/GroupShapable'
-  '../../validator/LayerProps'
-  '../../handler/LayerBehavior'
-  '../../util/JobPender'
+  './base/Container'
+  './validator/LayerProps'
+  './behavior/LayerBehavior'
+  './util/JobPender'
 ], (
   Container
-  GroupShapable
   LayerProps
   LayerBehavior
   JobPender
@@ -21,7 +19,6 @@ define [
   'use strict'
 
   class Layer extends Container
-    # @include GroupShapable
 
     clearCanvas: ->
 
@@ -33,9 +30,6 @@ define [
       context.clearRect(0, 0, @canvas.width, @canvas.height)
 
       context.save()
-
-      # HERE ; consider get 'x', 'y'
-      # console.log @get('x'), @get('y')
 
       offsetx = @get('offset-x')
       offsety = @get('offset-y')
@@ -58,8 +52,6 @@ define [
 
       context.beginPath()
 
-      # HERE ; consider get 'x', 'y'
-
       translated_position =
         x: position.x - @get('offset-x') - @get('x')
         y: position.y - @get('offset-y') - @get('y')
@@ -74,14 +66,14 @@ define [
 
       return null
 
-    init: (model) ->
+    init: ->
       @pender = new JobPender(@, @_draw)
 
       @html_container = @controller.getStage().html_container
 
       @canvas = document.createElement('canvas')
 
-      app_attrs = @controller.options.attrs
+      app_attrs = @controller.options
 
       x = @get('x') || 0
       y = @get('y') || 0
@@ -111,10 +103,6 @@ define [
       @canvas.setAttribute 'height', h
 
       @html_container.appendChild(@canvas)
-
-    setup: (model) ->
-
-      @draw()
 
     event_map: ->
       LayerBehavior

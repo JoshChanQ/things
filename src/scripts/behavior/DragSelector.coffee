@@ -5,9 +5,7 @@
 # ==========================================
 
 define [
-  '../plugins/widget/Rect'
 ], (
-  Rect
 ) ->
 
   'use strict'

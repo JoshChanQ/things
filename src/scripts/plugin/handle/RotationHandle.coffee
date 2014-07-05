@@ -6,7 +6,7 @@
 
 define [
   './Handle'
-  '../group/Group'
+  '../../Group'
 ], (
   Handle
   Group
@@ -31,7 +31,7 @@ define [
         x: cx
         y: cy
 
-    setup: ->
+    onadded: (container) ->
       @set('clip', false)
 
       @target = @select(@get('target'))[0]

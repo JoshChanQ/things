@@ -24,6 +24,7 @@ define [
     @include WithProperty
     @include WithLifeCycle
     @include WithEvent
+    @include Serializable
 
     constructor : (type, container) ->
       @type = type

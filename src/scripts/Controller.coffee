@@ -7,29 +7,27 @@
 define [
   './util/Util'
   './Global'
+  './Stage'
   './base/Component'
   './base/ComponentRegistry'
   './base/ComponentSelector'
   './base/ComponentFactory'
   './base/EventEngine'
-  './base/MouseEventEngine'
-  './base/TouchEventEngine'
   './base/ExportsManager'
   './command/CommandManager'
-  './handler/ControllerHandler'
+  './behavior/ControllerBehavior'
 ], (
   _
   Global
+  Stage
   Component
   ComponentRegistry
   ComponentSelector
   ComponentFactory
   EventEngine
-  MouseEventEngine
-  TouchEventEngine
   ExportsManager
   CommandManager
-  ControllerHandler
+  ControllerBehavior
 ) ->
 
   'use strict'
@@ -63,12 +61,6 @@ define [
       throw new Error('controller not initialized') unless @controller
       @controller.select selector, target
 
-    abs: (v) ->
-      rel = @get(v) || 0
-      container = @getContainer()
-      rel += (container.abs(v) || 0) if container
-      rel
-
     debug: (category, text) ->
       @require('debug-layer').debug category, text
 
@@ -93,49 +85,57 @@ define [
       @eventEngine = new EventEngine
       @componentFactory = new ComponentFactory(@componentRegistry, @)
 
-      # setup Stage
-      @stage = @componentFactory.createModel options
+      # create stage
+      @componentRegistry.register('stage', Stage)
+
+      @stage = @componentFactory.create('stage', options)
 
       @eventEngine.setRoot(@stage)
 
-      # if @stage.event_map
-      #   maps = @stage.event_map()
-      #   for map in maps
-      @eventEngine.add(@stage, @stage.event_map(), @stage) if @stage.event_map
-
-      @eventEngine.add @, ControllerHandler, @
-
-      @componentFactory.setupDescendant @stage
-
-      unless Global.mobile
-        @mouseEvent = new MouseEventEngine(@stage)
-      @touchEvent = new TouchEventEngine(@stage)
+      # set default event handler
+      @eventEngine.add @, ControllerBehavior, @
 
     setStage: (stage) ->
+
       @stage = stage
 
     getStage: ->
+
       @stage
 
     build: (model, onto_container) ->
+
       @componentFactory.build model, onto_container
 
     select: (selector, root) ->
+
       ComponentSelector.select selector, root || @stage
 
     import: (type, exports, binder) ->
+
       @exportsManager.import type, exports, binder
 
     require: (type) ->
+
       @exportsManager.require type
+
+    register: (type, klass) ->
+
+      @componentRegistry.register(type, klass)
+
+    change: (changeset) ->
+
+      for selector, set of changeset
+        selections = @select selector
+        for component in selections
+          console.log selector, component
+          component.set set
 
     dispose: ->
       @componentFactory.dispose()
-      @comandManager.dispose()
+      @commandManager.dispose()
       @eventEngine.dispose()
       @componentRegistry.dispose()
-      @mouseEvent.dispose() if @mouseEvent
-      @touchEvent.dispose()
       @exportsManager.dispose()
 
   Controller

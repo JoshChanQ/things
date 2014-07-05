@@ -5,10 +5,10 @@
 # ==========================================
 
 define [
-  './Layer'
+  '../../Layer'
   '../shape/Ruler'
   '../../validator/LayerProps'
-  '../../handler/LayerBehavior'
+  '../../behavior/LayerBehavior'
 ], (
   Layer
   Ruler
@@ -20,7 +20,7 @@ define [
 
   class RulerLayer extends Layer
 
-    setup: ->
+    onadded: (container) ->
 
       @target = @select(@get('target'))[0]
 
@@ -44,8 +44,6 @@ define [
         y: @target.get('y')
         w: @target.get('w')
         h: @target.get('h')
-
-      super()
 
     event_map: ->
       [

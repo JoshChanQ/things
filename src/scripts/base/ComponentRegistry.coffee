@@ -27,10 +27,10 @@ define [
       @callback_unregister = if typeof(callback) is 'function' then callback.bind(context) else undefined
 
     # Register application dependent ComponentSpecs recursively
-    register : (klass) ->
-      return if @componentSpecs[klass.spec.type]
+    register : (type, klass) ->
+      return if @componentSpecs[type]
 
-      (@register depspec) for name, depspec of klass.spec.dependencies if klass.spec.dependencies
+      (@register name, depspec) for name, depspec of klass.spec.dependencies if klass.spec.dependencies
 
       # TODO fix gracefully follow lines
       if klass.spec.properties instanceof Array
@@ -38,7 +38,7 @@ define [
         (_.merge props, i) for i in klass.spec.properties
         klass.spec.properties = props
 
-      @componentSpecs[klass.spec.type] = klass
+      @componentSpecs[type] = klass
       @callback_register(klass.spec) if @callback_register
 
     unregister : (type) ->

@@ -24,7 +24,8 @@ require(['require', 'chai', 'mocha'], function(require, chai){
   var specRoot = '../.tmp/test/spec/';
 
   require([
-    'things-spec.js',
+    // 'things-spec.js',
+    'things-model-spec.js',
     // 'base/container-spec.js',
     // 'base/component-selector-spec.js',
     // 'base/event-pump-spec.js',

@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  './Shape'
+  '../../Shape'
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'

@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  './Shape'
+  '../../Shape'
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
@@ -26,7 +26,7 @@ define [
 
       context.rect @get('x'), @get('y'), @image.width, @image.height
 
-    setup: ->
+    onadded: (container) ->
       @image = new Image()
 
       self = @

@@ -9,6 +9,11 @@ define [
   './base/Component'
   './base/Container'
 
+  './Stage'
+  './Layer'
+  './Group'
+  './Shape'
+
   './plugin/shape/Barcode'
   './plugin/shape/Circle'
   './plugin/shape/Ellipse'
@@ -16,19 +21,15 @@ define [
   './plugin/shape/Path'
   './plugin/shape/Rect'
   './plugin/shape/Ruler'
-  './plugin/shape/Shape'
   './plugin/shape/Text'
   './plugin/shape/Line'
 
   './plugin/layer/DebugLayer'
-  './plugin/layer/Layer'
   './plugin/layer/MagnifyLayer'
   './plugin/layer/RulerLayer'
   './plugin/layer/SelectionLayer'
   './plugin/layer/SlideLayer'
   './plugin/layer/WidgetLayer'
-
-  './plugin/group/Group'
 
   './plugin/handle/BoundHandle'
   './plugin/handle/CircleHandle'
@@ -36,13 +37,15 @@ define [
   './plugin/handle/P2PHandle'
   './plugin/handle/PathHandle'
   './plugin/handle/RotationHandle'
-
-  './plugin/stage/Stage'
-  './plugin/stage/WidgetBox'
 ], (
   Controller
   Component
   Container
+
+  Stage
+  Layer
+  Group
+  Shape
 
   Barcode
   Circle
@@ -51,19 +54,15 @@ define [
   Path
   Rect
   Ruler
-  Shape
   Text
   Line
 
   DebugLayer
-  Layer
   MagnifyLayer
   RulerLayer
   SelectionLayer
   SlideLayer
   WidgetLayer
-
-  Group
 
   BoundHandle
   CircleHandle
@@ -71,9 +70,6 @@ define [
   P2PHandle
   PathHandle
   RotationHandle
-
-  Stage
-  WidgetBox
 ) ->
 
   'use strict'
@@ -133,5 +129,4 @@ define [
 
     stage:
       Stage: Stage
-      WidgetBox: WidgetBox
   }

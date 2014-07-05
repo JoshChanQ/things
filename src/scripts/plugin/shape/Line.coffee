@@ -6,7 +6,7 @@
 
 define [
   '../../util/Util'
-  './Shape'
+  '../../Shape'
   '../handle/P2PHandle'
   '../../validator/P2P'
   '../../validator/Graphic'

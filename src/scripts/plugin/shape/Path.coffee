@@ -6,7 +6,7 @@
 
 define [
   '../../util/Util'
-  './Shape'
+  '../../Shape'
   '../handle/PathHandle'
   '../../validator/PathProperty'
   '../../validator/Graphic'

@@ -5,13 +5,17 @@
 # ==========================================
 
 define [
-  '../../Global'
-  '../../base/Container'
-  '../../validator/StageProps'
+  './Global'
+  './base/Container'
+  './validator/StageProps'
+  './base/MouseEventEngine'
+  './base/TouchEventEngine'
 ], (
   Global
   Container
   StageProps
+  MouseEventEngine
+  TouchEventEngine
 ) ->
 
   'use strict'
@@ -43,9 +47,15 @@ define [
 
       @client_container.appendChild(@html_container)
 
+      unless Global.mobile
+        @mouseEventEngine = new MouseEventEngine(@)
+      @touchEventEngine = new TouchEventEngine(@)
+
     dispose: ->
       @client_container.removeChild(@html_container)
       @controller.dispose()
+      @touchEventEngine.dispose()
+      @mouseEventEngine.dispose() if @mouseEventEngine
 
     capture: (position) ->
       if @size() > 0
@@ -99,6 +109,23 @@ define [
 
       @point_pos
 
+    register: (type, klass) ->
+
+      @controller.register type, klass
+
+    model: (data) ->
+
+      if data.dependencies
+        for type, klass of data.dependencies
+          @register type, klass
+
+      @forEach (layer) ->
+        layer.model data if layer.model
+
+    change: (changeset) ->
+
+      @controller.change changeset
+
     @spec:
       type: 'stage'
 
@@ -106,7 +133,7 @@ define [
 
       container_type: 'stage'
 
-      description: 'Abstract Stage'
+      description: 'Stage'
 
       dependencies: {}
 

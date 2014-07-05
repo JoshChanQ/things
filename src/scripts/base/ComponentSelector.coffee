@@ -17,8 +17,10 @@ define [
   match_by_id = (selector, component, listener, root) ->
     (selector.substr(1)) is component.get('id')
 
-  match_by_name = (selector, component, listener, root) ->
-    (selector.substr(1)) is component.get('name')
+  match_by_tag = (selector, component, listener, root) ->
+    tags = component.get('tag')
+    return false unless tags
+    return tags.indexOf(selector.substr(1)) > -1
 
   match_by_special = (selector, component, listener, root) ->
     switch(selector)
@@ -28,14 +30,12 @@ define [
       else false
 
   match_by_type = (selector, component, listener, root) ->
-    (selector is 'all') or (selector is component.type)
+    selector is component.type
 
   match = (selector, component, listener, root) ->
-    return true if selector is '(all)'
-
     switch selector.charAt(0)
       when '#' then match_by_id(selector, component, listener, root)
-      when '.' then match_by_name(selector, component, listener, root)
+      when '.' then match_by_tag(selector, component, listener, root)
       when '(' then match_by_special(selector, component, listener, root)
       else match_by_type(selector, component, listener, root)
 
@@ -53,7 +53,7 @@ define [
 
     matcher = switch selector.charAt(0)
       when '#' then match_by_id
-      when '.' then match_by_name
+      when '.' then match_by_tag
       when '(' then match_by_special
       else match_by_type
     return select_recurse matcher, selector, component, listener, component, []

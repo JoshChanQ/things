@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  './Layer'
+  '../../Layer'
   '../../validator/LayerProps'
 ], (
   Layer
@@ -16,12 +16,11 @@ define [
 
   class WidgetLayer extends Layer
 
-    setup: (model) ->
-      super()
+    model: (data) ->
 
-      widgets = @controller.options.widgets
+      return unless data.components
 
-      for widget in widgets
+      for widget in data.components
         @build(widget, @)
 
     @spec:

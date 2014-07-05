@@ -6,7 +6,7 @@
 
 define [
   '../../util/Util'
-  './Shape'
+  '../../Shape'
   '../handle/CircleHandle'
   '../../validator/Graphic'
   '../../validator/Circle'

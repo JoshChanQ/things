@@ -5,13 +5,13 @@
 # ==========================================
 
 define [
-  '../../util/Util'
-  '../../base/Component'
-  '../../mixin/Dockable'
-  '../../mixin/Serializable'
-  '../../mixin/Shapable'
-  '../../validator/Bound'
-  '../../validator/Graphic'
+  './util/Util'
+  './base/Component'
+  './mixin/Dockable'
+  './mixin/Serializable'
+  './mixin/Shapable'
+  './validator/Bound'
+  './validator/Graphic'
 ], (
   _
   Component

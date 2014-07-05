@@ -6,7 +6,7 @@
 
 define [
   './Handle'
-  '../group/Group'
+  '../../Group'
 ], (
   Handle
   Group
@@ -27,7 +27,7 @@ define [
         x: cx + Math.round(Math.cos(theta) * r)
         y: cy + Math.round(Math.sin(theta) * r)
 
-    setup: ->
+    onadded: (container) ->
       @set('clip', false)
       @set('theta', 0)
 

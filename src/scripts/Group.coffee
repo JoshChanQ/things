@@ -5,11 +5,11 @@
 # ==========================================
 
 define [
-  '../../base/Container'
-  '../../mixin/Dockable'
-  '../../mixin/GroupShapable'
-  '../../validator/Bound'
-  '../../validator/Graphic'
+  './base/Container'
+  './mixin/Dockable'
+  './mixin/GroupShapable'
+  './validator/Bound'
+  './validator/Graphic'
 ], (
   Container
   Dockable

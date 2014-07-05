@@ -5,7 +5,7 @@
 # ==========================================
 
 define [
-  './Shape'
+  '../../Shape'
   '../../validator/Bound'
   '../../validator/Graphic'
   '../../validator/Font'

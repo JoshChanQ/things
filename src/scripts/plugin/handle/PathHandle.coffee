@@ -7,7 +7,7 @@
 define [
   '../../util/Util'
   './Handle'
-  '../group/Group'
+  '../../Group'
 ], (
   _
   Handle
@@ -28,7 +28,7 @@ define [
           x: points[index][0]
           y: points[index][1]
 
-    setup: ->
+    onadded: (container) ->
       @set('clip', false)
 
       @target = @select(@get('target'))[0]

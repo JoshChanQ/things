@@ -29,44 +29,46 @@ define [
 
     build: (model, onto_container) ->
 
-      component = @createModel model
-
-      onto_container.add component if onto_container
+      component = @createByModel model
 
       @setupDescendant component, model.components
 
-      # component lifecycle 'setup'
-      component.setup(model) if component.setup
+      onto_container.add component if onto_container
 
       component
 
-    createModel: (model) ->
-      (@componentRegistry.register depspec) for deptype, depspec of model.dependencies if model.dependencies
+    create: (type, attrs) ->
 
-      klass = @componentRegistry.get(model.type)
+      klass = @componentRegistry.get(type)
 
       throw new Error('module (' + model.type + ') is not registered yet.') unless klass
 
-      # TODO validation for initialization
-      model.attrs = {} unless model.attrs
-      model.attrs.id = _.uniqueId() unless model.attrs.hasOwnProperty('id')
-      component = new klass(model.type).initialize(model.attrs, klass.spec.properties)
+      attrs = {} unless attrs
+
+      attrs.id = _.uniqueId() unless attrs.hasOwnProperty('id')
+
+      component = new klass(type).initialize(attrs, klass.spec.properties)
 
       component.setController @controller
 
       # component lifecycle 'init'
-      component.init(model) if component.init
+      component.init() if component.init
+
+      # TODO spec이 가진 컴포넌트와 model이 가진 컴포넌트가 혼재한다. 문제없을까 ?
+      if klass.spec.components
+        for c in klass.spec.components
+          @build(c, component)
 
       component
+
+    createByModel: (model) ->
+      (@componentRegistry.register deptype, depspec) for deptype, depspec of model.dependencies if model.dependencies
+
+      @create model.type, model.attrs
 
     setupDescendant: (container, components) ->
       klass = @componentRegistry.get(container.type)
       spec = klass.spec
-
-      # TODO 아래이거 정리해라. ㅠㅠ
-      if spec.components
-        for c in spec.components
-          @build(c, container)
 
       if components
         for c in components

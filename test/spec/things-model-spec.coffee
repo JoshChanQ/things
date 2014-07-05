@@ -6,7 +6,7 @@ define [
 
   this.things = things
 
-  describe 'things', ->
+  describe 'things-model', ->
     describe 'create', ->
 
       html_container = null
@@ -89,6 +89,7 @@ define [
           widgets.push
             type: 'barcode'
             attrs:
+              id: 'barcode001'
               x: 100
               y: 350
               # w: 400
@@ -132,6 +133,7 @@ define [
               direction: 'vertical'
               # rotate: 30
               draggable: true
+              tag: ['vruler']
 
           widgets.push
             type: 'path'
@@ -200,11 +202,6 @@ define [
 
         thing.build
           type: 'widget-layer'
-          attrs:
-            'offset-x': -50
-            'offset-y': -50
-            'x': 50
-            'y': 50
 
         thing.build
           type: 'ruler-layer'
@@ -245,6 +242,12 @@ define [
             'image': things.shape.ImageBox
             'barcode': things.shape.Barcode
           components: widgets
+
+        thing.change
+          'line':
+            'lineWidth': 100
+          '.vruler':
+            'strokeStyle': 'red'
 
         # $(html_container).children().get(0).tagName.should.equal 'CANVAS'
         # console.log thing

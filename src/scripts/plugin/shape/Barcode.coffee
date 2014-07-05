@@ -6,7 +6,7 @@
 
 define [
   '../../util/Util'
-  './Shape'
+  '../../Shape'
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
@@ -28,7 +28,7 @@ define [
 
       context.rect @get('x'), @get('y'), @barcode.width, @barcode.height
 
-    setup: ->
+    onadded: (container) ->
       @barcode = new Image()
 
       self = @
@@ -81,7 +81,7 @@ define [
           '(self)':
             change: (component, before, after) ->
               picked = _.pick after, ['symbol', 'text', 'alttext', 'scale-h', 'scale-w', 'rotation', 'includetext', 'barcolor', 'backgroundcolor']
-              @barcode.src = @makeurl() picked unless _.isEmpty(picked)
+              @barcode.src = @makeurl() unless _.isEmpty(picked)
 
     @spec:
       type: 'barcode'

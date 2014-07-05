@@ -11,11 +11,19 @@ define [
   "use strict"
 
   Serializable =
-    serialize: ->
-      [
-        "type: #{this.name}"
-        "id: #{this.id}"
-        "props: #{JSON.stringify(this.attrs)}"
-      ].join(',')
+    objectify: ->
+      # if typeof(@forEach) == 'function'
+      #   components = []
+      #   @forEach (child) ->
+      #     components.push child.objectify()
 
-    deserialize: ->
+      content =
+        type: @type
+        attrs: @attrs
+
+      # content.components = components if components
+
+      # content
+
+    serialize: ->
+      JSON.stringify @objectify()
