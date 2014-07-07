@@ -65,7 +65,9 @@ define [
       @require('debug-layer').debug category, text
 
   class Controller
+
     constructor: (options) ->
+
       @options = _.clone options
       @exports = {}
 

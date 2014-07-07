@@ -14,6 +14,8 @@ define [
   './Group'
   './Shape'
 
+  './Animation'
+
   './plugin/shape/Barcode'
   './plugin/shape/Circle'
   './plugin/shape/Ellipse'
@@ -46,6 +48,8 @@ define [
   Layer
   Group
   Shape
+
+  Animation
 
   Barcode
   Circle
@@ -94,6 +98,7 @@ define [
 
     Component: Component
     Container: Container
+    Animation: Animation
 
     shape:
       Barcode: Barcode

@@ -249,6 +249,18 @@ define [
           '.vruler':
             'strokeStyle': 'red'
 
+        image = thing.select('image')[0]
+        layer = thing.select('widget-layer')[0]
+        amplitude = 150
+        centerX = 400
+        period = 2000
+
+        anim = new things.Animation (frame) ->
+          image.set('x', amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerX)
+        , layer
+
+        anim.start()
+
         # $(html_container).children().get(0).tagName.should.equal 'CANVAS'
         # console.log thing
         # thing.controller.componentRegistry.list().length.should.equal 5

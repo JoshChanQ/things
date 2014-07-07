@@ -246,6 +246,18 @@ define [
             'barcode': things.shape.Barcode
           components: widgets
 
+        rect = thing.select('rect')[0]
+        layer = thing.select('widget-layer')[0]
+        amplitude = 150
+        centerX = 400
+
+        anim = new things.Animation (frame) ->
+          console.log 'animation', frame
+          rect.set('x', amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerX)
+        , layer
+
+        anim.start()
+
         # $(html_container).children().get(0).tagName.should.equal 'CANVAS'
         # console.log thing
         # thing.controller.componentRegistry.list().length.should.equal 5
