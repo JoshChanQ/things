@@ -33,11 +33,7 @@ define [
 
     shape: (context) ->
 
-      dimension =
-        x: @get('x')
-        y: @get('y')
-        w: @get('w')
-        h: @get('h')
+      dimension = @bound()
 
       context.rect dimension.x, dimension.y, dimension.w, dimension.h
 

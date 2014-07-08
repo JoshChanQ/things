@@ -36,10 +36,12 @@ define [
   class BoundHandle extends Group
 
     align: ->
-      rw = Math.round(@target.get('w') / 2)
-      rh = Math.round(@target.get('h') / 2)
-      cx = Math.round(@target.get('x') + rw)
-      cy = Math.round(@target.get('y') + rh)
+      bound = @target.bound()
+
+      rw = Math.round(bound.w / 2)
+      rh = Math.round(bound.h / 2)
+      cx = Math.round(bound.x + rw)
+      cy = Math.round(bound.y + rh)
 
       @forEach (component) ->
         index = component.get('index')

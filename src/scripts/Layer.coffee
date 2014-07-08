@@ -5,18 +5,33 @@
 # ==========================================
 
 define [
+  './Animation'
   './base/Container'
   './validator/LayerProps'
   './behavior/LayerBehavior'
-  './util/JobPender'
 ], (
+  Animation
   Container
   LayerProps
   LayerBehavior
-  JobPender
 ) ->
 
   'use strict'
+
+  layers = []
+
+  batch = new Animation (frame) ->
+
+    return batch.stop() if layers.length == 0
+
+    while layer = layers.shift()
+      layer._draw()
+
+  batchDraw = (layer) ->
+    return if -1 < layers.indexOf(layer)
+
+    layers.push(layer)
+    batch.start() if layers.length == 1
 
   class Layer extends Container
 
@@ -41,8 +56,7 @@ define [
       context.restore()
 
     draw: ->
-      @_draw()
-      # @pender.pend()
+      batchDraw(@)
 
     shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
@@ -67,8 +81,6 @@ define [
       return null
 
     init: ->
-      @pender = new JobPender(@, @_draw)
-
       @html_container = @controller.getStage().html_container
 
       @canvas = document.createElement('canvas')
@@ -110,7 +122,6 @@ define [
     dispose: ->
       @html_container.removeChild(@canvas)
       @controller = null
-      @pender.dispose()
 
     @spec:
       type: 'layer'

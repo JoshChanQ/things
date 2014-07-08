@@ -12,10 +12,19 @@ define [
 
   Shapable =
 
-    center: ->
+    bound: ->
       {
-        x: @get('x') + @get('w') / 2
-        y: @get('y') + @get('h') / 2
+        x: @get('x')
+        y: @get('y')
+        w: @get('w')
+        h: @get('h')
+      }
+
+    center: ->
+      bound = @bound()
+      {
+        x: bound.x + bound.w / 2
+        y: bound.y + bound.h / 2
       }
 
     shape: (context) ->

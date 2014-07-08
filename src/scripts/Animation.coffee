@@ -47,33 +47,13 @@ define [
     return RAF.apply(window, arguments)
 
   runFrames = ->
-    layerHash = {}
-
-    # loop through all animations and execute animation
-    #  function.  if the animation object has specified node,
-    #  we can add the node to the nodes hash to eliminate
-    #  drawing the same node multiple times.  The node property
-    #  can be the stage itself or a layer
-
-    needRedraw = false
-
     for animation in animations
-      layers = animation.layers
       func = animation.func
 
       animation.updateFrameObject(now())
 
-      for layer in layers
-        layerHash[layer.get('id')] = layer
-
-      # if animation object has a function, execute it
       if(func)
-        # allow anim bypassing drawing
-        needRedraw  = (func.call(animation, animation.frame) != false) || needRedraw
-
-    if (needRedraw)
-      for id, layer of layerHash
-        layer.draw()
+        func.call(animation, animation.frame)
 
   animationLoop = ->
     if(animations.length)
@@ -89,48 +69,14 @@ define [
 
   class Animation
 
-    constructor: (func, layers) ->
+    constructor: (func) ->
 
       @func = func
-      @setLayers(layers)
       @id = animIdCounter++
       @frame =
         time: 0
         timeDiff: 0
         lastTime: now()
-
-    setLayers: (layers) ->
-
-      lays = []
-
-      if (!layers)
-        lays = []
-      else if (layers.length > 0)
-        lays = layers
-      else
-        lays = [layers]
-
-      @layers = lays
-
-    getLayers: ->
-      @layers
-
-    addLayer: (layer) ->
-      layers = @layers
-
-      if (layers)
-        len = layers.length
-
-        # don't add the layer if it already exists
-        for l in layers
-          if l.get('id') == layer.get('id')
-            return false
-      else
-        @layers = []
-
-      @layers.push(layer)
-
-      return true
 
     isRunning: ->
       for animation in animations

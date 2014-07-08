@@ -24,7 +24,7 @@ define [
 
     capture_shape: (context) ->
 
-      context.rect @get('x'), @get('y'), @image.width, @image.height
+      context.rect @get('x'), @get('y'), @get('w') || @image.width, @get('h') || @image.height
 
     onadded: (container) ->
       @image = new Image()
@@ -38,10 +38,15 @@ define [
     shape: (context) ->
       return unless @image
 
-      if @get('w')
-        context.drawImage @image, @get('x'), @get('y'), @get('w'), @get('h')
-      else
-        context.drawImage @image, @get('x'), @get('y')
+      context.drawImage @image, @get('x'), @get('y'), @get('w') || @image.width, @get('h') || @image.height
+
+    bound: ->
+      {
+        x: @get('x')
+        y: @get('y')
+        w: @get('w') || @image.width
+        h: @get('h') || @image.height
+      }
 
     handles: ->
       ['bound-handle', 'rotation-handle']

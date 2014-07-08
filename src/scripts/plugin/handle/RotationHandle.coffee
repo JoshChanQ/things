@@ -17,15 +17,12 @@ define [
   class RotationHandle extends Group
 
     align: ->
-      x = @target.get('x')
-      y = @target.get('y')
-      w = @target.get('w')
-      h = @target.get('h')
+      bound = @target.bound()
 
-      rw = Math.round(w / 2)
-      rh = Math.round(h / 2)
-      cx = Math.round(x + w / 2)
-      cy = Math.round(y - 20)
+      rw = Math.round(bound.w / 2)
+      rh = Math.round(bound.h / 2)
+      cx = Math.round(bound.x + bound.w / 2)
+      cy = Math.round(bound.y - 20)
 
       @handle.set
         x: cx
@@ -65,13 +62,10 @@ define [
 
       index = handle.get('index')
 
-      x = @target.get('x')
-      y = @target.get('y')
-      w = @target.get('w')
-      h = @target.get('h')
+      bound = @target.bound()
 
-      ox = Math.round(x + w / 2)
-      oy = Math.round(y + h / 2)
+      ox = Math.round(bound.x + bound.w / 2)
+      oy = Math.round(bound.y + bound.h / 2)
 
       theta = Math.atan2(e.offsetY - oy, e.offsetX - ox)
       theta -= Math.atan2(@startpos.y - oy, @startpos.x - ox)

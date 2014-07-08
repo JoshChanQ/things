@@ -80,6 +80,7 @@ define [
               y: 100
               # w: 400
               # h: 400
+              rotate: -15
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5

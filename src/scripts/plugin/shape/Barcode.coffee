@@ -49,6 +49,14 @@ define [
 
       catch
 
+    bound: ->
+      {
+        x: @get('x')
+        y: @get('y')
+        w: @get('w') || @barcode.width
+        h: @get('h') || @barcode.height
+      }
+
     makeurl: ->
       # src = document.location.protocol + '://' + document.location.host;
       # if(document.location.port != 80)

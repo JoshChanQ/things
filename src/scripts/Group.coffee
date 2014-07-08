@@ -30,6 +30,14 @@ define [
     positions: ->
       [['x', 'y']]
 
+    bound: ->
+      {
+        x: @get('x')
+        y: @get('y')
+        w: @get('w')
+        h: @get('h')
+      }
+
     move: (option) ->
       {delta} = option
 
