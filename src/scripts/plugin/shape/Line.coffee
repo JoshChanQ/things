@@ -49,6 +49,8 @@ define [
     @spec:
       type: 'line'
 
+      source: 'core:shape.Line'
+
       containable: false
 
       description: 'Direct Line'

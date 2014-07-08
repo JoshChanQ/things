@@ -12,18 +12,18 @@ define [
 
   Serializable =
     objectify: ->
-      # if typeof(@forEach) == 'function'
-      #   components = []
-      #   @forEach (child) ->
-      #     components.push child.objectify()
+      if typeof(@forEach) == 'function'
+        components = []
+        @forEach (child) ->
+          components.push child.objectify()
 
       content =
         type: @type
         attrs: @attrs
 
-      # content.components = components if components
+      content.components = components if components
 
-      # content
+      content
 
     serialize: ->
       JSON.stringify @objectify()

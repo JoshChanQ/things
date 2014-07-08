@@ -65,6 +65,8 @@ define [
     @spec:
       type: 'shape'
 
+      source: 'core:shape.Shape'
+
       containable: false
 
       description: 'Abstract Shape'

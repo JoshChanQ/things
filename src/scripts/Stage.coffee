@@ -126,8 +126,32 @@ define [
 
       @controller.change changeset
 
+    objectify: ->
+
+      components = []
+      @forEach (child) ->
+        components.push child.objectify()
+
+      dependencies = {}
+      @controller.componentRegistry.forEach (name, spec) ->
+        console.log name, spec
+        dependencies[name] = spec.spec.source
+      , @
+
+      console.log dependencies
+
+      {
+        dependencies: dependencies
+        components : components
+        attrs:
+          w: @get('w')
+          h: @get('h')
+      }
+
     @spec:
       type: 'stage'
+
+      source: 'core:stage.Stage'
 
       containable: true
 

@@ -111,6 +111,8 @@ define [
     @spec:
       type: 'p2p-handle'
 
+      source: 'core:handle.P2PHandle'
+
       containable: true
 
       description: 'Point-to-Point Handle'

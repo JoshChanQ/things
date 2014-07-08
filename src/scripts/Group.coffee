@@ -56,6 +56,8 @@ define [
     @spec:
       type: 'group'
 
+      source: 'core:group.Group'
+
       containable: true
 
       container_type: 'group'

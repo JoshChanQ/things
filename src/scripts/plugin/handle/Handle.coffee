@@ -67,6 +67,8 @@ define [
     @spec:
       type: 'handle'
 
+      source: 'core:handle.Handle'
+
       containable: false
 
       description: 'Base Handle'

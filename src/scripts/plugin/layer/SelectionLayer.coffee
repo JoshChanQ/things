@@ -222,6 +222,8 @@ define [
     @spec:
       type: 'selection-layer'
 
+      source: 'core:layer.SelectionLayer'
+
       containable: true
 
       container_type: 'layer'

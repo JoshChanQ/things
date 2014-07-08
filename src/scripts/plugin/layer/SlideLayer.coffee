@@ -100,6 +100,8 @@ define [
     @spec:
       type: 'slide-layer'
 
+      source: 'core:layer.SlideLayer'
+
       containable: true
 
       container_type: 'layer'

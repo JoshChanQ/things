@@ -94,6 +94,8 @@ define [
     @spec:
       type: 'barcode'
 
+      source: 'core:shape.Barcode'
+
       containable: false
 
       description: 'Barcode'

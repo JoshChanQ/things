@@ -172,6 +172,8 @@ define [
     @spec:
       type: 'ruler'
 
+      source: 'core:shape.Ruler'
+
       containable: false
 
       description: 'Ruler'

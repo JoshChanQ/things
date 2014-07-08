@@ -123,6 +123,8 @@ define [
     @spec:
       type: 'circle-handle'
 
+      source: 'core:handle.CircleHandle'
+
       containable: true
 
       description: 'Circle Handle'

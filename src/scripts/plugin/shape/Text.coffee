@@ -46,6 +46,8 @@ define [
     @spec:
       type: 'text'
 
+      source: 'core:shape.Text'
+
       containable: false
 
       description: 'Text Box'

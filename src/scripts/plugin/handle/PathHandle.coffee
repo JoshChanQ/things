@@ -101,6 +101,8 @@ define [
     @spec:
       type: 'path-handle'
 
+      source: 'core:handle.PathHandle'
+
       containable: true
 
       description: 'Path Handle'

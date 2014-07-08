@@ -202,6 +202,8 @@ define [
     @spec:
       type: 'magnify-layer'
 
+      source: 'core:layer.MagnifyLayer'
+
       containable: true
 
       container_type: 'layer'

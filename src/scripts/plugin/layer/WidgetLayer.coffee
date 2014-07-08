@@ -26,6 +26,8 @@ define [
     @spec:
       type: 'widget-layer'
 
+      source: 'core:layer.WidgetLayer'
+
       containable: true
 
       container_type: 'layer'

@@ -81,7 +81,6 @@ define [
   stages = []
 
   {
-    # 어플리케이션을 만들면서, 그 어플리케이션에 컨텍스트를 제공한다.
     create: (options) ->
       stage = new Controller(options).getStage()
       stages.push stage

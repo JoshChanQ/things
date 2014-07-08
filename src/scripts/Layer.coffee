@@ -126,6 +126,8 @@ define [
     @spec:
       type: 'layer'
 
+      source: 'core:layer.Layer'
+
       containable: true
 
       container_type: 'layer'

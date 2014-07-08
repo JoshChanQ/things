@@ -35,6 +35,8 @@ define [
     @spec:
       type: 'debug-layer'
 
+      source: 'core:layer.DebugLayer'
+
       containable: true
 
       container_type: 'layer'

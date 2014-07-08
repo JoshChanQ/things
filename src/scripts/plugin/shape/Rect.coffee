@@ -31,6 +31,8 @@ define [
     @spec:
       type: 'rect'
 
+      source: 'core:shape.Rect'
+
       containable: false
 
       description: 'Rectangle'

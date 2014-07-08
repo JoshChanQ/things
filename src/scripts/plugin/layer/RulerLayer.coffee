@@ -70,6 +70,8 @@ define [
     @spec:
       type: 'ruler-layer'
 
+      source: 'core:layer.RulerLayer'
+
       containable: true
 
       container_type: 'layer'

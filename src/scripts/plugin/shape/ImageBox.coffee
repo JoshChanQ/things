@@ -63,6 +63,8 @@ define [
     @spec:
       type: 'image'
 
+      source: 'core:shape.ImageBox'
+
       containable: false
 
       description: 'ImageBox'

@@ -69,6 +69,8 @@ define [
     @spec:
       type: 'path'
 
+      source: 'core:shape.Path'
+
       containable: false
 
       description: 'Path'

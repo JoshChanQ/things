@@ -46,6 +46,8 @@ define [
     @spec:
       type: 'ellipse'
 
+      source: 'core:shape.Ellipse'
+
       containable: false
 
       description: 'Ellipse'

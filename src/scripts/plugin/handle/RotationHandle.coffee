@@ -95,6 +95,8 @@ define [
     @spec:
       type: 'rotation-handle'
 
+      source: 'core:handle.RotationHandle'
+
       containable: true
 
       description: 'Rotation Handle'

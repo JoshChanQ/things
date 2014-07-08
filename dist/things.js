@@ -390,8 +390,31 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
       return this.controller.change(changeset);
     };
 
+    Stage.prototype.objectify = function() {
+      var components, dependencies;
+      components = [];
+      this.forEach(function(child) {
+        return components.push(child.objectify());
+      });
+      dependencies = {};
+      this.controller.componentRegistry.forEach(function(name, spec) {
+        console.log(name, spec);
+        return dependencies[name] = spec.spec.source;
+      }, this);
+      console.log(dependencies);
+      return {
+        dependencies: dependencies,
+        components: components,
+        attrs: {
+          w: this.get('w'),
+          h: this.get('h')
+        }
+      };
+    };
+
     Stage.spec = {
       type: 'stage',
+      source: 'core:stage.Stage',
       containable: true,
       container_type: 'stage',
       description: 'Stage',
@@ -533,6 +556,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Layer.spec = {
       type: 'layer',
+      source: 'core:layer.Layer',
       containable: true,
       container_type: 'layer',
       description: 'Abstract Layer',
@@ -608,6 +632,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Group.spec = {
       type: 'group',
+      source: 'core:group.Group',
       containable: true,
       container_type: 'group',
       description: 'Group',
@@ -699,6 +724,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Shape.spec = {
       type: 'shape',
+      source: 'core:shape.Shape',
       containable: false,
       description: 'Abstract Shape',
       dependencies: {},
@@ -1229,6 +1255,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Barcode.spec = {
       type: 'barcode',
+      source: 'core:shape.Barcode',
       containable: false,
       description: 'Barcode',
       dependencies: {
@@ -1324,6 +1351,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Circle.spec = {
       type: 'circle',
+      source: 'core:shape.Circle',
       containable: false,
       description: 'Circle',
       dependencies: {
@@ -1376,6 +1404,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Ellipse.spec = {
       type: 'ellipse',
+      source: 'core:shape.Ellipse',
       containable: false,
       description: 'Ellipse',
       dependencies: {
@@ -1460,6 +1489,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     ImageBox.spec = {
       type: 'image',
+      source: 'core:shape.ImageBox',
       containable: false,
       description: 'ImageBox',
       dependencies: {
@@ -1544,6 +1574,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Path.spec = {
       type: 'path',
+      source: 'core:shape.Path',
       containable: false,
       description: 'Path',
       dependencies: {
@@ -1585,6 +1616,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Rect.spec = {
       type: 'rect',
+      source: 'core:shape.Rect',
       containable: false,
       description: 'Rectangle',
       dependencies: {
@@ -1791,6 +1823,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Ruler.spec = {
       type: 'ruler',
+      source: 'core:shape.Ruler',
       containable: false,
       description: 'Ruler',
       dependencies: {
@@ -1865,6 +1898,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Text.spec = {
       type: 'text',
+      source: 'core:shape.Text',
       containable: false,
       description: 'Text Box',
       dependencies: {},
@@ -1929,6 +1963,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Line.spec = {
       type: 'line',
+      source: 'core:shape.Line',
       containable: false,
       description: 'Direct Line',
       dependencies: {
@@ -1979,6 +2014,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     DebugLayer.spec = {
       type: 'debug-layer',
+      source: 'core:layer.DebugLayer',
       containable: true,
       container_type: 'layer',
       description: 'Debug Layer',
@@ -2203,6 +2239,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     MagnifyLayer.spec = {
       type: 'magnify-layer',
+      source: 'core:layer.MagnifyLayer',
       containable: true,
       container_type: 'layer',
       description: 'Magnify Layer',
@@ -2316,6 +2353,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     RulerLayer.spec = {
       type: 'ruler-layer',
+      source: 'core:layer.RulerLayer',
       containable: true,
       container_type: 'layer',
       description: 'Ruler Layer',
@@ -2600,6 +2638,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     SelectionLayer.spec = {
       type: 'selection-layer',
+      source: 'core:layer.SelectionLayer',
       containable: true,
       container_type: 'layer',
       description: 'Selection Layer',
@@ -2728,6 +2767,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     OutlineLayer.spec = {
       type: 'slide-layer',
+      source: 'core:layer.SlideLayer',
       containable: true,
       container_type: 'layer',
       description: 'Slide Layer',
@@ -2792,6 +2832,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     WidgetLayer.spec = {
       type: 'widget-layer',
+      source: 'core:layer.WidgetLayer',
       containable: true,
       container_type: 'layer',
       description: 'Widgets Layer',
@@ -2926,6 +2967,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     BoundHandle.spec = {
       type: 'bound-handle',
+      source: 'core:handle.BoundHandle',
       containable: true,
       description: 'Bound Handle',
       dependencies: {
@@ -3054,6 +3096,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     CircleHandle.spec = {
       type: 'circle-handle',
+      source: 'core:handle.CircleHandle',
       containable: true,
       description: 'Circle Handle',
       dependencies: {
@@ -3136,6 +3179,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     Handle.spec = {
       type: 'handle',
+      source: 'core:handle.Handle',
       containable: false,
       description: 'Base Handle',
       dependencies: {},
@@ -3280,6 +3324,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     P2PHandle.spec = {
       type: 'p2p-handle',
+      source: 'core:handle.P2PHandle',
       containable: true,
       description: 'Point-to-Point Handle',
       dependencies: {
@@ -3408,6 +3453,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     PathHandle.spec = {
       type: 'path-handle',
+      source: 'core:handle.PathHandle',
       containable: true,
       description: 'Path Handle',
       dependencies: {
@@ -3530,6 +3576,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
     RotationHandle.spec = {
       type: 'rotation-handle',
+      source: 'core:handle.RotationHandle',
       containable: true,
       description: 'Rotation Handle',
       dependencies: {
@@ -4081,7 +4128,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(63), __webpack_require__(62)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(DragAndDrop, PointEvent) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(62), __webpack_require__(63)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(DragAndDrop, PointEvent) {
   "use strict";
   var MouseEventEngine, oncontextmenu, onmousedown, onmouseenter, onmouseleave, onmousemove, onmouseup;
   onmousedown = function(e) {
@@ -4232,7 +4279,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(62), __webpack_require__(63)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(PointEvent, DragAndDrop) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(63), __webpack_require__(62)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(PointEvent, DragAndDrop) {
   "use strict";
   var TouchEventEngine, ontouchend, ontouchmove, ontouchstart;
   ontouchstart = function(e) {
@@ -4755,11 +4802,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
   var Serializable;
   return Serializable = {
     objectify: function() {
-      var content;
-      return content = {
+      var components, content;
+      if (typeof this.forEach === 'function') {
+        components = [];
+        this.forEach(function(child) {
+          return components.push(child.objectify());
+        });
+      }
+      content = {
         type: this.type,
         attrs: this.attrs
       };
+      if (components) {
+        content.components = components;
+      }
+      return content;
     },
     serialize: function() {
       return JSON.stringify(this.objectify());
@@ -5473,42 +5530,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 /* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_) {
-  'use strict';
-  var event_fn, event_types, trigger;
-  trigger = function(target, type, origin, position) {
-    var e, stage;
-    if (!position) {
-      stage = target.getStage();
-      position = stage.point(origin);
-    }
-    e = {
-      origin: origin,
-      type: type,
-      target: target,
-      offsetX: position.x,
-      offsetY: position.y
-    };
-    return target.trigger(e.type, e);
-  };
-  event_fn = function(type) {
-    return function(target, origin, position) {
-      return trigger(target, type, origin, position);
-    };
-  };
-  event_types = ['mousemove', 'mousedown', 'mouseup', 'click', 'doubleclick', 'contextmenu', 'mouseover', 'mouseout', 'dragstart', 'drag', 'dragend', 'touchstart', 'touchmove', 'touchend', 'longtouch', 'tap', 'doubletap'];
-  return _.reduce(event_types, function(result, event_type) {
-    result[event_type] = event_fn(event_type);
-    return result;
-  }, {});
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(62)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(PointEvent) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(63)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(PointEvent) {
   var DragAndDrop, onafter_mouseup, onbefore_mouseup;
   onbefore_mouseup = function(e) {};
   onafter_mouseup = function(e) {
@@ -5565,6 +5587,41 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
   document.addEventListener('mouseup', onafter_mouseup, false);
   document.addEventListener('touchend', onafter_mouseup, false);
   return DragAndDrop;
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_) {
+  'use strict';
+  var event_fn, event_types, trigger;
+  trigger = function(target, type, origin, position) {
+    var e, stage;
+    if (!position) {
+      stage = target.getStage();
+      position = stage.point(origin);
+    }
+    e = {
+      origin: origin,
+      type: type,
+      target: target,
+      offsetX: position.x,
+      offsetY: position.y
+    };
+    return target.trigger(e.type, e);
+  };
+  event_fn = function(type) {
+    return function(target, origin, position) {
+      return trigger(target, type, origin, position);
+    };
+  };
+  event_types = ['mousemove', 'mousedown', 'mouseup', 'click', 'doubleclick', 'contextmenu', 'mouseover', 'mouseout', 'dragstart', 'drag', 'dragend', 'touchstart', 'touchmove', 'touchend', 'longtouch', 'tap', 'doubletap'];
+  return _.reduce(event_types, function(result, event_type) {
+    result[event_type] = event_fn(event_type);
+    return result;
+  }, {});
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 

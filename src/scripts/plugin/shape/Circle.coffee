@@ -52,6 +52,8 @@ define [
     @spec:
       type: 'circle'
 
+      source: 'core:shape.Circle'
+
       containable: false
 
       description: 'Circle'

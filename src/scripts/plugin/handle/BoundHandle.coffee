@@ -116,6 +116,8 @@ define [
     @spec:
       type: 'bound-handle'
 
+      source: 'core:handle.BoundHandle'
+
       containable: true
 
       description: 'Bound Handle'
