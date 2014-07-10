@@ -108,6 +108,7 @@ define [
 
       r = @get('r')
       @set
+        'resizable': false
         'w': 2 * r
         'h': 2 * r
         'x': (@target.canvas.width / 2) - r
@@ -216,7 +217,6 @@ define [
 
       properties: [
         LayerProps
-        Graphic
       ]
 
       components: [{

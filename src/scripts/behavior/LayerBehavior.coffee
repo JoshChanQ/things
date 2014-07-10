@@ -22,7 +22,23 @@ define [
 
     @draw()
 
+  onrootchange = (target, before, after) ->
+    if @get('resizable') == false
+      return
+
+    set = {}
+
+    x = @get('x') || 0
+    y = @get('y') || 0
+    set.w = (after.w - x) if after.hasOwnProperty 'w'
+    set.h = (after.h - y) if after.hasOwnProperty 'h'
+
+    @set set
+
   {
+    '(root)':
+      '(root)':
+        'change': onrootchange
     '(self)':
       '(all)':
         'added': redraw

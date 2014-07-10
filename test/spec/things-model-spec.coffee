@@ -258,11 +258,13 @@ define [
         anim = new things.Animation (frame) ->
           image.set('x', amplitude * Math.sin(frame.time * 2 * Math.PI / period) + centerX)
 
-        anim.start()
+        # anim.start()
 
         # layer = thing.select('widget-layer')[0]
 
         console.log 'serialize', thing.serialize()
+
+        thing.set 'h', 600
 
         # $(html_container).children().get(0).tagName.should.equal 'CANVAS'
         # console.log thing

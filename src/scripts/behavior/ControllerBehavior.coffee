@@ -35,10 +35,17 @@ define [
       x: e.origin.pageX
       y: e.origin.pageY
 
+  onchange = (target, before, after) ->
+    # TODO 이거는 고민을 좀 해봐야 한다..
+    @stage.html_container.style.width = after['w'] + 'px' if after.hasOwnProperty('w')
+    @stage.html_container.style.height = after['h'] + 'px' if after.hasOwnProperty('h')
+
   [
     ContextMenu
     {
       '(root)':
+        '(root)':
+          'change': onchange
         '(all)':
           'add': onadd
           'remove': onremove

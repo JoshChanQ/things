@@ -7,10 +7,12 @@
 define [
   '../../Layer'
   '../../validator/LayerProps'
+  '../../behavior/LayerBehavior'
   '../shape/Circle'
 ], (
   Layer
   LayerProps
+  LayerBehavior
   Circle
 ) ->
 
@@ -95,7 +97,10 @@ define [
       context.translate -offset.x, -offset.y
 
     event_map: ->
-      EVENT_MAP
+      [
+        EVENT_MAP
+        LayerBehavior
+      ]
 
     @spec:
       type: 'slide-layer'

@@ -15,7 +15,7 @@ define [
   'use strict'
 
   _.merge {}, Bound,
-    alpha:
+    'alpha':
       type: 'number'
       default: 100
     'offset-x':
@@ -24,3 +24,5 @@ define [
     'offset-y':
       type: 'number'
       default: 0
+    'resizable':
+      type: 'boolean'

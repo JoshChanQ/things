@@ -2158,6 +2158,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
       this.magnify_edge = this.select('#magnify-edge')[0];
       r = this.get('r');
       this.set({
+        'resizable': false,
         'w': 2 * r,
         'h': 2 * r,
         'x': (this.target.canvas.width / 2) - r,
@@ -2246,7 +2247,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
       dependencies: {
         'circle': Circle
       },
-      properties: [LayerProps, Graphic],
+      properties: [LayerProps],
       components: [
         {
           type: 'circle',
@@ -2669,7 +2670,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(44), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerProps, Circle) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(44), __webpack_require__(42), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerProps, LayerBehavior, Circle) {
   'use strict';
   var EVENT_MAP, OutlineLayer, onhandle_drag, onhandle_dragend, onhandle_dragstart;
   onhandle_dragstart = function(e) {
@@ -2762,7 +2763,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     };
 
     OutlineLayer.prototype.event_map = function() {
-      return EVENT_MAP;
+      return [EVENT_MAP, LayerBehavior];
     };
 
     OutlineLayer.spec = {
@@ -4512,7 +4513,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(66)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(ContextMenu) {
   'use strict';
-  var onadd, oncontextmenu, onremove;
+  var onadd, onchange, oncontextmenu, onremove;
   onadd = function(container, component, index, e) {
     var maps;
     if (component.event_map) {
@@ -4536,9 +4537,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
       y: e.origin.pageY
     });
   };
+  onchange = function(target, before, after) {
+    if (after.hasOwnProperty('w')) {
+      this.stage.html_container.style.width = after['w'] + 'px';
+    }
+    if (after.hasOwnProperty('h')) {
+      return this.stage.html_container.style.height = after['h'] + 'px';
+    }
+  };
   return [
     ContextMenu, {
       '(root)': {
+        '(root)': {
+          'change': onchange
+        },
         '(all)': {
           'add': onadd,
           'remove': onremove,
@@ -4557,7 +4569,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
   'use strict';
-  var onchange, redraw;
+  var onchange, onrootchange, redraw;
   redraw = function(e) {
     return this.draw();
   };
@@ -4576,7 +4588,28 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     }
     return this.draw();
   };
+  onrootchange = function(target, before, after) {
+    var set, x, y;
+    if (this.get('resizable') === false) {
+      return;
+    }
+    set = {};
+    x = this.get('x') || 0;
+    y = this.get('y') || 0;
+    if (after.hasOwnProperty('w')) {
+      set.w = after.w - x;
+    }
+    if (after.hasOwnProperty('h')) {
+      set.h = after.h - y;
+    }
+    return this.set(set);
+  };
   return {
+    '(root)': {
+      '(root)': {
+        'change': onrootchange
+      }
+    },
     '(self)': {
       '(all)': {
         'added': redraw,
@@ -4613,7 +4646,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(39), __webpack_require__(45)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Bound) {
   'use strict';
   return _.merge({}, Bound, {
-    alpha: {
+    'alpha': {
       type: 'number',
       "default": 100
     },
@@ -4624,6 +4657,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     'offset-y': {
       type: 'number',
       "default": 0
+    },
+    'resizable': {
+      type: 'boolean'
     }
   });
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
