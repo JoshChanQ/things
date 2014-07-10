@@ -4538,6 +4538,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     });
   };
   onchange = function(target, before, after) {
+    console.log('TODO', 'think about html container on stage width/height change', after);
     if (after.hasOwnProperty('w')) {
       this.stage.html_container.style.width = after['w'] + 'px';
     }

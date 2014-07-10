@@ -36,6 +36,7 @@ define [
       y: e.origin.pageY
 
   onchange = (target, before, after) ->
+    console.log 'TODO', 'think about html container on stage width/height change', after
     # TODO 이거는 고민을 좀 해봐야 한다..
     @stage.html_container.style.width = after['w'] + 'px' if after.hasOwnProperty('w')
     @stage.html_container.style.height = after['h'] + 'px' if after.hasOwnProperty('h')
