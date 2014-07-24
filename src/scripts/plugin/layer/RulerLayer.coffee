@@ -7,12 +7,10 @@
 define [
   '../../Layer'
   '../shape/Ruler'
-  '../../validator/LayerProps'
   '../../behavior/LayerBehavior'
 ], (
   Layer
   Ruler
-  LayerProps
   LayerBehavior
 ) ->
 
@@ -83,7 +81,7 @@ define [
       }
 
       properties: [
-        LayerProps
+        Layer.spec.properties
         {
           target:
             type: 'string'
@@ -93,7 +91,7 @@ define [
       components: [
         {
           type: 'ruler'
-          attrs:
+          config:
             direction: 'horizontal'
             margin: [20, 0]
             opacity: 0.8
@@ -104,7 +102,7 @@ define [
             lineWidth: 1
         }, {
           type: 'ruler'
-          attrs:
+          config:
             direction: 'vertical'
             margin: [20, 0]
             opacity: 0.8

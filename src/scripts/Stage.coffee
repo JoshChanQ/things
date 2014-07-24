@@ -7,13 +7,15 @@
 define [
   './Global'
   './base/Container'
-  './validator/StageProps'
+  './validator/ComponentProps'
+  './validator/Bound'
   './base/MouseEventEngine'
   './base/TouchEventEngine'
 ], (
   Global
   Container
-  StageProps
+  ComponentProps
+  Bound
   MouseEventEngine
   TouchEventEngine
 ) ->
@@ -28,10 +30,13 @@ define [
 
     init: ->
       container = @get('container')
+
+      console.log 'container', container, @config()
+
       if container instanceof HTMLElement
         @client_container = container
       else
-        @client_container = document.getElementById(@get('container'))
+        @client_container = document.getElementById(container)
 
       # clear content inside container
       @client_container.innerHTML = ''
@@ -40,8 +45,8 @@ define [
       @html_container.style.position = 'relative'
       @html_container.style.display = 'inline-block'
 
-      w = @get('w')
-      h = @get('h')
+      w = @config('w')
+      h = @config('h')
       @html_container.style.width = if w == undefined || w == null then '100%' else w + 'px'
       @html_container.style.height = if h == undefined || h == null then '100%' else h + 'px'
 
@@ -122,9 +127,9 @@ define [
       @forEach (layer) ->
         layer.model data if layer.model
 
-    change: (changeset) ->
+    apply: (changeset) ->
 
-      @controller.change changeset
+      @controller.apply changeset
 
     objectify: ->
 
@@ -134,18 +139,13 @@ define [
 
       dependencies = {}
       @controller.componentRegistry.forEach (name, spec) ->
-        console.log name, spec
         dependencies[name] = spec.spec.source
       , @
-
-      console.log dependencies
 
       {
         dependencies: dependencies
         components : components
-        attrs:
-          w: @get('w')
-          h: @get('h')
+        config: _.omit @config(), 'container'
       }
 
     @spec:
@@ -162,5 +162,13 @@ define [
       dependencies: {}
 
       properties: [
-        StageProps
+        ComponentProps
+        Bound
+        {
+          alpha:
+            type: 'number'
+            default: 100
+          container:
+            type: 'string'
+        }
       ]

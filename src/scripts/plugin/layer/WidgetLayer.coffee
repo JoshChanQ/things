@@ -6,10 +6,8 @@
 
 define [
   '../../Layer'
-  '../../validator/LayerProps'
 ], (
   Layer
-  LayerProps
 ) ->
 
   'use strict'
@@ -37,5 +35,5 @@ define [
       dependencies: {}
 
       properties: [
-        LayerProps
+        Layer.spec.properties
       ]

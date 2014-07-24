@@ -6,14 +6,10 @@
 
 define [
   '../../Layer'
-  '../../validator/LayerProps'
-  '../../validator/Graphic'
   '../../behavior/LayerBehavior'
   '../shape/Circle'
 ], (
   Layer
-  LayerProps
-  Graphic
   LayerBehavior
   Circle
 ) ->
@@ -216,12 +212,20 @@ define [
       }
 
       properties: [
-        LayerProps
+        Layer.spec.properties
+        {
+          target:
+            type: 'string'
+          r:
+            type: 'number'
+          ratio:
+            type: 'number'
+        }
       ]
 
       components: [{
         type: 'circle'
-        attrs:
+        config:
           'id': 'magnify-edge'
           'cx': 100
           'cy': 100
@@ -232,7 +236,7 @@ define [
           draggable: true
       }, {
         type: 'circle'
-        attrs:
+        config:
           'id': 'magnify-handle'
           'cx': 180
           'cy': 180

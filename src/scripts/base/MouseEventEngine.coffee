@@ -27,7 +27,7 @@ define [
     @click_target = @captured
 
     # draggable flag will be reset when mouse button goes to up
-    DragAndDrop.draggable = true
+    DragAndDrop.draggable = true if @captured.get('draggable')
 
     PointEvent.mousedown @captured, e, position
 

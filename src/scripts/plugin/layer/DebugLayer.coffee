@@ -6,12 +6,10 @@
 
 define [
   '../../Layer'
-  '../../validator/LayerProps'
   '../shape/Text'
   '../../util/PrettyPrint'
 ], (
   Layer
-  LayerProps
   Text
   pp
 ) ->
@@ -47,13 +45,13 @@ define [
         'text': Text
 
       properties: [
-        LayerProps
+        Layer.spec.properties
       ]
 
       components: [{
         type: 'text'
         name: 'debug-text'
-        attrs:
+        config:
           text: ''
           x: 0
           y: 20

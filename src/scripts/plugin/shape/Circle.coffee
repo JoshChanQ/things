@@ -8,14 +8,10 @@ define [
   '../../util/Util'
   '../../Shape'
   '../handle/CircleHandle'
-  '../../validator/Graphic'
-  '../../validator/Circle'
 ], (
   _
   Shape
   CircleHandle
-  Graphic
-  CircleProps
 ) ->
 
   'use strict'
@@ -63,6 +59,16 @@ define [
       }
 
       properties: [
-        CircleProps
-        Graphic
+        Shape.spec.properties
+        {
+          cx:
+            type: 'number'
+            default: 0
+          cy:
+            type: 'number'
+            default: 0
+          r:
+            type: 'number'
+            default: 100
+        }
       ]

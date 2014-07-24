@@ -54,10 +54,12 @@ define [
 
       @target = @select(@get('target'))[0]
 
+      return unless @target.get('resizable')
+
       for point, i in points
         @build
           type: 'handle'
-          attrs:
+          config:
             r: 8
             strokeStyle: 'red'
             lineWidth: 2
@@ -102,6 +104,7 @@ define [
         y: e.offsetY
 
     ondragend: (e) ->
+      @target.configure @target.bound()
 
     event_map: ->
       '?target':

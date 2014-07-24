@@ -7,55 +7,28 @@
 define [
   '../../util/Util'
   '../../Shape'
+  './ImageBox'
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
-  '../../validator/Graphic'
 ], (
   _
   Shape
+  ImageBox
   BoundHandle
   RotationHandle
   Bound
-  Graphic
 ) ->
 
   "use strict"
 
-  class Barcode extends Shape
-
-    capture_shape: (context) ->
-
-      context.rect @get('x'), @get('y'), @barcode.width, @barcode.height
+  class Barcode extends ImageBox
 
     onadded: (container) ->
-      @barcode = new Image()
 
-      self = @
-      @barcode.onload = ->
-        self.draw()
+      @silentSet 'src', @makeurl()
 
-      @barcode.src = @makeurl()
-
-    shape: (context) ->
-      return unless @barcode
-
-      try
-
-        if @get('w')
-          context.drawImage @barcode, @get('x'), @get('y'), @get('w'), @get('h')
-        else
-          context.drawImage @barcode, @get('x'), @get('y')
-
-      catch
-
-    bound: ->
-      {
-        x: @get('x')
-        y: @get('y')
-        w: @get('w') || @barcode.width
-        h: @get('h') || @barcode.height
-      }
+      super container
 
     makeurl: ->
       # src = document.location.protocol + '://' + document.location.host;
@@ -80,16 +53,16 @@ define [
 
       src
 
-    handles: ->
-      ['bound-handle', 'rotation-handle']
-
     event_map: ->
       map =
         '(self)':
           '(self)':
             change: (component, before, after) ->
               picked = _.pick after, ['symbol', 'text', 'alttext', 'scale-h', 'scale-w', 'rotation', 'includetext', 'barcolor', 'backgroundcolor']
-              @barcode.src = @makeurl() unless _.isEmpty(picked)
+
+              unless _.isEmpty(picked)
+                @silentSet 'src', @makeurl()
+                @image.src = @get('src')
 
     @spec:
       type: 'barcode'
@@ -106,8 +79,8 @@ define [
       }
 
       properties: [
+        Shape.spec.properties
         Bound
-        Graphic
         {
           'symbol':
             type: 'string'

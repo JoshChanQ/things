@@ -11,12 +11,11 @@ define [
   'use strict'
 
   properties =
-    cx:
-      type: 'number'
-      default: 0
-    cy:
-      type: 'number'
-      default: 0
-    r:
-      type: 'number'
-      default: 100
+    'id':
+      'type': 'string'
+    'capturable':
+      'type': 'boolean'
+    'draggable':
+      'type': 'boolean'
+    'resizable':
+      'type': 'boolean'

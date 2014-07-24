@@ -35,7 +35,7 @@ define [
 
       @handle = @build
         type: 'handle'
-        attrs:
+        config:
           r: 8
           draggable: true
           strokeStyle: 'red'
@@ -81,6 +81,7 @@ define [
         y: e.offsetY
 
     ondragend: (e) ->
+      @target.configure 'rotate', @target.get('rotate')
 
     event_map: ->
       '?target':

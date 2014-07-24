@@ -8,12 +8,14 @@ define [
   './base/Container'
   './mixin/Dockable'
   './mixin/GroupShapable'
+  './validator/ComponentProps'
   './validator/Bound'
   './validator/Graphic'
 ], (
   Container
   Dockable
   GroupShapable
+  ComponentProps
   Bound
   Graphic
 ) ->
@@ -38,18 +40,32 @@ define [
         h: @get('h')
       }
 
-    move: (option) ->
+    move: (option, configure) ->
       {delta} = option
 
       return if _.isEmpty(delta)
 
       to = {}
 
-      for p in @positions()
+      positions = @positions()
+
+      for p in positions
         to[p[0]] = Math.round(@get(p[0]) + delta.x) if delta.x
         to[p[1]] = Math.round(@get(p[1]) + delta.y) if delta.y
 
       @set to
+
+      return unless configure
+
+      config = {}
+
+      for p in positions
+        config[p[0]] = @get(p[0])
+        config[p[1]] = @get(p[1])
+
+      @configure config
+
+      console.log @type, @config()
 
     event_map: null
 
@@ -68,6 +84,7 @@ define [
       }
 
       properties: [
+        ComponentProps
         Bound
         Graphic
         {

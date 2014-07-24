@@ -7,13 +7,17 @@
 define [
   './Animation'
   './base/Container'
-  './validator/LayerProps'
   './behavior/LayerBehavior'
+  './validator/ComponentProps'
+  './validator/Bound'
+  './validator/Graphic'
 ], (
   Animation
   Container
-  LayerProps
   LayerBehavior
+  ComponentProps
+  Bound
+  Graphic
 ) ->
 
   'use strict'
@@ -137,5 +141,20 @@ define [
       dependencies: {}
 
       properties: [
-        LayerProps
+        ComponentProps
+        Bound
+        Graphic
+        {
+          'alpha':
+            type: 'number'
+            default: 100
+          'offset-x':
+            type: 'number'
+            default: 0
+          'offset-y':
+            type: 'number'
+            default: 0
+          'resizable':
+            type: 'boolean'
+        }
       ]

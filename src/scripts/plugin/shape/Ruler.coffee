@@ -9,14 +9,12 @@ define [
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
-  '../../validator/Graphic'
   '../../validator/Font'
 ], (
   Shape
   BoundHandle
   RotationHandle
   Bound
-  Graphic
   Font
 ) ->
 
@@ -41,9 +39,6 @@ define [
         @drawHorizontal context, dimension
       else
         @drawVertical context, dimension
-
-    handles: ->
-      ['bound-handle', 'rotation-handle']
 
     drawHorizontal: (context, dimension) ->
       zeropos = parseInt(@get('zeropos'))
@@ -184,8 +179,8 @@ define [
       }
 
       properties: [
+        Shape.spec.properties
         Bound
-        Graphic
         Font
         {
           'zeropos':

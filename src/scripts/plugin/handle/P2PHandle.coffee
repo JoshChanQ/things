@@ -7,9 +7,13 @@
 define [
   './Handle'
   '../../Group'
+  '../../validator/ComponentProps'
+  '../../validator/Graphic'
 ], (
   Handle
   Group
+  ComponentProps
+  Graphic
 ) ->
 
   'use strict'
@@ -43,7 +47,7 @@ define [
       for i in [0..1]
         @build
           type: 'handle'
-          attrs:
+          config:
             r: 8
             index: i
             strokeStyle: 'red'
@@ -97,6 +101,11 @@ define [
         y: e.offsetY
 
     ondragend: (e) ->
+      @target.configure
+        x1: @target.get('x1')
+        y1: @target.get('y1')
+        x2: @target.get('x2')
+        y2: @target.get('y2')
 
     event_map: ->
       '?target':

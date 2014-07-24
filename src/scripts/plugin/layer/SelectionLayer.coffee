@@ -6,18 +6,10 @@
 
 define [
   '../../Layer'
-  '../../validator/LayerProps'
   '../../behavior/LayerBehavior'
-  '../handle/BoundHandle'
-  '../handle/CircleHandle'
-  '../handle/P2PHandle'
 ], (
   Layer
-  LayerProps
   LayerBehavior
-  BoundHandle
-  CircleHandle
-  P2PHandle
 ) ->
 
   'use strict'
@@ -63,7 +55,28 @@ define [
 
   ondragend = (e) ->
 
-    (item.move({delta: @offset})) for item in @selections when item.move
+    # (item.move({delta: @offset})) for item in @selections when item.move
+
+    for item in @selections when item.move
+      item.move({delta: @offset}, true)
+
+      # positions = item.positions()
+
+      # config = {}
+
+      # if positions instanceof Array
+      #   # Array Type : array of the property names for the points
+      #   for p in positions
+      #     config[p[0]] = item.get(p[0])
+      #     config[p[1]] = item.get(p[1])
+      # else
+      #   # String Type : property name of the points array possessing current value
+      #   path = _.clone @get(positions)
+      #   for p in path
+      #     config[p[0]] = item.get(p[0])
+      #     config[p[1]] = item.get(p[1])
+
+      # item.configure config
 
     @offset = null
 
@@ -199,7 +212,7 @@ define [
       for handle in @focus.handles()
         @build
           type: handle
-          attrs:
+          config:
             target: '#' + @focus.get('id')
 
     setFocus: (focus) ->
@@ -230,13 +243,10 @@ define [
 
       description: 'Selection Layer'
 
-      dependencies:
-        'bound-handle': BoundHandle
-        'circle-handle': CircleHandle
-        'p2p-handle': P2PHandle
+      dependencies: {}
 
       properties: [
-        LayerProps
+        Layer.spec.properties
         {
           target:
             type: 'string'

@@ -90,7 +90,7 @@ define [
       # create stage
       @componentRegistry.register('stage', Stage)
 
-      @stage = @componentFactory.create('stage', options)
+      @stage = @componentFactory.create 'stage', options
 
       @eventEngine.setRoot(@stage)
 
@@ -125,12 +125,11 @@ define [
 
       @componentRegistry.register(type, klass)
 
-    change: (changeset) ->
+    apply: (changeset) ->
 
       for selector, set of changeset
         selections = @select selector
         for component in selections
-          console.log selector, component
           component.set set
 
     dispose: ->

@@ -26,7 +26,7 @@ define [
         for i in [1..1]
           widgets.push
             type: 'rect'
-            attrs:
+            config:
               x: 100
               y: 100
               w: 200
@@ -39,7 +39,7 @@ define [
 
           widgets.push
             type: 'line'
-            attrs:
+            config:
               x1: 500
               y1: 100
               x2: 600
@@ -50,7 +50,7 @@ define [
 
           widgets.push
             type: 'circle'
-            attrs:
+            config:
               cx: 350
               cy: 150
               r: 100
@@ -61,7 +61,7 @@ define [
 
           widgets.push
             type: 'ellipse'
-            attrs:
+            config:
               x: 400
               y: 250
               w: 200
@@ -75,11 +75,11 @@ define [
 
           widgets.push
             type: 'image'
-            attrs:
+            config:
               x: 400
               y: 200
-              # w: 400
-              # h: 400
+              # w: 100
+              # h: 100
               rotate: -15
               strokeStyle: 'yellow'
               fillStyle: 'green'
@@ -89,7 +89,7 @@ define [
 
           widgets.push
             type: 'barcode'
-            attrs:
+            config:
               id: 'barcode001'
               x: 100
               y: 400
@@ -103,10 +103,11 @@ define [
               'scale-w': 4
               'scale-h': 4
               draggable: true
+              resizable: true
 
           widgets.push
             type: 'ruler'
-            attrs:
+            config:
               x: 600
               y: 100
               w: 400
@@ -121,7 +122,7 @@ define [
 
           widgets.push
             type: 'ruler'
-            attrs:
+            config:
               x: 600
               y: 100
               w: 30
@@ -138,7 +139,7 @@ define [
 
           widgets.push
             type: 'path'
-            attrs:
+            config:
               path: [[100, 400], [200, 300], [300, 500], [350, 350]]
               strokeStyle: 'blue'
               # fillStyle: 'yellow'
@@ -149,7 +150,7 @@ define [
 
         widgets.push
           type: 'group'
-          attrs:
+          config:
             x: 100
             y: 100
             w: 300
@@ -161,7 +162,7 @@ define [
             lineWidth: 6
           components: [{
             type: 'rect'
-            attrs:
+            config:
               x: 50
               y: 50
               w: 100
@@ -171,7 +172,7 @@ define [
               draggable: true
           }, {
             type: 'circle'
-            attrs:
+            config:
               cx: 200
               cy: 200
               r: 50
@@ -180,7 +181,7 @@ define [
               draggable: true
           }, {
             type: 'line'
-            attrs:
+            config:
               x1: 280
               y1: 50
               x2: 280
@@ -206,17 +207,17 @@ define [
 
         thing.build
           type: 'ruler-layer'
-          attrs:
+          config:
             'target': 'widget-layer'
 
         thing.build
           type: 'selection-layer'
-          attrs:
+          config:
             'target': 'widget-layer'
 
         thing.build
           type: 'magnify-layer'
-          attrs:
+          config:
             'target': 'widget-layer'
             'fillStyle': 'white'
             'strokeStyle': 'gray'
@@ -225,7 +226,7 @@ define [
 
         thing.build
           type: 'slide-layer'
-          attrs:
+          config:
             'target': 'widget-layer'
 
         thing.build
@@ -244,7 +245,7 @@ define [
             'barcode': things.shape.Barcode
           components: widgets
 
-        thing.change
+        thing.apply
           'line':
             'lineWidth': 100
           '.vruler':

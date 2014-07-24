@@ -10,7 +10,7 @@ define [
   './mixin/Dockable'
   './mixin/Serializable'
   './mixin/Shapable'
-  './validator/Bound'
+  './validator/ComponentProps'
   './validator/Graphic'
 ], (
   _
@@ -18,7 +18,7 @@ define [
   Dockable
   Serializable
   Shapable
-  Bound
+  ComponentProps
   Graphic
 ) ->
 
@@ -30,12 +30,15 @@ define [
     @include Shapable
 
     handles: ->
-      ['bound-handle']
+      handles = ['rotation-handle']
+      handles.push 'bound-handle' if @get('resizable')
+
+      handles
 
     positions: ->
       [['x', 'y']]
 
-    move: (option) ->
+    move: (option, configure) ->
       {delta} = option
 
       return if _.isEmpty(delta)
@@ -59,6 +62,25 @@ define [
 
       @set to
 
+      return unless configure
+
+      config = {}
+
+      if positions instanceof Array
+        # Array Type : array of the property names for the points
+        for p in positions
+          config[p[0]] = @get(p[0])
+          config[p[1]] = @get(p[1])
+      else
+        # String Type : property name of the points array possessing current value
+        for p in path
+          config[p[0]] = @get(p[0])
+          config[p[1]] = @get(p[1])
+
+      @configure config
+
+      console.log @type, @config()
+
     event_map: ->
       null
 
@@ -75,6 +97,6 @@ define [
       }
 
       properties: [
-        Bound
+        ComponentProps
         Graphic
       ]

@@ -9,13 +9,11 @@ define [
   '../../Shape'
   '../handle/P2PHandle'
   '../../validator/P2P'
-  '../../validator/Graphic'
 ], (
   _
   Shape
   P2PHandle
   P2P
-  Graphic
 ) ->
 
   'use strict'
@@ -60,6 +58,6 @@ define [
       }
 
       properties: [
+        Shape.spec.properties
         P2P
-        Graphic
       ]

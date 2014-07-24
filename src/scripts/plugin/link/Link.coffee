@@ -5,8 +5,10 @@
 # ==========================================
 
 define [
+  '../../validator/ComponentProps'
   '../../validator/Graphic'
 ], (
+  ComponentProps
   Graphic
 ) ->
 
@@ -63,6 +65,7 @@ define [
       dependencies: {}
 
       properties: [
+        ComponentProps
         Graphic
         {
           'source':

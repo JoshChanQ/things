@@ -6,12 +6,10 @@
 
 define [
   '../../Layer'
-  '../../validator/LayerProps'
   '../../behavior/LayerBehavior'
   '../shape/Circle'
 ], (
   Layer
-  LayerProps
   LayerBehavior
   Circle
 ) ->
@@ -117,12 +115,16 @@ define [
         'circle': Circle
 
       properties: [
-        LayerProps
+        Layer.spec.properties
+        {
+          target:
+            type: 'string'
+        }
       ]
 
       components: [{
         type: 'circle'
-        attrs:
+        config:
           'id': 'slide-handle'
           'cx': 100
           'cy': 100

@@ -9,13 +9,11 @@ define [
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
-  '../../validator/Graphic'
 ], (
   Shape
   BoundHandle
   RotationHandle
   Bound
-  Graphic
 ) ->
 
   'use strict'
@@ -40,9 +38,6 @@ define [
 
       context.restore()
 
-    handles: ->
-      ['bound-handle', 'rotation-handle']
-
     @spec:
       type: 'ellipse'
 
@@ -58,6 +53,6 @@ define [
       }
 
       properties: [
+        Shape.spec.properties
         Bound
-        Graphic
       ]

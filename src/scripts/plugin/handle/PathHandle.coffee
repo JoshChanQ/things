@@ -38,7 +38,7 @@ define [
       for i in [0..(path.length - 1)]
         @build
           type: 'handle'
-          attrs:
+          config:
             r: 8
             index: i
             strokeStyle: 'red'
@@ -87,6 +87,7 @@ define [
         y: e.offsetY
 
     ondragend: (e) ->
+      @target.configure 'path', @target.get('path')
 
     event_map: ->
       '?target':

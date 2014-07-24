@@ -7,9 +7,13 @@
 define [
   '../../base/Component'
   '../../mixin/Shapable'
+  '../../validator/ComponentProps'
+  '../../validator/Graphic'
 ], (
   Component
   Shapable
+  ComponentProps
+  Graphic
 ) ->
 
   'use strict'
@@ -76,6 +80,8 @@ define [
       dependencies: {}
 
       properties: [
+        ComponentProps
+        Graphic
         {
           x:
             type: 'number'

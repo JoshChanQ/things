@@ -9,13 +9,11 @@ define [
   '../handle/BoundHandle'
   '../handle/RotationHandle'
   '../../validator/Bound'
-  '../../validator/Graphic'
 ], (
   Shape
   BoundHandle
   RotationHandle
   Bound
-  Graphic
 ) ->
 
   'use strict'
@@ -24,9 +22,6 @@ define [
 
     shape: (context) ->
       context.rect @get('x'), @get('y'), @get('w'), @get('h')
-
-    handles: ->
-      ['bound-handle', 'rotation-handle']
 
     @spec:
       type: 'rect'
@@ -43,6 +38,6 @@ define [
       }
 
       properties: [
+        Shape.spec.properties
         Bound
-        Graphic
       ]

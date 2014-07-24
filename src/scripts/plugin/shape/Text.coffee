@@ -7,12 +7,10 @@
 define [
   '../../Shape'
   '../../validator/Bound'
-  '../../validator/Graphic'
   '../../validator/Font'
 ], (
   Shape
   Bound
-  Graphic
   Font
 ) ->
 
@@ -55,8 +53,8 @@ define [
       dependencies: {}
 
       properties: [
+        Shape.spec.properties
         Bound
-        Graphic
         Font
         {
           text:

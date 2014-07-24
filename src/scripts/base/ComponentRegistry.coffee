@@ -35,7 +35,7 @@ define [
       # TODO fix gracefully follow lines
       if klass.spec.properties instanceof Array
         props = {}
-        (_.merge props, i) for i in klass.spec.properties
+        (_.merge props, i) for i in _.flatten(klass.spec.properties)
         klass.spec.properties = props
 
       @componentSpecs[type] = klass

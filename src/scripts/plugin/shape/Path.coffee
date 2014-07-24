@@ -8,14 +8,12 @@ define [
   '../../util/Util'
   '../../Shape'
   '../handle/PathHandle'
-  '../../validator/PathProperty'
-  '../../validator/Graphic'
+  '../../validator/PathProps'
 ], (
   _
   Shape
   PathHandle
-  PathProperty
-  Graphic
+  PathProps
 ) ->
 
   'use strict'
@@ -80,6 +78,6 @@ define [
       }
 
       properties: [
-        PathProperty
-        Graphic
+        Shape.spec.properties
+        PathProps
       ]

@@ -19,7 +19,7 @@ define [
 
       content =
         type: @type
-        attrs: @attrs
+        config: @config()
 
       content.components = components if components
 

@@ -37,17 +37,17 @@ define [
 
       component
 
-    create: (type, attrs) ->
+    create: (type, config) ->
 
       klass = @componentRegistry.get(type)
 
       throw new Error('module (' + model.type + ') is not registered yet.') unless klass
 
-      attrs = {} unless attrs
+      config = {} unless config
 
-      attrs.id = _.uniqueId() unless attrs.hasOwnProperty('id')
+      config.id = _.uniqueId() unless config.hasOwnProperty('id')
 
-      component = new klass(type).initialize(attrs, klass.spec.properties)
+      component = new klass(type).initialize(config, klass.spec.properties)
 
       component.setController @controller
 
@@ -64,7 +64,7 @@ define [
     createByModel: (model) ->
       (@componentRegistry.register deptype, depspec) for deptype, depspec of model.dependencies if model.dependencies
 
-      @create model.type, model.attrs
+      @create model.type, model.config
 
     setupDescendant: (container, components) ->
       klass = @componentRegistry.get(container.type)

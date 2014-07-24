@@ -35,7 +35,7 @@ define [
 
       @handle = @build
         type: 'handle'
-        attrs:
+        config:
           r: 8
           index: 0
           strokeStyle: 'red'
