@@ -71,15 +71,15 @@ define [
         for p in positions
           config[p[0]] = @get(p[0])
           config[p[1]] = @get(p[1])
+
+        @configure config
       else
         # String Type : property name of the points array possessing current value
         for p in path
           config[p[0]] = @get(p[0])
           config[p[1]] = @get(p[1])
 
-      @configure config
-
-      console.log @type, @config()
+        @configure positions, path
 
     event_map: ->
       null

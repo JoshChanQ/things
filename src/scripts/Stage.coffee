@@ -47,8 +47,8 @@ define [
 
       w = @config('w')
       h = @config('h')
-      @html_container.style.width = if w == undefined || w == null then '100%' else w + 'px'
-      @html_container.style.height = if h == undefined || h == null then '100%' else h + 'px'
+      @html_container.style.width = if (w == undefined || w == null) then '100%' else w + 'px'
+      @html_container.style.height = if (h == undefined || h == null) then '100%' else h + 'px'
 
       @client_container.appendChild(@html_container)
 

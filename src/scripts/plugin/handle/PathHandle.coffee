@@ -7,10 +7,12 @@
 define [
   '../../util/Util'
   './Handle'
+  './SplitHandle'
   '../../Group'
 ], (
   _
   Handle
+  SplitHandle
   Group
 ) ->
 
@@ -21,17 +23,23 @@ define [
     align: ->
 
       points = @target.get('path')
+      points_count = points.length
 
       @forEach (component) ->
         index = component.get('index')
-        component.set
-          x: points[index][0]
-          y: points[index][1]
+        if index < points_count
+          component.set
+            x: points[index][0]
+            y: points[index][1]
+        else
+          first_point_index = index - points_count
+          component.set
+            x: (points[first_point_index][0] + points[first_point_index + 1][0]) / 2
+            y: (points[first_point_index][1] + points[first_point_index + 1][1]) / 2
 
-    onadded: (container) ->
-      @set('clip', false)
+    buildHandles: ->
 
-      @target = @select(@get('target'))[0]
+      @removeAll()
 
       path = @target.get('path')
 
@@ -46,48 +54,119 @@ define [
             lineWidth: 2
             draggable: true
 
+      for i in [0..(path.length - 2)]
+        @build
+          type: 'split-handle'
+          config:
+            r: 8
+            index: path.length + i
+            strokeStyle: 'red'
+            fillStyle: 'black'
+            lineWidth: 2
+            draggable: true
+
       @align()
+
+    onadded: (container) ->
+      @set('clip', false)
+
+      @target = @select(@get('target'))[0]
+
+      @buildHandles()
+
 
     onchange: (e) ->
-      @align()
+      @align() unless @_split_mode
       @draw()
 
-    ondragstart: (e) ->
-      @startpos =
-        x: e.offsetX
-        y: e.offsetY
+    path_handle:
+      ondragstart: (e) ->
+        @startpos =
+          x: e.offsetX
+          y: e.offsetY
 
-    ondrag: (e) ->
-      handle = e.target
+      ondrag: (e) ->
+        handle = e.target
 
-      delta =
-        x: e.offsetX - @startpos.x
-        y: e.offsetY - @startpos.y
+        delta =
+          x: e.offsetX - @startpos.x
+          y: e.offsetY - @startpos.y
 
-      newcx = handle.get('x') + delta.x
-      newcy = handle.get('y') + delta.y
+        newcx = handle.get('x') + delta.x
+        newcy = handle.get('y') + delta.y
 
-      handle.set
-        x: newcx
-        y: newcy
+        handle.set
+          x: newcx
+          y: newcy
 
-      index = handle.get('index')
+        index = handle.get('index')
 
-      path = _.clone @target.get('path')
+        newpath = _.clone @target.get('path')
 
-      path[index][0] += delta.x
-      path[index][1] += delta.y
+        newpath[index][0] = newcx
+        newpath[index][1] = newcy
 
-      @target.set 'path', path
+        @target.set 'path', newpath
 
-      # @draw()
+        # @draw()
 
-      @startpos =
-        x: e.offsetX
-        y: e.offsetY
+        @startpos =
+          x: e.offsetX
+          y: e.offsetY
 
-    ondragend: (e) ->
-      @target.configure 'path', @target.get('path')
+      ondragend: (e) ->
+        @target.configure 'path', @target.get('path')
+
+    split_handle:
+      ondragstart: (e) ->
+        @_split_mode = true
+
+        @startpos =
+          x: e.offsetX
+          y: e.offsetY
+
+        handle = e.target
+
+        newpath = _.clone @target.get('path')
+
+        index = handle.get('index') - newpath.length
+
+        newpath.splice(index + 1, 0, [e.offsetX, e.offsetY])
+
+        @target.set 'path', newpath
+
+      ondrag: (e) ->
+        handle = e.target
+
+        delta =
+          x: e.offsetX - @startpos.x
+          y: e.offsetY - @startpos.y
+
+        newcx = handle.get('x') + delta.x
+        newcy = handle.get('y') + delta.y
+
+        handle.set
+          x: newcx
+          y: newcy
+
+        newpath = _.clone @target.get('path')
+
+        index = handle.get('index') - newpath.length + 2
+
+        newpath[index][0] = newcx
+        newpath[index][1] = newcy
+
+        @target.set 'path', newpath
+
+        @startpos =
+          x: e.offsetX
+          y: e.offsetY
+
+      ondragend: (e) ->
+        @_split_mode = false
+        @target.configure 'path', @target.get('path')
+
+        @buildHandles()
 
     event_map: ->
       '?target':
@@ -95,9 +174,13 @@ define [
           change: @onchange
       '(self)':
         'handle':
-          dragstart: @ondragstart
-          drag: @ondrag
-          dragend: @ondragend
+          dragstart: @path_handle.ondragstart
+          drag: @path_handle.ondrag
+          dragend: @path_handle.ondragend
+        'split-handle':
+          dragstart: @split_handle.ondragstart
+          drag: @split_handle.ondrag
+          dragend: @split_handle.ondragend
 
     @spec:
       type: 'path-handle'
@@ -110,6 +193,7 @@ define [
 
       dependencies: {
         'handle': Handle
+        'split-handle': SplitHandle
       }
 
       properties: [

@@ -26,7 +26,7 @@ define [
 
     onadded: (container) ->
 
-      @silentSet 'src', @makeurl()
+      @set 'src', @makeurl()
 
       super container
 

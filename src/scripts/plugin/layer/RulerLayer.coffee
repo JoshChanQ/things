@@ -94,29 +94,27 @@ define [
         }
       ]
 
-      components: [
-        {
-          type: 'ruler'
-          config:
-            direction: 'horizontal'
-            margin: [20, 0]
-            opacity: 0.8
-            x: 0
-            y: 0
-            zeropos: 20
-            strokeStyle: 'navy'
-            lineWidth: 1
-        }, {
-          type: 'ruler'
-          config:
-            direction: 'vertical'
-            margin: [20, 0]
-            opacity: 0.8
-            x: 0
-            y: 0
-            zeropos: 20
-            strokeStyle: 'navy'
-            lineWidth: 1
-        }
-      ]
+      components: [ {
+        type: 'ruler'
+        config:
+          direction: 'horizontal'
+          margin: [20, 0]
+          opacity: 0.8
+          x: 0
+          y: 0
+          zeropos: 20
+          strokeStyle: 'navy'
+          lineWidth: 1
+      }, {
+        type: 'ruler'
+        config:
+          direction: 'vertical'
+          margin: [20, 0]
+          opacity: 0.8
+          x: 0
+          y: 0
+          zeropos: 20
+          strokeStyle: 'navy'
+          lineWidth: 1
+      } ]
 
