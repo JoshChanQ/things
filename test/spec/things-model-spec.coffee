@@ -84,7 +84,7 @@ define [
               strokeStyle: 'yellow'
               fillStyle: 'green'
               lineWidth: 5
-              src: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+              src: 'http://www.html5canvastutorials.com/demos/assets/darth-vader1.jpg'
               draggable: true
 
           widgets.push

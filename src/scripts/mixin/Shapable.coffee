@@ -75,8 +75,8 @@ define [
 
       @capture_shape context
 
-      if @get('strokeStyle')
-        context.lineWidth = @get('lineWidth')
+      if @get('lineWidth')
+        context.lineWidth = @get('lineWidth') + 10
 
       itsme = (!!@get('strokeStyle') && context.isPointInStroke(position.x, position.y)) ||
         (!!@get('fillStyle') && context.isPointInPath(position.x, position.y))

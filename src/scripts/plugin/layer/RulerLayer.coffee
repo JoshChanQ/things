@@ -55,13 +55,19 @@ define [
 
     onchange: (target, before, after) ->
 
-      if after.hasOwnProperty('offset-x')
-        @hori.set('zeropos', after['offset-x'])
-      if after.hasOwnProperty('offset-y')
-        @vert.set('zeropos', after['offset-y'])
+      hset = {}
+      vset = {}
+
+      hset['zeropos'] = after['offset-x'] if after.hasOwnProperty('offset-x')
+      vset['zeropos'] = after['offset-y'] if after.hasOwnProperty('offset-y')
+      hset['w'] = after['w'] if after.hasOwnProperty('w')
+      vset['h'] = after['h'] if after.hasOwnProperty('h')
 
       picked = _.pick after, ['x', 'y', 'w', 'h']
-      @set picked unless _.isEmpty(picked)
+      @silentSet picked unless _.isEmpty(picked)
+
+      @hori.silentSet(hset) unless _.isEmpty(hset)
+      @vert.silentSet(vset) unless _.isEmpty(vset)
 
       @draw()
 
