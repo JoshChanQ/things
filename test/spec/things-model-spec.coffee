@@ -66,7 +66,6 @@ define [
               y: 250
               w: 200
               h: 100
-              draggable: true
               strokeStyle: 'green'
               fillStyle: 'lightgray'
               lineWidth: 1

@@ -87,10 +87,10 @@ define [
       if @captured != lastCaptured
 
         newAscendant = [@captured]
-        newAscendant.unshift(component) while component = (component||@captured).getContainer() if @captured
+        newAscendant.unshift(component) while component = (component || @captured).getContainer() if @captured
 
         oldAscendant = [lastCaptured]
-        oldAscendant.unshift(component) while component = (component||lastCaptured).getContainer() if lastCaptured
+        oldAscendant.unshift(component) while component = (component || lastCaptured).getContainer() if lastCaptured
 
         while oldAscendant[0] == newAscendant[0]
           oldAscendant.shift()

@@ -14,7 +14,7 @@ define [
 
   "use strict"
 
-  control = (root, listener, handlers, event, args)->
+  control = (root, listener, handlers, event, args) ->
     for own selector, event_map of handlers when ComponentSelector.match(selector, event.origin, listener, root)
       for own event_name, handler of event_map when event_name is event.name
         event.listener = listener
@@ -34,7 +34,7 @@ define [
     #
     # @param [Object] deliverer target object to listen events that the object fires or delegates
     #
-    constructor: (deliverer)->
+    constructor: (deliverer) ->
       @setDeliverer(deliverer)
       @listeners = []
 
@@ -42,7 +42,7 @@ define [
       @deliverer = deliverer
 
     start: (context) ->
-      @deliverer.on 'all', event_handler_fn, {context:(context||null), eventPump:@}
+      @deliverer.on 'all', event_handler_fn, {context: (context || null), eventPump: @}
 
     stop: ->
       @deliverer.off 'all', event_handler_fn

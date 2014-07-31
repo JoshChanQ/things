@@ -13,7 +13,7 @@ define [
   'use strict'
 
   class Command
-    constructor : (params) ->
+    constructor: (params) ->
       @params = _.clone(params)
 
     execute: ->

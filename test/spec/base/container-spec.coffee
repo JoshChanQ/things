@@ -150,7 +150,7 @@ define [
         inst.add(['a', 'b', 'c', 'd', 'e'])
 
         context =
-          join : ''
+          join: ''
 
         inst.forEach (i) ->
           this.join += i

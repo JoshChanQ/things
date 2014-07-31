@@ -144,7 +144,7 @@ define [
 
       {
         dependencies: dependencies
-        components : components
+        components: components
         config: _.omit @config(), 'container'
       }
 

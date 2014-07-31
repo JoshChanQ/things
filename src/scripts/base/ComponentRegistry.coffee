@@ -13,21 +13,21 @@ define [
   'use strict'
 
   class ComponentRegistry
-    constructor : ->
+    constructor: ->
       @componentSpecs = {}
 
-    dispose : ->
+    dispose: ->
       keys = Object.keys(@componentSpecs)
       @unregister(type) for type in keys
 
-    setRegisterCallback : (callback, context) ->
+    setRegisterCallback: (callback, context) ->
       @callback_register = if typeof(callback) is 'function' then callback.bind(context) else undefined
 
-    setUnregisterCallback : (callback, context) ->
+    setUnregisterCallback: (callback, context) ->
       @callback_unregister = if typeof(callback) is 'function' then callback.bind(context) else undefined
 
     # Register application dependent ComponentSpecs recursively
-    register : (type, klass) ->
+    register: (type, klass) ->
       return if @componentSpecs[type]
 
       (@register name, depspec) for name, depspec of klass.spec.dependencies if klass.spec.dependencies
@@ -41,7 +41,7 @@ define [
       @componentSpecs[type] = klass
       @callback_register(klass.spec) if @callback_register
 
-    unregister : (type) ->
+    unregister: (type) ->
       # TODO consider dependencies -
       spec = @componentSpecs[type]
       return if not spec
@@ -51,16 +51,16 @@ define [
 
       spec
 
-    forEach : (fn, context) ->
+    forEach: (fn, context) ->
       for own name, spec of @componentSpecs
         fn.call context, name, spec
 
-    list : (filter) ->
+    list: (filter) ->
       Object.keys(@componentSpecs).map (key) ->
         @componentSpecs[key]
       , this
 
-    get : (type) ->
+    get: (type) ->
       spec = @componentSpecs[type]
       return if spec then _.clone(@componentSpecs[type]) else null
 

@@ -15,39 +15,47 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     gutil = require('gulp-util'),
     connect = require('gulp-connect'),
+    open = require('gulp-open'),
+    webpack = require('gulp-webpack'),
+    webpack_config = require('./webpack.config.js'),
     mocha = require('gulp-mocha');
 
 // Scripts
-gulp.task('scripts', ['coffee'], function() {
+gulp.task('package', ['coffee'], function() {
   return gulp.src('.tmp/scripts/**/*.js')
     .pipe(concat('things.js'))
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(webpack(webpack_config))
+    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('vendor/assets/javascripts'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('vendor/assets/javascripts'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // Clean
 gulp.task('clean', function() {
-  return gulp.src(['.tmp/scripts', '.tmp/test', 'dist/scripts'], {read: false})
+  return gulp.src(['.tmp/scripts', '.tmp/test', 'dist', 'vendor/assets/javascripts'], {read: false})
     .pipe(clean());
 });
 
 gulp.task('coffee', function() {
   gulp.src('./src/scripts/**/*.coffee')
-    // .pipe(coffeelint())
-    // .pipe(coffeelint.reporter())
+    .pipe(coffeelint())
+    .pipe(coffeelint.reporter())
     .pipe(coffee({bare: false, sourceMap: true, sourceRoot: '../../src/scripts/'}).on('error', gutil.log))
     .pipe(gulp.dest('./.tmp/scripts'))
+    .pipe(connect.reload())
 });
 
 gulp.task('coffee-test', function() {
   gulp.src('./test/spec/**/*.coffee')
-    // .pipe(coffeelint())
-    // .pipe(coffeelint.reporter())
+    .pipe(coffeelint())
+    .pipe(coffeelint.reporter())
     .pipe(coffee({bare: true, sourceMap: true}).on('error', gutil.log))
     .pipe(gulp.dest('./.tmp/test/spec'))
+    .pipe(connect.reload())
 });
 
 gulp.task('test', function() {
@@ -56,11 +64,29 @@ gulp.task('test', function() {
     .pipe(mocha({reporter: 'nyan'}));
 });
 
-gulp.task('connect', function() {
+// Reload index.html & test setting files for test
+gulp.task('test-resource', function() {
+  gulp.src('test/*')
+    .pipe(connect.reload());
+});
+
+gulp.task('connect-dev', function() {
   connect.server({
-    root: '',
-    livereload: true
+    hostname: '*',
+    port: 9000,
+    // root: '.',
+    livereload: {
+      port: 35729
+    }
   });
+});
+
+gulp.task('open', function() {
+  gulp.src('test/index.html')
+    .pipe(open('', {
+      url: 'http://localhost:9000/test/index.html',
+      // app: 'chrome'
+    }))
 });
 
 // Watch
@@ -70,28 +96,15 @@ gulp.task('watch', function() {
   gulp.watch('src/scripts/**/*.coffee', ['coffee']);
   gulp.watch('test/spec/**/*.coffee', ['coffee-test']);
 
-  // Watch any files in .tmp/, reload on change
-  gulp.watch('.tmp/**/*.js', ['reload-js']);
-  gulp.watch('test/*', ['reload-test']);
+  // Watch resources in test/, reload on change
+  gulp.watch('test/{,*/}*.{html,js}', ['test-resource']);
 });
 
-// Reload js files
-gulp.task('reload-js', function () {
-  gulp.src('.tmp/**/*.js')
-    .pipe(connect.reload());
-});
-
-// Reload index.html & test setting files for test
-gulp.task('reload-test', function() {
-  gulp.src('test/*')
-    .pipe(connect.reload());
-});
-
-gulp.task('dev', ['coffee', 'coffee-test', 'connect', 'watch'], function() {
+gulp.task('dev', ['coffee', 'coffee-test', 'connect-dev', 'open', 'watch'], function() {
 });
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('scripts');
+    gulp.start(['coffee', 'coffee-test', 'connect-dev', 'open', 'watch']);
 });
 

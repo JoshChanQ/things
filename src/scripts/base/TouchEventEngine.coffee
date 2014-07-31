@@ -88,7 +88,7 @@ define [
       @longtouch_timer = null
     else if @longtouch_triggered
       if e.preventDefault
-          e.preventDefault()
+        e.preventDefault()
       return
 
     target = @stage.capture position
@@ -97,7 +97,7 @@ define [
       PointEvent.touchmove target, e, position
 
       if e.preventDefault
-          e.preventDefault()
+        e.preventDefault()
 
     DragAndDrop.drag target, e, position
 

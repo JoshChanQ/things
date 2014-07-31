@@ -135,7 +135,7 @@ define [
 
       context.arc(r, r, r - 1, 0, Math.PI * 2, false)
 
-      context.clip();
+      context.clip()
 
       context.rect(0, 0, r * 2, r * 2)
 

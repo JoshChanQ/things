@@ -11,8 +11,8 @@ define [
   'use strict'
 
   class StandAloneTracker
-    constructor : (target, handlers, self) ->
-      @started = false;
+    constructor: (target, handlers, self) ->
+      @started = false
 
       @target = target if target
       @handlers = handlers

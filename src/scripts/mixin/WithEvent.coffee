@@ -21,8 +21,8 @@ define [
     on: (name, callback, context) ->
       return @ if (!eventsApi(@, 'on', name, [callback, context]) || !callback)
 
-      @_listeners || (@_listeners = {});
-      events = @_listeners[name] || (@_listeners[name] = []);
+      @_listeners || (@_listeners = {})
+      events = @_listeners[name] || (@_listeners[name] = [])
       events.push
         callback: callback
         context: context
@@ -52,10 +52,10 @@ define [
       return @ if (!@_listeners || !eventsApi(@, 'off', name, [callback, context]))
 
       if (!name && !callback && !context)
-        @_listeners = undefined;
-        return @;
+        @_listeners = undefined
+        return @
 
-      names = if name then [name] else Object.keys(@_listeners);
+      names = if name then [name] else Object.keys(@_listeners)
 
       for name, i in names
         if (events = @_listeners[name])
@@ -70,7 +70,7 @@ define [
       @
 
     delegate_on: (delegator) ->
-      @_delegators || (@_delegators = new Collection.List());
+      @_delegators || (@_delegators = new Collection.List())
       @_delegators.append delegator
 
       @
@@ -108,7 +108,7 @@ define [
         origin: @,
         name: name,
         deliverer: @
-      });
+      })
 
       delegateEvents(@_delegators, args) if @_delegators and @_delegators.size() > 0
 
@@ -131,7 +131,7 @@ define [
 
       return @ if (!listeningTo)
 
-      remove = !name && !callback;
+      remove = !name && !callback
 
       callback = @ if (!callback && typeof name is 'object')
 
@@ -155,7 +155,7 @@ define [
     # Handle event maps.
     if typeof name is 'object'
       obj[action].apply(obj, [key, val].concat(rest)) for key, val of name
-      return false;
+      return false
 
     # Handle space separated event names.
     if eventSplitter.test(name)
@@ -163,7 +163,7 @@ define [
 
       obj[action].apply(obj, [val].concat(rest)) for val in names
 
-      return false;
+      return false
 
     true
 

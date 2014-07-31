@@ -18,7 +18,7 @@ define [
     newline = false
     spacer = (depth) ->
       spaces = ""
-      for i in [0..depth-1]
+      for i in [0..depth - 1]
         spaces += "  "
         return spaces
     pretty = ""
@@ -36,7 +36,7 @@ define [
           newline = true
         content = ""
         for k, item of object
-          content += pp(item, depth+1) + ",\n" + spacer(depth+1)
+          content += pp(item, depth + 1) + ",\n" + spacer(depth + 1)
         content = content.replace(/,\n\s*$/, "").replace(/^\s*/,"")
         pretty += "[ " + content + "\n" + spacer(depth) + "]"
       else
@@ -47,7 +47,7 @@ define [
           newline = true
         content = ""
         for key of object
-          content += spacer(depth + 1) + key.toString() + ": " + pp(object[key], depth+2, true) + ",\n"
+          content += spacer(depth + 1) + key.toString() + ": " + pp(object[key], depth + 2, true) + ",\n"
 
         content = content.replace(/,\n\s*$/, "").replace(/^\s*/,"")
         pretty += "{ " + content + "\n" + spacer(depth) + "}"

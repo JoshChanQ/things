@@ -10,7 +10,10 @@ define [
 
   dppx = window.devicePixelRatio
   unless dppx
-    dppx = (if (window.matchMedia && window.matchMedia("(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches) then 2 else 1) || 1
+    dppx = (if (window.matchMedia &&
+      window.matchMedia("(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)").matches)
+      then 2
+      else 1) || 1
 
   # 해상도 w X h
   w = Math.round(screen.width * dppx)
@@ -18,9 +21,9 @@ define [
 
   # dpi 공식 : d : 화면 크기 13.3, ..
   calcDpi = (d) ->
-    w > 0 || (w=1)
-    h > 0 || (h=1)
-    dpi = Math.sqrt(w*w + h*h) / d
+    w > 0 || (w = 1)
+    h > 0 || (h = 1)
+    dpi = Math.sqrt(w * w + h * h) / d
     return if dpi > 0 then Math.round(dpi) else 0
 
   Global =
@@ -58,7 +61,7 @@ define [
     # @example
     # things.dragDistance = 10;
     #
-    dragDistance : 0
+    dragDistance: 0
 
     #
     # Use degree values for angle properties. You may set this property to false if you want to use radiant values.
@@ -80,7 +83,7 @@ define [
     # @example
     # things.showWarnings = false;
     #
-    showWarnings : true
+    showWarnings: true
 
     #
     # @namespace Filters

@@ -13,10 +13,10 @@ define [
   'use strict'
 
   class CommandManager
-    constructor : (params) ->
+    constructor: (params) ->
       @reset()
 
-    dispose : ->
+    dispose: ->
       @reset()
 
     execute: (command) ->

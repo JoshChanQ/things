@@ -26,20 +26,20 @@ define [
     @include WithEvent
     @include Serializable
 
-    constructor : (type, container) ->
+    constructor: (type, container) ->
       @type = type
       @container = container
 
-    getType : ->
+    getType: ->
       @type
 
-    dispose : ->
+    dispose: ->
       @setContainer null
 
-    getContainer : ->
+    getContainer: ->
       @container
 
-    setContainer : (container) ->
+    setContainer: (container) ->
       return if container is @container
 
       if @container
