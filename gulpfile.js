@@ -40,6 +40,10 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
+gulp.task('clean-compile', ['clean'], function() {
+  gulp.start(['coffee', 'coffee-test']);
+});
+
 gulp.task('coffee', function() {
   gulp.src('./src/scripts/**/*.coffee')
     .pipe(coffeelint())
@@ -100,11 +104,8 @@ gulp.task('watch', function() {
   gulp.watch('test/{,*/}*.{html,js}', ['test-resource']);
 });
 
-gulp.task('dev', ['coffee', 'coffee-test', 'connect-dev', 'open', 'watch'], function() {
-});
-
 // Default task
-gulp.task('default', ['clean'], function() {
-    gulp.start(['coffee', 'coffee-test', 'connect-dev', 'open', 'watch']);
+gulp.task('default', ['connect-dev', 'watch'], function() {
+    gulp.start('open');
 });
 
