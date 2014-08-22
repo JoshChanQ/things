@@ -41,7 +41,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('clean-compile', ['clean'], function() {
-  gulp.start(['coffee', 'coffee-test']);
+  gulp.start('coffee', 'coffee-test');
 });
 
 gulp.task('coffee', function() {
@@ -105,7 +105,7 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['connect-dev', 'watch'], function() {
-    gulp.start('open');
+gulp.task('default', ['coffee', 'coffee-test'], function() {
+    gulp.start('connect-dev', 'watch', 'open');
 });
 

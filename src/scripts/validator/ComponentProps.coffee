@@ -19,3 +19,5 @@ define [
       'type': 'boolean'
     'resizable':
       'type': 'boolean'
+    'tag':
+      'type': 'array'

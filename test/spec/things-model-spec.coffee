@@ -246,7 +246,7 @@ define [
 
         thing.apply
           'line':
-            'lineWidth': 100
+            'lineWidth': 30
           '.vruler':
             'strokeStyle': 'red'
 
