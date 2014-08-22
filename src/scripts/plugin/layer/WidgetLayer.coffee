@@ -14,7 +14,9 @@ define [
 
   class WidgetLayer extends Layer
 
-    model: (data) ->
+    model: (data, reset) ->
+      if reset
+        @removeAll()
 
       return unless data.components
 

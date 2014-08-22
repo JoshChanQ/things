@@ -111,42 +111,6 @@ var widgets = [{
     draggable: true
   }
 }, {
-  type: 'line',
-  config: {
-    x1: 500,
-    y1: 100,
-    x2: 600,
-    y2: 300,
-    lineWidth: 10,
-    strokeStyle: 'gray',
-    draggable: true
-  }
-}, {
-  type: 'circle',
-  config: {
-    cx: 350,
-    cy: 150,
-    r: 100,
-    strokeStyle: 'yellow',
-    fillStyle: 'green',
-    lineWidth: 5,
-    draggable: true
-  }
-}, {
-  type: 'ellipse',
-  config: {
-    x: 400,
-    y: 250,
-    w: 200,
-    h: 100,
-    draggable: true,
-    strokeStyle: 'green',
-    fillStyle: 'lightgray',
-    lineWidth: 1,
-    rotate: 15,
-    draggable: true
-  }
-}, {
   type: 'image',
   config: {
     x: 400,
@@ -196,8 +160,8 @@ stage.model({
         'image': things.shape.ImageBox,
         'barcode': things.shape.Barcode
     },
-    components: widgets
-});
+    components: widgets,
+}, true); // 기존 모델을 다 지우고 새로 추가하는 경우에 true 설정
 ```
 모델정보를 설정하면서 모델정보안에서 사용된 컴포넌트들에 대한 등록정보는 앞에서 레이어를 등록하는 방법처럼 register메쏘드를 사용할 수도 있고, model 정보내에 dependencies 속성으로 등록할 수도 있다.
 

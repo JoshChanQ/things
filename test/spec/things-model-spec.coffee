@@ -38,28 +38,6 @@ define [
               draggable: true
 
           widgets.push
-            type: 'line'
-            config:
-              x1: 500
-              y1: 100
-              x2: 600
-              y2: 300
-              lineWidth: 10
-              strokeStyle: 'gray'
-              draggable: true
-
-          widgets.push
-            type: 'circle'
-            config:
-              cx: 350
-              cy: 150
-              r: 100
-              strokeStyle: 'yellow'
-              fillStyle: 'green'
-              lineWidth: 5
-              draggable: true
-
-          widgets.push
             type: 'ellipse'
             config:
               x: 400
@@ -243,6 +221,30 @@ define [
             'image': things.shape.ImageBox
             'barcode': things.shape.Barcode
           components: widgets
+        , true
+
+        thing.model
+          components:[{
+            type: 'line'
+            config:
+              x1: 500
+              y1: 100
+              x2: 600
+              y2: 300
+              lineWidth: 10
+              strokeStyle: 'black'
+              draggable: true
+          }, {
+            type: 'circle'
+            config:
+              cx: 350
+              cy: 150
+              r: 100
+              strokeStyle: 'yellow'
+              fillStyle: 'green'
+              lineWidth: 5
+              draggable: true
+          }]
 
         thing.apply
           'line':
