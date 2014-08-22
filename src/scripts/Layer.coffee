@@ -82,7 +82,8 @@ define [
           captured = child.capture translated_position, context
           return captured if captured
 
-      return null
+      return if @get('capturable') then @ else null
+      # return null
 
     init: ->
       @html_container = @controller.getStage().html_container

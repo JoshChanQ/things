@@ -161,7 +161,7 @@ stage.model({
         'barcode': things.shape.Barcode
     },
     components: widgets,
-}, true); // 기존 모델을 다 지우고 새로 추가하는 경우에 true 설정
+}, true); // 기존 모델을 다 지우고 새로 추가하는 경우에 true로 설정
 ```
 모델정보를 설정하면서 모델정보안에서 사용된 컴포넌트들에 대한 등록정보는 앞에서 레이어를 등록하는 방법처럼 register메쏘드를 사용할 수도 있고, model 정보내에 dependencies 속성으로 등록할 수도 있다.
 

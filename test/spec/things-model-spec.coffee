@@ -178,6 +178,7 @@ define [
         thing.register 'selection-layer', things.layer.SelectionLayer
         thing.register 'magnify-layer', things.layer.MagnifyLayer
         thing.register 'ruler-layer', things.layer.RulerLayer
+        thing.register 'test-layer', things.layer.TestLayer
 
         thing.build
           type: 'widget-layer'
@@ -209,6 +210,11 @@ define [
         thing.build
           type: 'debug-layer'
 
+        thing.build
+          type: 'test-layer'
+          config:
+            'slider': 'slide-layer'
+
         thing.model
           dependencies:
             'group': things.group.Group
@@ -224,7 +230,7 @@ define [
         , true
 
         thing.model
-          components:[{
+          components: [{
             type: 'line'
             config:
               x1: 500

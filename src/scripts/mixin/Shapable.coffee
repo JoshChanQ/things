@@ -47,6 +47,9 @@ define [
       context.rotate(rotate * Math.PI / 180)
       context.translate(-center.x, -center.y)
 
+      if @get('alpha')
+        context.globalAlpha = @get('alpha') * context.globalAlpha
+
       @shape context
 
       if @get('fillStyle')

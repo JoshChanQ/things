@@ -32,6 +32,7 @@ define [
   './plugin/layer/SelectionLayer'
   './plugin/layer/SlideLayer'
   './plugin/layer/WidgetLayer'
+  './plugin/layer/TestLayer'
 
   './plugin/handle/BoundHandle'
   './plugin/handle/CircleHandle'
@@ -67,6 +68,7 @@ define [
   SelectionLayer
   SlideLayer
   WidgetLayer
+  TestLayer
 
   BoundHandle
   CircleHandle
@@ -119,6 +121,7 @@ define [
       SelectionLayer: SelectionLayer
       SlideLayer: SlideLayer
       WidgetLayer: WidgetLayer
+      TestLayer: TestLayer
 
     group:
       Group: Group

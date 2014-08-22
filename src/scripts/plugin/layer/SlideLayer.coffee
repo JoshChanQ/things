@@ -17,6 +17,7 @@ define [
   'use strict'
 
   onhandle_dragstart = (e) ->
+    console.log 'slide-layer dragg'
     @slide_last_position =
       x: e.offsetX
       y: e.offsetY
@@ -36,63 +37,26 @@ define [
       'offset-x': offset.x + delta.x
       'offset-y': offset.y + delta.y
 
-    @slide_handle.move {delta: delta}
-
     @slide_last_position =
       x: e.offsetX
       y: e.offsetY
 
-    @draw()
-
   onhandle_dragend = (e) ->
     @slide_last_position = null
-    @slide_handle.set
-      cx: @canvas.width / 2 - @get('offset-x')
-      cy: @canvas.height / 2 - @get('offset-y')
-
-    @draw()
 
   EVENT_MAP =
     '(self)':
-      '#slide-handle':
+      '（self)':
         'dragstart': onhandle_dragstart
         'drag': onhandle_drag
         'dragend': onhandle_dragend
+        'click': (e) ->
+          console.log 'clickxxx'
 
-  class OutlineLayer extends Layer
+  class SlideLayer extends Layer
 
     onadded: (container) ->
-      @slide_handle = @select('#slide-handle')[0]
-      @slide_handle.set
-        cx: @canvas.width / 2 - @get('offset-x')
-        cy: @canvas.height / 2 - @get('offset-y')
-
-      @draw()
-
-    _draw: ->
-      @clearCanvas()
-
-      context = @canvas.getContext '2d'
-
-      offset =
-        x: @get('offset-x')
-        y: @get('offset-y')
-
-      context.translate offset.x, offset.y
-
-      context.globalAlpha = 0.5 # Half opacity
-
-      if @outline_target
-        context.translate @offset.x, @offset.y if @offset
-        @outline_target.draw context
-        context.translate -@offset.x, -@offset.y if @offset
-
-      context.globalAlpha = 1 # Half opacity
-
-      @forEach (child) ->
-        child.draw context
-
-      context.translate -offset.x, -offset.y
+      @set('draggable', true)
 
     event_map: ->
       [
@@ -111,8 +75,7 @@ define [
 
       description: 'Slide Layer'
 
-      dependencies:
-        'circle': Circle
+      dependencies: null
 
       properties: [
         Layer.spec.properties
@@ -121,17 +84,3 @@ define [
             type: 'string'
         }
       ]
-
-      components: [{
-        type: 'circle'
-        config:
-          'id': 'slide-handle'
-          'cx': 100
-          'cy': 100
-          'r': 20
-          'lineWidth': 5
-          'strokeStyle': 'red'
-          'fillStyle': 'black'
-          capturable: true
-          draggable: true
-      }]
