@@ -270,7 +270,7 @@ define [
 
         # layer = thing.select('widget-layer')[0]
 
-        console.log 'serialize', thing.serialize()
+        # console.log 'serialize', thing.serialize()
 
         thing.set 'h', 600
 

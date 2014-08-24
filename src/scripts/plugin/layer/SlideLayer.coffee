@@ -17,7 +17,6 @@ define [
   'use strict'
 
   onhandle_dragstart = (e) ->
-    console.log 'slide-layer dragg'
     @slide_last_position =
       x: e.offsetX
       y: e.offsetY
@@ -46,7 +45,7 @@ define [
 
   EVENT_MAP =
     '(self)':
-      '（self)':
+      '(self)':
         'dragstart': onhandle_dragstart
         'drag': onhandle_drag
         'dragend': onhandle_dragend
@@ -57,6 +56,7 @@ define [
 
     onadded: (container) ->
       @set('draggable', true)
+      @aaaaaa = 1
 
     event_map: ->
       [

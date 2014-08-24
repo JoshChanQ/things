@@ -25,7 +25,10 @@ define [
   match_by_special = (selector, component, listener, root) ->
     switch(selector)
       when '(all)' then true
+      when '(child)' then listener.isAscendentOf && listener.isAscendentOf(component)
+      when '(:child)' then root.isAscendentOf && root.isAscendentOf(component)
       when '(self)' then listener is component
+      when '(:self)' then root is component
       when '(root)' then root is component
       else false
 

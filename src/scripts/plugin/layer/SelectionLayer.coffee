@@ -33,70 +33,107 @@ define [
 
     selections
 
-  ondragstart = (e) ->
-    if e.origin.shiftKey
-      @selections = select_add @selections, e.target
-    else
-      @selections = select @selections, e.target
+  WIDGETS_HANDLER =
+    ondragstart: (e) ->
 
-    @setFocus(@selections[0])
+      if e.origin.shiftKey
+        @selections = select_add @selections, e.target
+      else
+        @selections = select @selections, e.target
 
-    @draglast_position =
-      x: e.offsetX
-      y: e.offsetY
+      @setFocus(@selections[0])
 
-  ondrag = (e) ->
+      @draglast_position =
+        x: e.offsetX
+        y: e.offsetY
 
-    @offset =
-      x: e.offsetX - @draglast_position.x
-      y: e.offsetY - @draglast_position.y
+    ondrag: (e) ->
 
-    @draw()
+      @offset =
+        x: e.offsetX - @draglast_position.x
+        y: e.offsetY - @draglast_position.y
 
-  ondragend = (e) ->
+      @draw()
 
-    # (item.move({delta: @offset})) for item in @selections when item.move
+    ondragend: (e) ->
 
-    for item in @selections when item.move
-      item.move({delta: @offset}, true)
+      # (item.move({delta: @offset})) for item in @selections when item.move
 
-      # positions = item.positions()
+      for item in @selections when item.move
+        item.move({delta: @offset}, true)
 
-      # config = {}
+        # positions = item.positions()
 
-      # if positions instanceof Array
-      #   # Array Type : array of the property names for the points
-      #   for p in positions
-      #     config[p[0]] = item.get(p[0])
-      #     config[p[1]] = item.get(p[1])
-      # else
-      #   # String Type : property name of the points array possessing current value
-      #   path = _.clone @get(positions)
-      #   for p in path
-      #     config[p[0]] = item.get(p[0])
-      #     config[p[1]] = item.get(p[1])
+        # config = {}
 
-      # item.configure config
+        # if positions instanceof Array
+        #   # Array Type : array of the property names for the points
+        #   for p in positions
+        #     config[p[0]] = item.get(p[0])
+        #     config[p[1]] = item.get(p[1])
+        # else
+        #   # String Type : property name of the points array possessing current value
+        #   path = _.clone @get(positions)
+        #   for p in path
+        #     config[p[0]] = item.get(p[0])
+        #     config[p[1]] = item.get(p[1])
 
-    @offset = null
+        # item.configure config
 
-    @draw()
+      @offset = null
 
-  onclick = (e) ->
+      @draw()
 
-    if e.origin.shiftKey
-      # Fixme - 쉬프트 키 드래깅 이후에 타겟의 선택이 해제되는 문제.
-      @selections = select_toggle @selections, e.target
-    else
-      @selections = select @selections, e.target
+    onclick: (e) ->
+      if e.origin.shiftKey
+        # Fixme - 쉬프트 키 드래깅 이후에 타겟의 선택이 해제되는 문제.
+        @selections = select_toggle @selections, e.target
+      else
+        @selections = select @selections, e.target
 
-    @setFocus(@selections[0])
+      @setFocus(@selections[0])
 
-    @draw()
+      @draw()
 
-  onchange = (target, before, after) ->
-    picked = _.pick after, ['offset-x', 'offset-y', 'x', 'y']
-    @set picked unless _.isEmpty(picked)
+  WIDGET_LAYER_HANDLER =
+    ondragstart: (e) ->
+      @selections = []
+      @setFocus()
+
+      @select_last_position =
+        x: e.offsetX
+        y: e.offsetY
+
+    ondrag: (e) ->
+      delta =
+        x: e.offsetX - @select_last_position.x
+        y: e.offsetY - @select_last_position.y
+
+      # @slide_target = @slide_target || @select(@get('target'))[0]
+
+      # offset =
+      #   x: @slide_target.get('offset-x')
+      #   y: @slide_target.get('offset-y')
+
+      # @slide_target.set
+      #   'offset-x': offset.x + delta.x
+      #   'offset-y': offset.y + delta.y
+
+      @select_last_position =
+        x: e.offsetX
+        y: e.offsetY
+
+    ondragend: (e) ->
+      @select_last_position = null
+
+    onclick: (e) ->
+      # 클릭된 오브젝트가 타겟레이어 자체인 경우는 셀렉션을 모두 해제한다.
+      @selections = []
+      @setFocus()
+
+    onchange: (target, before, after) ->
+      picked = _.pick after, ['offset-x', 'offset-y', 'x', 'y']
+      @set picked unless _.isEmpty(picked)
 
   onselfchange = (target, before, after) ->
     @canvas.style.left = after['x'] + 'px' if after.hasOwnProperty('x')
@@ -105,14 +142,19 @@ define [
 
   EVENT_MAP =
     '?target':
-      '(all)':
-        'click': onclick
-        'tap': onclick
-        'dragstart': ondragstart
-        'drag': ondrag
-        'dragend': ondragend
-      '?target':
-        'change': onchange
+      '(:child)': # (?target:child)가 있으면 좋겠다.
+        'click': WIDGETS_HANDLER.onclick
+        'tap': WIDGETS_HANDLER.onclick
+        'dragstart': WIDGETS_HANDLER.ondragstart
+        'drag': WIDGETS_HANDLER.ondrag
+        'dragend': WIDGETS_HANDLER.ondragend
+      '(:self)':
+        'click': WIDGET_LAYER_HANDLER.onclick
+        'tap': WIDGET_LAYER_HANDLER.onclick
+        'dragstart': WIDGET_LAYER_HANDLER.ondragstart
+        'drag': WIDGET_LAYER_HANDLER.ondrag
+        'dragend': WIDGET_LAYER_HANDLER.ondragend
+        'change': WIDGET_LAYER_HANDLER.onchange
     '(self)':
       '(self)':
         'change': onselfchange
@@ -208,7 +250,6 @@ define [
       context.restore()
 
     buildHandles: ->
-
       for handle in @focus.handles()
         @build
           type: handle

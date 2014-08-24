@@ -91,6 +91,12 @@ define [
   size = ->
     (@__components__ || EMPTY).length
 
+  isAscendentOf = (component) ->
+    return false unless component
+    return true if @ is component.getContainer()
+
+    return @isAscendentOf(component.getContainer())
+
   moveChildAt = (index, child) ->
     oldIndex = @indexOf(child)
     return if oldIndex is -1
@@ -151,6 +157,7 @@ define [
     getAt: getAt
     indexOf: indexOf
     forEach: forEach
+    isAscendentOf: isAscendentOf
     moveChildAt: moveChildAt
     moveChildForward: moveChildForward
     moveChildBackward: moveChildBackward

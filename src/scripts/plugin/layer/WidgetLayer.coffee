@@ -6,13 +6,19 @@
 
 define [
   '../../Layer'
+  '../../behavior/LayerBehavior'
 ], (
   Layer
+  LayerBehavior
 ) ->
 
   'use strict'
 
   class WidgetLayer extends Layer
+
+    onadded: (container) ->
+      @set('capturable', true)
+      @set('draggable', true)
 
     model: (data, reset) ->
       if reset
@@ -22,6 +28,11 @@ define [
 
       for widget in data.components
         @build(widget, @)
+
+    event_map: ->
+      [
+        LayerBehavior
+      ]
 
     @spec:
       type: 'widget-layer'
