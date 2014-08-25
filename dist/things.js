@@ -1024,7 +1024,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(40), __webpack_require__(7), __webpack_require__(54)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Component, ComponentEvent) {
   "use strict";
-  var Container, EMPTY, add, add_component, forEach, getAt, indexOf, moveChildAt, moveChildBackward, moveChildForward, moveChildToBack, moveChildToFront, remove, removeAll, remove_component, size;
+  var Container, EMPTY, add, add_component, forEach, getAt, indexOf, isAscendentOf, moveChildAt, moveChildBackward, moveChildForward, moveChildToBack, moveChildToFront, remove, removeAll, remove_component, size;
   EMPTY = [];
   add_component = function(container, component) {
     var containable, index, oldContainer;
@@ -1115,6 +1115,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
   size = function() {
     return (this.__components__ || EMPTY).length;
   };
+  isAscendentOf = function(component) {
+    if (!component) {
+      return false;
+    }
+    if (this === component.getContainer()) {
+      return true;
+    }
+    return this.isAscendentOf(component.getContainer());
+  };
   moveChildAt = function(index, child) {
     var head, oldIndex, tail;
     oldIndex = this.indexOf(child);
@@ -1200,6 +1209,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     Container.prototype.indexOf = indexOf;
 
     Container.prototype.forEach = forEach;
+
+    Container.prototype.isAscendentOf = isAscendentOf;
 
     Container.prototype.moveChildAt = moveChildAt;
 
@@ -1982,7 +1993,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(40), __webpack_require__(5), __webpack_require__(28), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, P2PHandle, P2P) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(40), __webpack_require__(5), __webpack_require__(28), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Shape, P2PHandle, P2P) {
   'use strict';
   var Line;
   return Line = (function(_super) {
@@ -2042,7 +2053,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(16), __webpack_require__(57)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, Text, pp) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(16), __webpack_require__(58)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, Text, pp) {
   'use strict';
   var DebugLayer, exports;
   exports = {
@@ -2495,7 +2506,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
   'use strict';
-  var EVENT_MAP, SelectionLayer, onchange, onclick, ondrag, ondragend, ondragstart, onselfchange, parent_groups_translate, select, select_add, select_toggle;
+  var EVENT_MAP, SelectionLayer, WIDGETS_HANDLER, WIDGET_LAYER_HANDLER, onselfchange, parent_groups_translate, select, select_add, select_toggle;
   select_toggle = function(selections, target) {
     if (_.contains(selections, target)) {
       _.pull(selections, target);
@@ -2517,53 +2528,100 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     selections.unshift(target);
     return selections;
   };
-  ondragstart = function(e) {
-    if (e.origin.shiftKey) {
-      this.selections = select_add(this.selections, e.target);
-    } else {
-      this.selections = select(this.selections, e.target);
-    }
-    this.setFocus(this.selections[0]);
-    return this.draglast_position = {
-      x: e.offsetX,
-      y: e.offsetY
-    };
-  };
-  ondrag = function(e) {
-    this.offset = {
-      x: e.offsetX - this.draglast_position.x,
-      y: e.offsetY - this.draglast_position.y
-    };
-    return this.draw();
-  };
-  ondragend = function(e) {
-    var item, _i, _len, _ref;
-    _ref = this.selections;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      item = _ref[_i];
-      if (item.move) {
-        item.move({
-          delta: this.offset
-        }, true);
+  WIDGETS_HANDLER = {
+    ondragstart: function(e) {
+      if (e.origin.shiftKey) {
+        this.selections = select_add(this.selections, e.target);
+      } else {
+        this.selections = select(this.selections, e.target);
       }
+      this.setFocus(this.selections[0]);
+      return this.draglast_position = {
+        x: e.offsetX,
+        y: e.offsetY
+      };
+    },
+    ondrag: function(e) {
+      this.offset = {
+        x: e.offsetX - this.draglast_position.x,
+        y: e.offsetY - this.draglast_position.y
+      };
+      return this.draw();
+    },
+    ondragend: function(e) {
+      var item, _i, _len, _ref;
+      _ref = this.selections;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        item = _ref[_i];
+        if (item.move) {
+          item.move({
+            delta: this.offset
+          }, true);
+        }
+      }
+      this.offset = null;
+      return this.draw();
+    },
+    onclick: function(e) {
+      if (e.origin.shiftKey) {
+        this.selections = select_toggle(this.selections, e.target);
+      } else {
+        this.selections = select(this.selections, e.target);
+      }
+      this.setFocus(this.selections[0]);
+      return this.draw();
     }
-    this.offset = null;
-    return this.draw();
   };
-  onclick = function(e) {
-    if (e.origin.shiftKey) {
-      this.selections = select_toggle(this.selections, e.target);
-    } else {
-      this.selections = select(this.selections, e.target);
-    }
-    this.setFocus(this.selections[0]);
-    return this.draw();
-  };
-  onchange = function(target, before, after) {
-    var picked;
-    picked = _.pick(after, ['offset-x', 'offset-y', 'x', 'y']);
-    if (!_.isEmpty(picked)) {
-      return this.set(picked);
+  WIDGET_LAYER_HANDLER = {
+    ondragstart: function(e) {
+      this.selections = [];
+      this.setFocus();
+      this.select_last_position = {
+        x: e.offsetX,
+        y: e.offsetY
+      };
+      return this.selection_box = this.build({
+        type: 'rect',
+        config: {
+          x: this.select_last_position.x,
+          y: this.select_last_position.y
+        }
+      });
+    },
+    ondrag: function(e) {
+      var delta;
+      delta = {
+        x: e.offsetX - this.select_last_position.x,
+        y: e.offsetY - this.select_last_position.y
+      };
+      this.select_last_position = {
+        x: e.offsetX,
+        y: e.offsetY
+      };
+      if (this.selection_box) {
+        return this.selection_box.set({
+          w: this.select_last_position.x - this.selection_box.get('x'),
+          h: this.select_last_position.y - this.selection_box.get('y')
+        });
+      }
+    },
+    ondragend: function(e) {
+      this.select_last_position = null;
+      if (this.selection_box) {
+        this.selection_box.dispose();
+        return this.selection_box = null;
+      }
+    },
+    onclick: function(e) {
+      this.selections = [];
+      return this.setFocus();
+    },
+    onchange: function(target, before, after) {
+      var picked;
+      picked = _.pick(after, ['offset-x', 'offset-y', 'x', 'y']);
+      if (!_.isEmpty(picked)) {
+        return this.set(picked);
+      }
     }
   };
   onselfchange = function(target, before, after) {
@@ -2577,15 +2635,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
   };
   EVENT_MAP = {
     '?target': {
-      '(all)': {
-        'click': onclick,
-        'tap': onclick,
-        'dragstart': ondragstart,
-        'drag': ondrag,
-        'dragend': ondragend
+      '(:child)': {
+        'click': WIDGETS_HANDLER.onclick,
+        'tap': WIDGETS_HANDLER.onclick,
+        'dragstart': WIDGETS_HANDLER.ondragstart,
+        'drag': WIDGETS_HANDLER.ondrag,
+        'dragend': WIDGETS_HANDLER.ondragend
       },
-      '?target': {
-        'change': onchange
+      '(:self)': {
+        'click': WIDGET_LAYER_HANDLER.onclick,
+        'tap': WIDGET_LAYER_HANDLER.onclick,
+        'dragstart': WIDGET_LAYER_HANDLER.ondragstart,
+        'drag': WIDGET_LAYER_HANDLER.ondrag,
+        'dragend': WIDGET_LAYER_HANDLER.ondragend,
+        'change': WIDGET_LAYER_HANDLER.onchange
       }
     },
     '(self)': {
@@ -2753,7 +2816,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
   'use strict';
   var EVENT_MAP, SlideLayer, onhandle_drag, onhandle_dragend, onhandle_dragstart;
   onhandle_dragstart = function(e) {
-    console.log('slide-layer dragg');
     return this.slide_last_position = {
       x: e.offsetX,
       y: e.offsetY
@@ -2784,7 +2846,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
   };
   EVENT_MAP = {
     '(self)': {
-      '（self)': {
+      '(self)': {
         'dragstart': onhandle_dragstart,
         'drag': onhandle_drag,
         'dragend': onhandle_dragend,
@@ -2802,7 +2864,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     }
 
     SlideLayer.prototype.onadded = function(container) {
-      return this.set('draggable', true);
+      this.set('draggable', true);
+      return this.aaaaaa = 1;
     };
 
     SlideLayer.prototype.event_map = function() {
@@ -2840,49 +2903,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
   'use strict';
-  var EVENT_MAP, WidgetLayer, onhandle_drag, onhandle_dragend, onhandle_dragstart;
-  onhandle_dragstart = function(e) {
-    console.log('slide-layer dragg');
-    return this.select_last_position = {
-      x: e.offsetX,
-      y: e.offsetY
-    };
-  };
-  onhandle_drag = function(e) {
-    var delta, offset;
-    delta = {
-      x: e.offsetX - this.select_last_position.x,
-      y: e.offsetY - this.select_last_position.y
-    };
-    this.slide_target = this.slide_target || this.select(this.get('target'))[0];
-    offset = {
-      x: this.slide_target.get('offset-x'),
-      y: this.slide_target.get('offset-y')
-    };
-    this.slide_target.set({
-      'offset-x': offset.x + delta.x,
-      'offset-y': offset.y + delta.y
-    });
-    return this.select_last_position = {
-      x: e.offsetX,
-      y: e.offsetY
-    };
-  };
-  onhandle_dragend = function(e) {
-    return this.select_last_position = null;
-  };
-  EVENT_MAP = {
-    '(self)': {
-      '（self)': {
-        'dragstart': onhandle_dragstart,
-        'drag': onhandle_drag,
-        'dragend': onhandle_dragend,
-        'click': function(e) {
-          return console.log('clickxxx');
-        }
-      }
-    }
-  };
+  var WidgetLayer;
   return WidgetLayer = (function(_super) {
     __extends(WidgetLayer, _super);
 
@@ -2891,8 +2912,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     }
 
     WidgetLayer.prototype.onadded = function(container) {
-      this.config('capturable', true);
-      return this.config('draggable', true);
+      this.set('capturable', true);
+      return this.set('draggable', true);
     };
 
     WidgetLayer.prototype.model = function(data, reset) {
@@ -2913,7 +2934,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
     };
 
     WidgetLayer.prototype.event_map = function() {
-      return [EVENT_MAP, LayerBehavior];
+      return [LayerBehavior];
     };
 
     WidgetLayer.spec = {
@@ -4137,8 +4158,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     switch (selector) {
       case '(all)':
         return true;
+      case '(child)':
+        return listener.isAscendentOf && listener.isAscendentOf(component);
+      case '(:child)':
+        return root.isAscendentOf && root.isAscendentOf(component);
       case '(self)':
         return listener === component;
+      case '(:self)':
+        return root === component;
       case '(root)':
         return root === component;
       default:
@@ -4473,7 +4500,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     var position;
     position = this.stage.point(e);
     this.captured = this.stage.capture(position);
-    console.log('down', this.captured);
     this.click_target = this.captured;
     if (this.captured.get('draggable')) {
       DragAndDrop.draggable = true;
@@ -4487,7 +4513,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     var dbl_click_detected, position, self;
     position = this.stage.point(e);
     this.captured = this.stage.capture(position);
-    console.log('up', this.captured);
     dbl_click_detected = false;
     if (this.listening_dbl_click) {
       dbl_click_detected = true;
@@ -4502,7 +4527,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     if (this.captured && !DragAndDrop.dragging) {
       PointEvent.mouseup(this.captured, e, position);
       if (this.click_target && this.captured === this.click_target) {
-        console.log('click', this.click_target, this.captured);
         PointEvent.click(this.captured, e, position);
         if (dbl_click_detected) {
           PointEvent.doubleclick(this.captured, e, position);
@@ -5673,6 +5697,34 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
   'use strict';
+  var properties;
+  return properties = {
+    x1: {
+      type: 'number',
+      "default": 0
+    },
+    y1: {
+      type: 'number',
+      "default": 0
+    },
+    x2: {
+      type: 'number',
+      "default": 100
+    },
+    y2: {
+      type: 'number',
+      "default": 100
+    }
+  };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+  'use strict';
   var prettyprint;
   return prettyprint = function(object, depth, embedded) {
     var content, item, k, key, newline, pretty, spacer;
@@ -5732,34 +5784,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
       pretty += object.toString();
     }
     return (newline ? "\n" + spacer(depth) : "") + pretty;
-  };
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-  'use strict';
-  var properties;
-  return properties = {
-    x1: {
-      type: 'number',
-      "default": 0
-    },
-    y1: {
-      type: 'number',
-      "default": 0
-    },
-    x2: {
-      type: 'number',
-      "default": 100
-    },
-    y2: {
-      type: 'number',
-      "default": 100
-    }
   };
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 

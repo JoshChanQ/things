@@ -13,6 +13,12 @@ define [
   properties =
     lineWidth:
       type: 'number'
+    lineJoin:
+      type: 'string'
+    lineDash:
+      type: 'array'
+    lineDashOffset:
+      type: 'number'
     fillStyle:
       type: 'string'
     strokeStyle:

@@ -104,6 +104,19 @@ define [
         x: e.offsetX
         y: e.offsetY
 
+      @selection_box = @build
+        type: 'rect'
+        config:
+          x: @select_last_position.x - @target.get('offset-x')
+          y: @select_last_position.y - @target.get('offset-y')
+          w: 0
+          h: 0
+          strokeStyle: 'black'
+          lineWidth: 1
+          lineJoin: 'round'
+          lineDash: [12, 3, 3, 3]
+          lineDashOffset: 0
+
     ondrag: (e) ->
       delta =
         x: e.offsetX - @select_last_position.x
@@ -123,8 +136,19 @@ define [
         x: e.offsetX
         y: e.offsetY
 
+      if @selection_box
+        @selection_box.set
+          w: @select_last_position.x - @selection_box.get('x') - @target.get('offset-x')
+          h: @select_last_position.y - @selection_box.get('y') - @target.get('offset-y')
+
+      @draw()
+
     ondragend: (e) ->
       @select_last_position = null
+
+      if @selection_box
+        @selection_box.dispose()
+        @selection_box = null
 
     onclick: (e) ->
       # 클릭된 오브젝트가 타겟레이어 자체인 경우는 셀렉션을 모두 해제한다.
@@ -243,9 +267,9 @@ define [
 
       context.globalAlpha = 1 # Half opacity
 
-      if @focus
-        @forEach (child) ->
-          child.draw context
+      # Selection Box, Handlers ..
+      @forEach (child) ->
+        child.draw context
 
       context.restore()
 

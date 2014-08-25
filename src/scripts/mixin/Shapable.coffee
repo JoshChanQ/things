@@ -58,6 +58,10 @@ define [
 
       if @get('strokeStyle')
         context.lineWidth = @get('lineWidth')
+        context.lineJoin = @get('lineJoin')
+        if @get('lineDash')
+          context.setLineDash(@get('lineDash'))
+          context.lineDashOffset = @get('lineDashOffset')
         context.strokeStyle = @get('strokeStyle')
         context.stroke()
 
