@@ -23,10 +23,10 @@ define [
     @slider.set('capturable', true)
 
   onclick_undo = (e) ->
-    console.log('undo click')
+    @controller.undo()
 
   onclick_redo = (e) ->
-    console.log('redo click')
+    @controller.redo()
 
   EVENT_MAP =
     '(self)':

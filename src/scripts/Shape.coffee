@@ -73,6 +73,7 @@ define [
           config[p[1]] = @get(p[1])
 
         @configure config
+
       else
         # String Type : property name of the points array possessing current value
         for p in path

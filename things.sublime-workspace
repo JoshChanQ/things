@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"sele",
+				"select_last_position"
+			],
+			[
+				"o",
+				"offsetX"
+			],
+			[
+				"lineD",
+				"lineDashOffset"
+			],
+			[
+				"selection",
+				"selection_box"
+			],
+			[
+				"off",
+				"offsetY"
+			],
+			[
+				"han",
+				"handlerMaps"
+			],
+			[
+				"click",
+				"click_target"
+			],
+			[
+				"Lay",
+				"LayerBehavior"
+			],
+			[
+				"slide",
+				"slide-layer"
+			],
+			[
+				"onha",
+				"onhandle_redo"
+			],
+			[
+				"clean",
+				"clean-compile"
+			],
+			[
 				"coffee",
 				"coffee-test"
 			],
@@ -164,10 +208,6 @@
 				"draglast_position"
 			],
 			[
-				"sele",
-				"selector"
-			],
-			[
 				"comp",
 				"ComponentSelector"
 			],
@@ -214,10 +254,6 @@
 			[
 				"m",
 				"mouseout"
-			],
-			[
-				"off",
-				"offsetX"
 			],
 			[
 				"Component",
@@ -364,10 +400,6 @@
 				"controller"
 			],
 			[
-				"han",
-				"handle_view"
-			],
-			[
 				"handle",
 				"handle-layer"
 			],
@@ -482,48 +514,16 @@
 			[
 				"clo",
 				"clonedHandlers"
-			],
-			[
-				"gui",
-				"guideLayer"
-			],
-			[
-				"Event",
-				"EventPump"
-			],
-			[
-				"fold",
-				"folder_listener"
-			],
-			[
-				"list",
-				"listeners"
-			],
-			[
-				"origin_",
-				"origin_link_count"
-			],
-			[
-				"folder",
-				"folder1"
-			],
-			[
-				"dele",
-				"delegator_computer_count"
-			],
-			[
-				"or",
-				"origin_file_count"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "bower.json",
+			"file": "src/scripts/Stage.coffee",
 			"settings":
 			{
-				"buffer_size": 773,
+				"buffer_size": 4161,
 				"line_ending": "Unix"
 			}
 		}
@@ -596,7 +596,29 @@
 	},
 	"file_history":
 	[
+		"/Users/super/Documents/NextStop/things/src/scripts/mixin/Shapable.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/validator/Graphic.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/SelectionLayer.coffee",
+		"/Users/super/Documents/NextStop/things/test/spec/things-model-spec.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/behavior/LayerBehavior.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/WidgetLayer.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/base/MouseEventEngine.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/SlideLayer.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/base/EventEngine.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/base/ComponentSelector.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/base/Container.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/base/EventPump.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/validator/ComponentProps.coffee",
+		"/Users/super/Documents/NextStop/things/doc/tutorial/001-GettingStarted.md",
+		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/TestLayer.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/Layer.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/things.coffee",
+		"/Users/super/Documents/NextStop/things/doc/tutorial/002-GettingStarted.md",
+		"/Users/super/Documents/NextStop/things/src/scripts/event/PointEvent.coffee",
+		"/Users/super/Documents/NextStop/things/src/scripts/command/CommandConfigChange.coffee",
 		"/Users/super/Documents/NextStop/things/gulpfile.js",
+		"/Users/super/Documents/NextStop/things/doc/api/Stage.md",
+		"/Users/super/Documents/NextStop/things/doc/api/thing.md",
 		"/Users/super/Documents/NextStop/things/test/index.html",
 		"/Users/super/Documents/NextStop/things/test/spec/base/container-spec.coffee",
 		"/Users/super/Documents/NextStop/things/gruntfile.js",
@@ -605,7 +627,6 @@
 		"/Users/super/Documents/NextStop/things/src/scripts/Stage.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/validator/PathProps.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/MagnifyLayer.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/SlideLayer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/Animation.coffee",
 		"/Users/super/Documents/NextStop/things/coffeelint.json",
 		"/Users/super/Documents/NextStop/things/src/scripts/util/PrettyPrint.coffee",
@@ -614,12 +635,9 @@
 		"/Users/super/Documents/NextStop/things/src/scripts/command/CommandManager.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/base/TouchEventEngine.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/command/Command.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/base/MouseEventEngine.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/base/EventTracker.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/base/EventPump.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/base/ComponentRegistry.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/base/Component.coffee",
-		"/Users/super/Documents/NextStop/things/test/spec/things-model-spec.coffee",
 		"/Users/super/Documents/NextStop/things/test/spec/things-spec.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/Global.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/mixin/WithProperty.coffee",
@@ -633,7 +651,6 @@
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/handle/PathHandle.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/handle/RotationHandle.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/validator/StageProps.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/validator/ComponentProps.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/Ellipse.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/ImageBox.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/Rect.coffee",
@@ -645,28 +662,21 @@
 		"/Users/super/Documents/NextStop/things/src/scripts/base/ComponentFactory.coffee",
 		"/Users/super/Documents/NextStop/things/.tmp/scripts/plugin/layer/MagnifyLayer.js",
 		"/Users/super/Documents/NextStop/things/src/scripts/behavior/DragMover.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/SelectionLayer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/RulerLayer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/DebugLayer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/handle/CircleHandle.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugin/layer/WidgetLayer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/Path.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/Line.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/shape/Circle.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/Layer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/validator/LayerProps.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/handle/Handle.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/base/ComponentSpec.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugin/link/Link.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/things.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/base/ComponentSelector.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/behavior/ControllerBehavior.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/behavior/LayerBehavior.coffee",
 		"/Users/super/Downloads/mesplus-src-reference/mesplus-webapp/src/main/webapp/resources/module/WIP/view/inquiry/ViewBatchHistory.js",
 		"/Users/super/Downloads/mesplus-src-reference/mesplus-webapp/src/main/webapp/resources/module/WIP/locale/cn.js",
 		"/Users/super/Downloads/mesplus-src-reference/mesplus-webapp/src/main/webapp/resources/module/WIP/locale/en.js",
 		"/Users/super/Downloads/mesplus-src-reference/mesplus-webapp/src/main/webapp/resources/module/WIP/locale/ko.js",
-		"/Users/super/Documents/NextStop/things/src/scripts/mixin/Shapable.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/Animation.cof",
 		"/Users/super/Documents/NextStop/things/src/scripts/behavior/DragSelector.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/handler/ComponentBehavior.coffee",
@@ -713,17 +723,7 @@
 		"/Users/super/Documents/NextStop/things/src/scripts/plugins/layer/Layer.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugins/stage/Stage.coffee",
 		"/Users/super/Documents/NextStop/things/src/scripts/plugins/widget/Widget.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugins/widget/Rect.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/event/MouseEvent.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/handlers/ControllerHandler.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/handlers/Expander.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/handlers/Outline.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/base/EventEngine.coffee",
-		"/Users/super/Documents/NextStop/things/.tmp/scripts/base/ComponentRegistry.js",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugins/link/Link.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/validator/Layer.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugins/widget/Text.coffee",
-		"/Users/super/Documents/NextStop/things/src/scripts/plugins/stage/Graph.coffee"
+		"/Users/super/Documents/NextStop/things/src/scripts/plugins/widget/Rect.coffee"
 	],
 	"find":
 	{
@@ -770,6 +770,21 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"@offset",
+			"buildHandles",
+			"parent_groups_translate",
+			"slide-layer",
+			"setFocus",
+			"control",
+			"eventMaps",
+			"click",
+			"slide_last_position",
+			"outline_target",
+			"onhandle",
+			"slide_handle",
+			"vruler",
+			"configure",
+			"vruler",
 			"package",
 			" :",
 			";",
@@ -882,22 +897,7 @@
 			"app.js",
 			"mean-",
 			"height",
-			"width",
-			"author",
-			"Hello things-stage",
-			"app",
-			"seed-element",
-			"publish",
-			"_.merge",
-			"align",
-			"startpos",
-			"Line",
-			"dou",
-			"this",
-			"this.",
-			"this",
-			"this.",
-			"dockPoints"
+			"width"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -921,26 +921,26 @@
 			[
 				{
 					"buffer": 0,
-					"file": "bower.json",
-					"semi_transient": true,
+					"file": "src/scripts/Stage.coffee",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 773,
+						"buffer_size": 4161,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								563,
-								563
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
@@ -1059,7 +1059,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 236.0,
+	"side_bar_width": 278.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

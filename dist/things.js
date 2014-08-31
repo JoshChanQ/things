@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(40), __webpack_require__(31), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32), __webpack_require__(33), __webpack_require__(34), __webpack_require__(35), __webpack_require__(36), __webpack_require__(41), __webpack_require__(42)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Global, Stage, Component, ComponentRegistry, ComponentSelector, ComponentFactory, EventEngine, ExportsManager, CommandManager, ControllerBehavior) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(40), __webpack_require__(31), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32), __webpack_require__(33), __webpack_require__(34), __webpack_require__(35), __webpack_require__(36), __webpack_require__(43), __webpack_require__(41)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, Global, Stage, Component, ComponentRegistry, ComponentSelector, ComponentFactory, EventEngine, ExportsManager, CommandManager, ControllerBehavior) {
   'use strict';
   var Controller;
   Component.include({
@@ -441,7 +441,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(6), __webpack_require__(8), __webpack_require__(43), __webpack_require__(44), __webpack_require__(45), __webpack_require__(46)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Animation, Container, LayerBehavior, ComponentProps, Bound, Graphic) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(6), __webpack_require__(8), __webpack_require__(42), __webpack_require__(44), __webpack_require__(45), __webpack_require__(46)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Animation, Container, LayerBehavior, ComponentProps, Bound, Graphic) {
   'use strict';
   var Layer, batch, batchDraw, layers;
   layers = [];
@@ -2120,7 +2120,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(42), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
   'use strict';
   var EVENT_MAP, MagnifyLayer, edge, handle, onchange, ontargetchange;
   handle = {
@@ -2371,7 +2371,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(15), __webpack_require__(43)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, Ruler, LayerBehavior) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(15), __webpack_require__(42)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, Ruler, LayerBehavior) {
   "use strict";
   var RulerLayer;
   return RulerLayer = (function(_super) {
@@ -2504,7 +2504,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(42)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
   'use strict';
   var EVENT_MAP, SelectionLayer, WIDGETS_HANDLER, WIDGET_LAYER_HANDLER, onselfchange, parent_groups_translate, select, select_add, select_toggle;
   select_toggle = function(selections, target) {
@@ -2583,8 +2583,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
       return this.selection_box = this.build({
         type: 'rect',
         config: {
-          x: this.select_last_position.x,
-          y: this.select_last_position.y
+          x: this.select_last_position.x - this.target.get('offset-x'),
+          y: this.select_last_position.y - this.target.get('offset-y'),
+          w: 0,
+          h: 0,
+          strokeStyle: 'black',
+          lineWidth: 1,
+          lineJoin: 'round',
+          lineDash: [12, 3, 3, 3],
+          lineDashOffset: 0
         }
       });
     },
@@ -2599,11 +2606,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
         y: e.offsetY
       };
       if (this.selection_box) {
-        return this.selection_box.set({
-          w: this.select_last_position.x - this.selection_box.get('x'),
-          h: this.select_last_position.y - this.selection_box.get('y')
+        this.selection_box.set({
+          w: this.select_last_position.x - this.selection_box.get('x') - this.target.get('offset-x'),
+          h: this.select_last_position.y - this.selection_box.get('y') - this.target.get('offset-y')
         });
       }
+      return this.draw();
     },
     ondragend: function(e) {
       this.select_last_position = null;
@@ -2742,11 +2750,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
         context.restore();
       }
       context.globalAlpha = 1;
-      if (this.focus) {
-        this.forEach(function(child) {
-          return child.draw(context);
-        });
-      }
+      this.forEach(function(child) {
+        return child.draw(context);
+      });
       return context.restore();
     };
 
@@ -2812,7 +2818,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(42), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
   'use strict';
   var EVENT_MAP, SlideLayer, onhandle_drag, onhandle_dragend, onhandle_dragstart;
   onhandle_dragstart = function(e) {
@@ -2901,7 +2907,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(42)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior) {
   'use strict';
   var WidgetLayer;
   return WidgetLayer = (function(_super) {
@@ -2960,7 +2966,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(43), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3), __webpack_require__(42), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Layer, LayerBehavior, Circle) {
   'use strict';
   var EVENT_MAP, TestLayer, onclick_move, onclick_point, onclick_redo, onclick_undo;
   onclick_point = function(e) {
@@ -4814,69 +4820,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(65)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Command) {
-  'use strict';
-  var CommandManager;
-  CommandManager = (function() {
-    function CommandManager(params) {
-      this.reset();
-    }
-
-    CommandManager.prototype.dispose = function() {
-      return this.reset();
-    };
-
-    CommandManager.prototype.execute = function(command) {
-      if (!command instanceof Command) {
-        return;
-      }
-      command.execute();
-      this.exq.push(command);
-      return this.uxq = [];
-    };
-
-    CommandManager.prototype.undo = function() {
-      var command;
-      command = this.exq.pop();
-      if (command) {
-        command.unexecute();
-        return this.uxq.push(command);
-      }
-    };
-
-    CommandManager.prototype.redo = function() {
-      var command;
-      command = this.uxq.pop();
-      if (command) {
-        command.execute();
-        return this.exq.push(command);
-      }
-    };
-
-    CommandManager.prototype.undoable = function() {
-      return this.exq.length > 0;
-    };
-
-    CommandManager.prototype.redoable = function() {
-      return this.uxq.length > 0;
-    };
-
-    CommandManager.prototype.reset = function() {
-      this.exq = [];
-      return this.uxq = [];
-    };
-
-    return CommandManager;
-
-  })();
-  return CommandManager;
-}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(66)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(ContextMenu) {
   'use strict';
   var onadd, onchange, oncontextmenu, onremove;
@@ -4931,7 +4874,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
@@ -4988,6 +4931,69 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
       }
     }
   };
+}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(65)], __WEBPACK_AMD_DEFINE_RESULT__ = (function(Command) {
+  'use strict';
+  var CommandManager;
+  CommandManager = (function() {
+    function CommandManager(params) {
+      this.reset();
+    }
+
+    CommandManager.prototype.dispose = function() {
+      return this.reset();
+    };
+
+    CommandManager.prototype.execute = function(command) {
+      if (!command instanceof Command) {
+        return;
+      }
+      command.execute();
+      this.exq.push(command);
+      return this.uxq = [];
+    };
+
+    CommandManager.prototype.undo = function() {
+      var command;
+      command = this.exq.pop();
+      if (command) {
+        command.unexecute();
+        return this.uxq.push(command);
+      }
+    };
+
+    CommandManager.prototype.redo = function() {
+      var command;
+      command = this.uxq.pop();
+      if (command) {
+        command.execute();
+        return this.exq.push(command);
+      }
+    };
+
+    CommandManager.prototype.undoable = function() {
+      return this.exq.length > 0;
+    };
+
+    CommandManager.prototype.redoable = function() {
+      return this.uxq.length > 0;
+    };
+
+    CommandManager.prototype.reset = function() {
+      this.exq = [];
+      return this.uxq = [];
+    };
+
+    return CommandManager;
+
+  })();
+  return CommandManager;
 }.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
@@ -5057,6 +5063,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
   var properties;
   return properties = {
     lineWidth: {
+      type: 'number'
+    },
+    lineJoin: {
+      type: 'string'
+    },
+    lineDash: {
+      type: 'array'
+    },
+    lineDashOffset: {
       type: 'number'
     },
     fillStyle: {
@@ -5264,6 +5279,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
       }
       if (this.get('strokeStyle')) {
         context.lineWidth = this.get('lineWidth');
+        context.lineJoin = this.get('lineJoin');
+        if (this.get('lineDash')) {
+          context.setLineDash(this.get('lineDash'));
+          context.lineDashOffset = this.get('lineDashOffset');
+        }
         context.strokeStyle = this.get('strokeStyle');
         context.stroke();
       }

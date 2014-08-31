@@ -132,6 +132,15 @@ define [
         for component in selections
           component.set set
 
+    execute: (command) ->
+      @commandManager.execute(command)
+
+    redo: ->
+      @commandManager.redo()
+
+    undo: ->
+      @commandManager.undo()
+
     dispose: ->
       @componentFactory.dispose()
       @commandManager.dispose()
